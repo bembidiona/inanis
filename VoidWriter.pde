@@ -1,3 +1,5 @@
+final private String appName = "Void Writer";
+final private String version = "v0.1";
 
 String allText = "";
 String myText = "Type something";
@@ -10,9 +12,11 @@ String savePath = "";
 PFont fontOptions;
 
 
-Button buttonExport;
+String[] buttonsNames = {"save", "close", "lol"};
+ArrayList<Button> buttons = new ArrayList<Button>();
  
 void setup() {
+  frame.setTitle(appName + " " + version);
   size(displayWidth, displayHeight); 
  
   fontOptions = loadFont("courier_15.vlw");
@@ -22,7 +26,10 @@ void setup() {
   fill(50);
   
   
-  buttonExport = new Button("save");
+  
+  for (int i = 0; i < buttonsNames.length; i++){
+    buttons.add(new Button(buttonsNames[i],i));
+  }
 }
  
 void draw() {
@@ -39,7 +46,9 @@ void draw() {
   noFill();  
   setGradient(width/6, 0, width/4, height, color(bgColor, bgColor, bgColor), color(bgColor, bgColor, bgColor, 0), true);
   
-  buttonExport.display();
+  for (Button b : buttons) {
+    b.display();
+  } 
 }
  
 void keyPressed() {
@@ -77,8 +86,9 @@ void setGradient(int x, int y, float w, float h, color c1, color c2, boolean axi
 }
 
 void mousePressed(){
-  buttonExport.checkClick();
-  
+  for (Button b : buttons) {
+    b.checkClick();
+  }
 }
 
 void checkPath(File selection){

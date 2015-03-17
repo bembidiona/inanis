@@ -8,31 +8,34 @@ class Button{
  
    String name;
    
-   Button(String _name){    
+   int margen = 5;
+   
+   Button(String _name, int buttonNum){    
      name = _name;     
      
+     int separation = 20;
      int safe = 5;
-     w = 50;
-     h = 30;
+     w = width - name.length() - margen;
+     h = 0 + margen;
      
-     x = width - w - safe;
-     y = h + safe;
+     x = width - name.length() - margen;
+     y = h + safe + separation*buttonNum;
    }
    
    void display(){   
      textFont(fontOptions);                 
      fill(255);  
-     //textAlign(center);    
-     text(name, width, height);    
-     
-     if((mouseX > x && mouseX < x+w) && (mouseY > y && mouseY < y+h)){
-       text("-"+name, width, 0);        
-     }
-     else {
-       text(name, width, 0); 
-     }
+     //textAlign(center);     
+     drawIt((mouseX > x && mouseX < x+w) && (mouseY > y && mouseY < y+h));    
         
    }
+   
+   void drawIt(boolean over){
+     String txt = name;
+     if (over) txt = "-" + txt ;
+     
+     text(txt, x, y);
+   }   
    
    void checkClick(){
      if(mouseX > x && mouseX < x+w){
