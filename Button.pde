@@ -39,11 +39,15 @@ class Button{
    
    void display(){   
      textFont(fontOptions);                 
-     fill(255);  
+     fill(colorTxt);  
      textAlign(RIGHT);     
      
      String txt = name;     
-     if (isOver()){ txt = "-" + txt;}          
+     if (isOver()){
+       txt = "_" + txt;
+       
+       cursorHand = true;
+     }          
      text(txt, x, y);    
      
      /*noFill();
@@ -56,6 +60,17 @@ class Button{
      if(isOver()){
         if(name == "save") exportTxt();
         else if (name == "folder") selectFolder("On exit Save to this folder", "checkPath");
+        else if (name == "day/night") {
+          if(colorBg == 0) {
+            colorBg = 255;
+            colorTxt = 0;
+          }
+          else{
+            colorBg = 0;
+            colorTxt = 255;
+          }
+          
+        }
         else if (name == "exit") exit(); 
      }
    }
@@ -79,7 +94,7 @@ class Button{
   void out() {
     if(!hiden){
       hiden = true;
-      Ani.to(this, 1, 0.05*buttonNum, "x", width + 60,  Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
+      Ani.to(this, 1, 0.05*buttonNum, "x", width + 100,  Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
     }      
   }
   

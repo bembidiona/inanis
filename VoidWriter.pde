@@ -4,24 +4,30 @@ import de.looksgood.ani.easing.*;
 final private String appName = "Void Writer";
 final private String version = "v0.1";
 
+final private Boolean startFullscreen = true;
+
 String allText = "";
 String myText = "Type something";
-int bgColor = 0; 
+int colorBg = 0;
+int colorTxt = 255;
 
 String breaker = "./ ";
-
 String savePath = "";
-
 PFont fontOptions;
 
 
-String[] buttonsNames = {"save", "folder", "exit"};
+String[] buttonsNames = {"save", "folder", "day/night", "exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 
 Boolean firstBlood = false;
 
 int timerMouseInactive = 0;
 int timeMouseInactive = 2000;
+boolean mouseInactive = false;
+
+Boolean cursorHand = false;
+
+Message messager;
  
 void setup() {
   frame.setTitle(appName + " " + version);
@@ -42,13 +48,16 @@ void setup() {
   for (int i = 0; i < buttonsNames.length; i++){
     buttons.add(new Button(buttonsNames[i],i));
   }
+  
+  messager = new Message();
 }
  
 void draw() {
-  background(bgColor);  
-  noStroke();  
+  background(colorBg);  
+  cursorHand = false;
   
-  fill(255);
+  noStroke();  
+  fill(colorTxt);
   text(myText, width/2+width/6, height/2);
   /*int x = 0;
   int y = 0;
@@ -61,18 +70,25 @@ void draw() {
   
   
   //tapon  
-  fill(0);
+  fill(colorBg);
   rect(0, 0, width/6, height);  
   noFill();  
-  setGradient(width/6, 0, width/4, height, color(bgColor, bgColor, bgColor), color(bgColor, bgColor, bgColor, 0), true);
+  setGradient(width/6, 0, width/4, height, color(colorBg, colorBg, colorBg), color(colorBg, colorBg, colorBg, 0), true);
   
   for (Button b : buttons) {
     b.display();
   } 
+  messager.display();
+  
+  if(!mouseInactive){
+    if (cursorHand) cursor(HAND);
+    else cursor(CROSS);
+  }
   
   //Timers
-  if(millis() - timerMouseInactive >= timeMouseInactive){
+  if(millis() - timerMouseInactive >= timeMouseInactive && !cursorHand){
     timerMouseInactive = millis();
+    mouseInactive = true;
     noCursor();
   }
 }
@@ -103,7 +119,7 @@ void keyPressed() {
 }
 
 boolean sketchFullScreen() {
-  return true;
+  return startFullscreen;
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, boolean axisX ) {
@@ -126,10 +142,10 @@ void mousePressed(){
 }
 
 void mouseMoved(){
-  cursor(CROSS);
+  mouseInactive = false;
   
   if(firstBlood){
-    if(mouseX > width - 50){     
+    if(mouseX > width - 100){     
         for (Button b : buttons) {
           b.in();
         }
@@ -154,7 +170,9 @@ if (selection == null) {
 
 void exportTxt(){
    String[] list = split(myText, breaker);
-   saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);  
+   saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
+ 
+   messager.show("-file saved-", 1);
 }
  
 
