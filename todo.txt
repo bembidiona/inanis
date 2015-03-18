@@ -1,3 +1,4 @@
+- BUG: el texto se comienza a offsetear hacia la derecha hasta irse de pantalla
 - el FirstBlood esta invertido
 
 
