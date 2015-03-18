@@ -19,10 +19,15 @@ String[] buttonsNames = {"save", "folder", "exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 
 Boolean firstBlood = false;
+
+int timerMouseInactive = 0;
+int timeMouseInactive = 2000;
  
 void setup() {
   frame.setTitle(appName + " " + version);
   size(displayWidth, displayHeight); 
+  
+  timerMouseInactive = millis();
   
   Ani.init(this);
  
@@ -31,7 +36,7 @@ void setup() {
   textAlign(RIGHT, CENTER);
   textSize(30);
   fill(50);
-  
+  cursor(CROSS);
   
   
   for (int i = 0; i < buttonsNames.length; i++){
@@ -41,11 +46,10 @@ void setup() {
  
 void draw() {
   background(bgColor);  
-  noStroke();
-  cursor(CROSS);
+  noStroke();  
   
   fill(255);
-  text(myText, width/2, height/2);
+  text(myText, width/2+width/6, height/2);
   /*int x = 0;
   int y = 0;
   for (int i = 0; i < myText.length(); i++) {
@@ -65,6 +69,12 @@ void draw() {
   for (Button b : buttons) {
     b.display();
   } 
+  
+  //Timers
+  if(millis() - timerMouseInactive >= timeMouseInactive){
+    timerMouseInactive = millis();
+    noCursor();
+  }
 }
  
 void keyPressed() {
@@ -116,6 +126,8 @@ void mousePressed(){
 }
 
 void mouseMoved(){
+  cursor(CROSS);
+  
   if(firstBlood){
     if(mouseX > width - 50){     
         for (Button b : buttons) {
