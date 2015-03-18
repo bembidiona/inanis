@@ -1,3 +1,6 @@
+import de.looksgood.ani.*;
+import de.looksgood.ani.easing.*;
+
 final private String appName = "Void Writer";
 final private String version = "v0.1";
 
@@ -12,12 +15,14 @@ String savePath = "";
 PFont fontOptions;
 
 
-String[] buttonsNames = {"save", "close", "lol"};
+String[] buttonsNames = {"save", "folder", "exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
  
 void setup() {
   frame.setTitle(appName + " " + version);
   size(displayWidth, displayHeight); 
+  
+  Ani.init(this);
  
   fontOptions = loadFont("courier_15.vlw");
   
@@ -35,6 +40,7 @@ void setup() {
 void draw() {
   background(bgColor);  
   noStroke();
+  cursor(CROSS);
   
   fill(255);
   text(myText, width/2, height/2);
@@ -68,9 +74,9 @@ void keyPressed() {
   
 }
 
-/*boolean sketchFullScreen() {
+boolean sketchFullScreen() {
   return true;
-}*/
+}
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, boolean axisX ) {
   noFill();
@@ -91,6 +97,21 @@ void mousePressed(){
   }
 }
 
+void mouseMoved(){
+  if(mouseX > width - 50){     
+      for (Button b : buttons) {
+        b.in();
+      }
+      
+      println("lol");
+  }
+  else{
+      for (Button b : buttons) {
+        b.out();
+      }
+  }
+}
+
 void checkPath(File selection){
 if (selection == null) {
    println("Window was closed or the user hit cancel.");
@@ -98,7 +119,7 @@ if (selection == null) {
       savePath = selection.getAbsolutePath();     
    }   
     
-   exportTxt();
+   
 }
 
 

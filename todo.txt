@@ -1,0 +1,5 @@
+- separar el stream, para poder hacer avanzar las letras desde distintos Ys
+- dar feedback de guardado
+- intentar hacer llover frases ya escritas cuando se deja de escribir
+- algun glitchaje para cuando va a full
+- El sonido de typeado puede cambiar a mini grititos
