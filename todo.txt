@@ -1,3 +1,7 @@
+- el FirstBlood esta invertido
+
+
+
 - separar el stream, para poder hacer avanzar las letras desde distintos Ys
 - intentar hacer llover frases ya escritas cuando se deja de escribir
 - algun glitchaje para cuando va a full

@@ -98,6 +98,7 @@ void keyPressed() {
     for (Button b : buttons) {
       b.out();
     }
+    myText = "";
     
     firstBlood = true;
   }
