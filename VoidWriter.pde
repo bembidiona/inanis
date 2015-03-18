@@ -17,6 +17,8 @@ PFont fontOptions;
 
 String[] buttonsNames = {"save", "folder", "exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
+
+Boolean firstBlood = false;
  
 void setup() {
   frame.setTitle(appName + " " + version);
@@ -44,6 +46,14 @@ void draw() {
   
   fill(255);
   text(myText, width/2, height/2);
+  /*int x = 0;
+  int y = 0;
+  for (int i = 0; i < myText.length(); i++) {
+    //textSize(random(14,16));
+    text(myText.charAt(i), x + width/2 - textWidth(myText), height/2);
+    // textWidth() spaces the characters out properly.
+    x += textWidth(myText.charAt(i)); 
+  }*/
   
   
   //tapon  
@@ -58,6 +68,14 @@ void draw() {
 }
  
 void keyPressed() {
+  if (!firstBlood){
+    for (Button b : buttons) {
+      b.out();
+    }
+    
+    firstBlood = true;
+  }
+  
   if (keyCode == ENTER){
      myText = myText + breaker;
   }
@@ -98,17 +116,17 @@ void mousePressed(){
 }
 
 void mouseMoved(){
-  if(mouseX > width - 50){     
-      for (Button b : buttons) {
-        b.in();
-      }
-      
-      println("lol");
-  }
-  else{
-      for (Button b : buttons) {
-        b.out();
-      }
+  if(firstBlood){
+    if(mouseX > width - 50){     
+        for (Button b : buttons) {
+          b.in();
+        }
+    }
+    else{
+        for (Button b : buttons) {
+          b.out();
+        }
+    }
   }
 }
 
@@ -118,8 +136,6 @@ if (selection == null) {
    } else {
       savePath = selection.getAbsolutePath();     
    }   
-    
-   
 }
 
 

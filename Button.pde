@@ -33,7 +33,7 @@ class Button{
      cX = x - w + 5;
      cY = y-h+5;
      
-     x = width + 100;
+     hiden = false;
    }
    
    
