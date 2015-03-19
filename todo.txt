@@ -1,9 +1,16 @@
-- BUG: el texto se comienza a offsetear hacia la derecha hasta irse de pantalla
 - el FirstBlood esta invertido
 
 
 
-- separar el stream, para poder hacer avanzar las letras desde distintos Ys
+
+IDEA: Probar networking, para que haya varias navecitas volando a la vez
+
+IDEA: Al dejar de tipear, aparece una frase que te haga mierda, y motive a seguir escribiendo. How DA FAC
+
+IDEA: Al tipear, la letra queda suelta y da impulso al cursor de input/nave, y la hace avanzar hacia la derecha. Sino se tipea, la nave cada vez se va mas hacia la izquierda. Si se va por completo, se tira un save() y se cierra el programa. Al rato de escribir empiezan a aparecer pixeles de derecha a izquierda como un star field. Si se tipean palabras claves como "amor" "muerte" "silvia suler" los pixeles cambian de iconito, a corazoncitos, calaveras, tetas, etc.
+
+
+///--------------------------------------------------
 - intentar hacer llover frases ya escritas cuando se deja de escribir
 - algun glitchaje para cuando va a full
 - El sonido de typeado puede cambiar a mini grititos
