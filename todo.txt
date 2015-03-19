@@ -7,3 +7,4 @@
 - intentar hacer llover frases ya escritas cuando se deja de escribir
 - algun glitchaje para cuando va a full
 - El sonido de typeado puede cambiar a mini grititos
+- La línea de txt colapsa pasado x tiempo de no escribir-idea-
