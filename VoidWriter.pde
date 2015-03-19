@@ -4,10 +4,10 @@ import de.looksgood.ani.easing.*;
 final private String appName = "Void Writer";
 final private String version = "v0.1";
 
-final private Boolean startFullscreen = true;
+final private Boolean startFullscreen = false;
 
 String allText = "";
-String myText = "Type something";
+String stream = "Type something";
 int colorBg = 0;
 int colorTxt = 255;
 
@@ -18,6 +18,7 @@ PFont fontOptions;
 
 String[] buttonsNames = {"save", "folder", "day/night", "exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
+ArrayList<Letter> letters = new ArrayList<Letter>();
 
 Boolean firstBlood = false;
 
@@ -58,17 +59,10 @@ void draw() {
   
   noStroke();  
   fill(colorTxt);
-  text(myText, width/2+width/6, height/2);
-  /*int x = 0;
-  int y = 0;
-  for (int i = 0; i < myText.length(); i++) {
-    //textSize(random(14,16));
-    text(myText.charAt(i), x + width/2 - textWidth(myText), height/2);
-    // textWidth() spaces the characters out properly.
-    x += textWidth(myText.charAt(i)); 
-  }*/
-  
-  
+  for (Letter l : letters) {
+    l.display();
+  }
+    
   //tapon  
   fill(colorBg);
   rect(0, 0, width/6, height);  
@@ -98,22 +92,33 @@ void keyPressed() {
     for (Button b : buttons) {
       b.out();
     }
-    myText = "";
+    stream = "";
     
     firstBlood = true;
   }
   
   if (keyCode == ENTER){
-     myText = myText + breaker;
+     stream = stream + breaker;
   }
   if (keyCode == BACKSPACE) {
-    if (myText.length() > 0) {
-      myText = myText.substring(0, myText.length()-1);
+    if (stream.length() > 0) {
+      stream = stream.substring(0, stream.length()-1);
+      
+      letters.remove(letters.size()-1);
+      
+      for (Letter l : letters) {
+        l.stepBack();
+      }
+      
     }
-  } else if (keyCode == DELETE) {
-    myText = "";
   } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT && keyCode != ENTER) {
-    myText = myText +  str(key);
+    stream = stream +  str(key);
+    
+    for (Letter l : letters) {
+      l.stepForward();
+    }
+    
+    letters.add(new Letter(str(key)  ));
   }  
   
   
@@ -170,7 +175,7 @@ if (selection == null) {
 
 
 void exportTxt(){
-   String[] list = split(myText, breaker);
+   String[] list = split(stream, breaker);
    saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
  
    messager.show("-file saved-", 1);
