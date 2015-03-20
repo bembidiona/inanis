@@ -13,7 +13,7 @@ class Caret{
    private final int xMin = width/2;
    private final int xMax = width/2+width/4;
    
-   private final float stepBack = step/4;
+   private final float stepBack = step/2;
       
    Caret(){
      
@@ -68,7 +68,10 @@ class Caret{
    void addChar(String _char){               
       for (Letter l : letters) {
         l.stepForward();
-      }            
+      }
+      for (Star s : stars) {
+        s.stepForward();
+      }       
       letters.add(new Letter(_char));
       stream = stream + _char;
       

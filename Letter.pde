@@ -8,6 +8,8 @@ class Letter{
    float windX = 0.001; 
    private int windTimer = 0;
    int windTimerMax = 5;
+   
+   Boolean isOut = false;
          
    Letter(String _letter){
       letter = _letter; 
@@ -28,6 +30,7 @@ class Letter{
       }
       else windTimer++;
       
+      if(x < - width/2) isOut = true;
    }
    
    void stepForward(){

@@ -21,6 +21,7 @@ String pixFormat = "png";
 String[] buttonsNames = {".txt", ".img","-", "img", "folder", "-","day/night", "-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
+ArrayList<Star> stars = new ArrayList<Star>();
 
 Boolean firstBlood = true;
 
@@ -72,10 +73,17 @@ void draw() {
   
   noStroke();  
   fill(colorTxt);
-  for (Letter l : letters) {
-    l.display();
-  }
   caret.display();
+  for (int i=letters.size()-1; i >= 0; i--) {
+    Letter l = letters.get(i);
+    if (l.isOut) letters.remove(i);
+    else l.display();
+  }  
+  for (int i=stars.size()-1; i >= 0; i--) {
+    Star s = stars.get(i);
+    if (s.isOut) stars.remove(i);
+    else s.display();
+  }
     
   //tapon  
   fill(colorBg);
@@ -120,6 +128,8 @@ void keyPressed() {
      isPressed_Ctrl = true;
   }
   
+  
+  
   if (keyCode == ENTER){
      caret.addChar(breaker);
   }
@@ -128,6 +138,10 @@ void keyPressed() {
       caret.removeChar();      
     }
   } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT && keyCode != ENTER) {
+    
+    if(keyCode == 32){ // space
+      stars.add(new Star());
+    }
     
     if(isPressed_Ctrl){
       if(keyCode == 83) saveTxt(); //s
