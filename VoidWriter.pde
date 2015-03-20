@@ -28,10 +28,13 @@ int timerMouseInactive = 0;
 int timeMouseInactive = 2000;
 boolean mouseInactive = false;
 
+int timerKeysInactive = 0;
+int timeKeysInactive = 2000;
+boolean keysInactive = true;
+
 Boolean cursorHand = false;
 
 Message messager;
-
 Caret caret;
  
 void setup() {
@@ -93,10 +96,16 @@ void draw() {
     timerMouseInactive = millis();
     mouseInactive = true;
     noCursor();
+  }  
+  if(millis() - timerKeysInactive >= timeKeysInactive){
+    timerKeysInactive = millis();
+    keysInactive = true;    
   }
 }
  
 void keyPressed() {
+  keysInactive = false;
+  
   if (!firstBlood){
     for (Button b : buttons) {
       b.out();

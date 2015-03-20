@@ -7,6 +7,8 @@ class Caret{
    int blinkTimerMax = 20;
    
    Ani animation;
+   
+   PImage sprite;
       
    Caret(){
      
@@ -14,7 +16,9 @@ class Caret{
      y = height/2 - 50;
      
      animation = new Ani(this, 10, "y", height/2 + 50, Ani.EXPO_IN_OUT);
-    
+     
+     sprite = loadImage("caret.png");
+     
      // FORWARD, BACKWARD, YOYO
      animation.setPlayMode(Ani.YOYO);
      animation.repeat();
@@ -22,15 +26,27 @@ class Caret{
    }   
    
    void display(){
-      
-      if (blinkTimer < blinkTimerMax){
-        text("^",x,y);
+      if (keysInactive){
+        if (blinkTimer < blinkTimerMax){
+        drawIt(255);
         blinkTimer++; 
+        }
+        else if (blinkTimer < blinkTimerMax*2){
+          drawIt(100);
+          blinkTimer++;
+        }
+        else blinkTimer = 0;        
       }
-      else if (blinkTimer < blinkTimerMax*2){
-        blinkTimer++;
+      else { 
+        drawIt(255);
+        blinkTimer = 0;
       }
-      else blinkTimer = 0;
+      
+   }
+   
+   void drawIt(int _alpha){
+     tint(colorTxt, _alpha);
+     image(sprite,x-sprite.width/1.5,y-sprite.height/1.5);
    }
    
    
