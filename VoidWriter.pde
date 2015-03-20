@@ -4,7 +4,7 @@ import de.looksgood.ani.easing.*;
 final private String appName = "Void Writer";
 final private String version = "v0.1";
 
-final private Boolean startFullscreen = true;
+final private Boolean startFullscreen = false;
 
 String allText = "";
 String stream = "Type something";
@@ -16,7 +16,7 @@ String savePath = "";
 PFont fontOptions;
 
 
-String[] buttonsNames = {"save", "folder", "day/night", "exit"};
+String[] buttonsNames = {"save", "folder", "-","day/night", "-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 
@@ -47,9 +47,12 @@ void setup() {
   fill(50);
   cursor(CROSS);
   
-  
+  int uiBlank = 0;
   for (int i = 0; i < buttonsNames.length; i++){
-    buttons.add(new Button(buttonsNames[i],i));
+    if (buttonsNames[i] != "-"){
+      buttons.add(new Button(buttonsNames[i],i,uiBlank));
+    }
+    else uiBlank++;
   }
   
   messager = new Message();

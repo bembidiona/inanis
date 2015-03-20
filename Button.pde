@@ -18,7 +18,7 @@ class Button{
    
    boolean hiden = true;
    
-   Button(String _name, int _buttonNum){    
+   Button(String _name, int _buttonNum, int _blank){    
      name = _name;     
      buttonNum = _buttonNum;
      
