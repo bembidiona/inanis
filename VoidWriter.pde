@@ -11,6 +11,8 @@ String stream = "Type something";
 int colorBg = 0;
 int colorTxt = 255;
 
+int step = 10;
+
 String breaker = "./ ";
 String savePath = "";
 PFont fontOptions;

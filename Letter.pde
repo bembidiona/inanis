@@ -3,9 +3,7 @@ class Letter{
    int x = 2;
    int y = 1;
       
-   String letter = " ";
-   
-   private final int step = 10;
+   String letter = " ";   
    
    float windX = 0.001; 
    private int windTimer = 0;

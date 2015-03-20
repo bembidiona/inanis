@@ -28,7 +28,7 @@ class Button{
      h = 15;
      
      x = width - name.length() - margen;
-     y = h + safe + separation*buttonNum;
+     y = h + safe + separation*buttonNum - _blank*10;
      
      cX = x - w + 5;
      cY = y-h+5;
