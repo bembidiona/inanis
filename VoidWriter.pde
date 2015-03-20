@@ -4,7 +4,7 @@ import de.looksgood.ani.easing.*;
 final private String appName = "Void Writer";
 final private String version = "v0.1";
 
-final private Boolean startFullscreen = false;
+final private Boolean startFullscreen = true;
 
 String allText = "";
 String stream = "Type something";
@@ -29,6 +29,8 @@ boolean mouseInactive = false;
 Boolean cursorHand = false;
 
 Message messager;
+
+Caret caret;
  
 void setup() {
   frame.setTitle(appName + " " + version);
@@ -51,6 +53,7 @@ void setup() {
   }
   
   messager = new Message();
+  caret = new Caret();
 }
  
 void draw() {
@@ -62,6 +65,7 @@ void draw() {
   for (Letter l : letters) {
     l.display();
   }
+  caret.display();
     
   //tapon  
   fill(colorBg);

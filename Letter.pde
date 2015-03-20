@@ -6,18 +6,30 @@ class Letter{
    String letter = " ";
    
    private final int step = 10;
+   
+   float windX = 0.001; 
+   private int windTimer = 0;
+   int windTimerMax = 1;
          
    Letter(String _letter){
       letter = _letter; 
   
-      x = width/2+width/6;
-      y = height/2;
+      x = caret.x - step;
+      y = caret.y;
    }
    
    void display(){
       noStroke();  
       fill(colorTxt);
       text(letter, x, y + glitch() );
+      
+      if (windTimer > windTimerMax){
+        x -= windX;
+        
+        windTimer = 0; 
+      }
+      else windTimer++;
+      
    }
    
    void stepForward(){
