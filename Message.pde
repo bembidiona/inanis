@@ -20,7 +20,7 @@ class Message{
    }
    
    void show(String _message, float seconds){
-     message = _message;
+     message = "- "+_message+" -";
      duration = seconds;
      
      Ani.to(this, 1, "y", moveDistance, Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");

@@ -17,6 +17,7 @@ class Button{
    Ani tweenOut;   
    
    boolean hiden = true;
+   private String txt;
    
    Button(String _name, int _buttonNum, int _blank){    
      name = _name;     
@@ -42,12 +43,13 @@ class Button{
      fill(colorTxt);  
      textAlign(RIGHT);     
      
-     String txt = name;     
+     if (name == ".img") txt = "."+pixFormat;
+     else txt = name;     
      if (isOver()){
        txt = "_" + txt;
        
        cursorHand = true;
-     }          
+     }     
      text(txt, x, y);    
      
      /*noFill();
@@ -58,7 +60,12 @@ class Button{
    
    void checkClick(){
      if(isOver()){
-        if(name == "save") exportTxt();
+        if(name == ".txt") saveTxt();
+        else if(name == ".img") savePix();
+        else if (name == "img"){
+           if (pixFormat == "bmp") pixFormat = "png";
+           else if (pixFormat == "png") pixFormat = "bmp";  
+        }
         else if (name == "folder") selectFolder("On exit Save to this folder", "checkPath");
         else if (name == "day/night") {
           if(colorBg == 0) {
@@ -71,6 +78,8 @@ class Button{
           }
           
         }
+        else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit()", 3);
+        else if (name == "?") messager.show(appName+" "+version+" by jeRemias Babini", 2);
         else if (name == "exit") exit(); 
      }
    }

@@ -16,9 +16,9 @@ int step = 10;
 String breaker = "./ ";
 String savePath = "";
 PFont fontOptions;
+String pixFormat = "png"; 
 
-
-String[] buttonsNames = {"save", "folder", "-","day/night", "-","exit"};
+String[] buttonsNames = {".txt", ".img","-", "img", "folder", "-","day/night", "-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 
@@ -33,6 +33,8 @@ int timeKeysInactive = 2000;
 boolean keysInactive = true;
 
 Boolean cursorHand = false;
+
+boolean isPressed_Ctrl = false;
 
 Message messager;
 Caret caret;
@@ -114,6 +116,10 @@ void keyPressed() {
     firstBlood = false;
   }
   
+  if (keyCode == CONTROL){
+     isPressed_Ctrl = true;
+  }
+  
   if (keyCode == ENTER){
      caret.addChar(breaker);
   }
@@ -122,11 +128,20 @@ void keyPressed() {
       caret.removeChar();      
     }
   } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT && keyCode != ENTER) {
-    caret.addChar(str(key));
-  }  
-  
-  
+    
+    if(isPressed_Ctrl){
+      if(keyCode == 83) saveTxt(); //s
+      else if(keyCode == 69) savePix(); //e      
+    }
+    else caret.addChar(str(key));
+  }
 }
+void keyReleased() {
+  if (keyCode == CONTROL){
+    isPressed_Ctrl = false;
+  }
+}
+
 
 boolean sketchFullScreen() {
   return startFullscreen;
@@ -148,7 +163,7 @@ void setGradient(int x, int y, float w, float h, color c1, color c2, boolean axi
 void mousePressed(){
   for (Button b : buttons) {
     b.checkClick();
-  }
+  }  
 }
 
 void mouseMoved(){
@@ -170,11 +185,16 @@ void mouseMoved(){
 
 
 // Save stuff
-void exportTxt(){
+void saveTxt(){
    String[] list = split(stream, breaker);
    saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
  
-   messager.show("-file saved-", 1);
+   messager.show("txt saved", 1);
+}
+void savePix(){
+  save(savePath +second()+"-"+hour()+"-"+day()+"."+pixFormat); 
+  
+  messager.show("pix saved", 1);
 }
 void checkPath(File selection){
 if (selection == null) {
