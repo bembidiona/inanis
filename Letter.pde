@@ -7,7 +7,7 @@ class Letter{
    
    float windX = 0.001; 
    private int windTimer = 0;
-   int windTimerMax = 1;
+   int windTimerMax = 5;
          
    Letter(String _letter){
       letter = _letter; 

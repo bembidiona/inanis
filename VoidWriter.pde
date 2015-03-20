@@ -22,7 +22,7 @@ String[] buttonsNames = {"save", "folder", "-","day/night", "-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 
-Boolean firstBlood = false;
+Boolean firstBlood = true;
 
 int timerMouseInactive = 0;
 int timeMouseInactive = 2000;
@@ -106,37 +106,23 @@ void draw() {
 void keyPressed() {
   keysInactive = false;
   
-  if (!firstBlood){
+  if (firstBlood){
     for (Button b : buttons) {
       b.out();
     }
-    stream = "";
-    
-    firstBlood = true;
+    stream = "";    
+    firstBlood = false;
   }
   
   if (keyCode == ENTER){
-     stream = stream + breaker;
+     caret.addChar(breaker);
   }
   if (keyCode == BACKSPACE) {
     if (stream.length() > 0) {
-      stream = stream.substring(0, stream.length()-1);
-      
-      letters.remove(letters.size()-1);
-      
-      for (Letter l : letters) {
-        l.stepBack();
-      }
-      
+      caret.removeChar();      
     }
   } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT && keyCode != ENTER) {
-    stream = stream +  str(key);
-    
-    for (Letter l : letters) {
-      l.stepForward();
-    }
-    
-    letters.add(new Letter(str(key)  ));
+    caret.addChar(str(key));
   }  
   
   
@@ -168,7 +154,7 @@ void mousePressed(){
 void mouseMoved(){
   mouseInactive = false;
   
-  if(firstBlood){
+  if(!firstBlood){
     if(mouseX > width - 100){     
         for (Button b : buttons) {
           b.in();
@@ -182,6 +168,14 @@ void mouseMoved(){
   }
 }
 
+
+// Save stuff
+void exportTxt(){
+   String[] list = split(stream, breaker);
+   saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
+ 
+   messager.show("-file saved-", 1);
+}
 void checkPath(File selection){
 if (selection == null) {
    println("Window was closed or the user hit cancel.");
@@ -190,14 +184,6 @@ if (selection == null) {
    }   
 }
 
-
-
-void exportTxt(){
-   String[] list = split(stream, breaker);
-   saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
- 
-   messager.show("-file saved-", 1);
-}
  
 
 
