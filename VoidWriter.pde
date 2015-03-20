@@ -4,7 +4,7 @@ import de.looksgood.ani.easing.*;
 final private String appName = "Void Writer";
 final private String version = "v0.1";
 
-final private Boolean startFullscreen = false;
+final private Boolean startFullscreen = true;
 
 String allText = "";
 String stream = "Type something";
@@ -36,6 +36,12 @@ boolean keysInactive = true;
 Boolean cursorHand = false;
 
 boolean isPressed_Ctrl = false;
+
+String lastWord;
+String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
+String[] triggerDEAD = {"muerte", "dead", "fetal"};
+
+String mode = "stars";
 
 Message messager;
 Caret caret;
@@ -131,7 +137,7 @@ void keyPressed() {
   
   
   if (keyCode == ENTER){
-     caret.addChar(breaker);
+     caret.addChar(breaker, false);
   }
   if (keyCode == BACKSPACE) {
     if (stream.length() > 0) {
@@ -139,15 +145,21 @@ void keyPressed() {
     }
   } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT && keyCode != ENTER) {
     
-    if(keyCode == 32){ // space
-      stars.add(new Star());
-    }
-    
     if(isPressed_Ctrl){
       if(keyCode == 83) saveTxt(); //s
       else if(keyCode == 69) savePix(); //e      
     }
-    else caret.addChar(str(key));
+    else{
+      if(keyCode == 32){ // space
+        stars.add(new Star());
+        
+        checkTriggers();        
+        lastWord = "";
+        
+        caret.addChar(str(key), true);
+      }
+      else caret.addChar(str(key), false);      
+    }
   }
 }
 void keyReleased() {
@@ -216,6 +228,28 @@ if (selection == null) {
    } else {
       savePath = selection.getAbsolutePath();     
    }   
+}
+
+void checkTriggers(){
+  for (int i = 0; i < triggerLOVE.length; i++){    
+    if(lastWord.equals(triggerLOVE[i])) triggerLOVE();
+  }
+  for (int i = 0; i < triggerDEAD.length; i++){    
+    if(lastWord.equals(triggerDEAD[i])) triggerDEAD();
+  }
+}
+
+
+void triggerDEAD(){
+  for (Star s : stars) {
+    s.txt = "@";
+  } 
+}
+
+void triggerLOVE(){
+  for (Star s : stars) {
+    s.txt = "<3";
+  } 
 }
 
  

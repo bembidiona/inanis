@@ -5,6 +5,8 @@ class Star{
    private float speed = 3;
    private float paralaje;
    
+   String txt = "*";
+   
    Boolean isOut = false;
          
    Star(){
@@ -14,7 +16,8 @@ class Star{
    }
    
    void display(){
-     text("*",x,y); 
+     
+     text(txt,x,y); 
      
      if(x < 0) isOut = true;
    }

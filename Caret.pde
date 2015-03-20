@@ -65,7 +65,7 @@ class Caret{
      image(sprite,x-sprite.width/1.5,y-sprite.height/1.5);
    }
    
-   void addChar(String _char){               
+   void addChar(String _char, Boolean space){               
       for (Letter l : letters) {
         l.stepForward();
       }
@@ -73,13 +73,17 @@ class Caret{
         s.stepForward();
       }       
       letters.add(new Letter(_char));
+      
       stream = stream + _char;
+      if(!space) lastWord = lastWord + _char;
       
       x += step/2;
    }
    
    void removeChar(){ 
-      stream = stream.substring(0, stream.length()-1);      
+      stream = stream.substring(0, stream.length()-1); 
+      lastWord = lastWord.substring(0, lastWord.length()-1);
+      
       letters.remove(letters.size()-1);      
       for (Letter l : letters) {
         l.stepBack();
