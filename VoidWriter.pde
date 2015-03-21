@@ -40,11 +40,16 @@ boolean isPressed_Ctrl = false;
 String lastWord;
 String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
 String[] triggerDEAD = {"muerte", "dead", "fetal"};
+String[] triggerGLITCH = {"glitch", "bakun", "art"};
+private int charsTriggerMax;
+private int charsTriggerMin;
 
 String mode = "stars";
 
 Message messager;
 Caret caret;
+
+int bgAlpha = 255;
  
 void setup() {
   frame.setTitle(appName + " " + version);
@@ -71,10 +76,23 @@ void setup() {
   
   messager = new Message();
   caret = new Caret();
+  
+  //----------
+  for (int i = 0; i < triggerLOVE.length; i++){    
+    setMaxMinTriggers(triggerLOVE[i].length());
+  }
+  for (int i = 0; i < triggerDEAD.length; i++){    
+    setMaxMinTriggers(triggerDEAD[i].length());
+  }
+  for (int i = 0; i < triggerGLITCH.length; i++){    
+    setMaxMinTriggers(triggerGLITCH[i].length());
+  }
 }
  
 void draw() {
-  background(colorBg);  
+  fill(colorBg, bgAlpha);
+  rect(0,0,width,height); 
+   
   cursorHand = false;
   
   noStroke();  
@@ -231,26 +249,40 @@ if (selection == null) {
    }   
 }
 
-void checkTriggers(){
-  for (int i = 0; i < triggerLOVE.length; i++){    
-    if(lastWord.equals(triggerLOVE[i])) triggerLOVE();
-  }
-  for (int i = 0; i < triggerDEAD.length; i++){    
-    if(lastWord.equals(triggerDEAD[i])) triggerDEAD();
-  }
+//Triggers
+void setMaxMinTriggers(int _charsNum){
+  if(_charsNum > charsTriggerMax) charsTriggerMax = _charsNum;
+  if(_charsNum < charsTriggerMin) charsTriggerMin = _charsNum;
 }
 
-
+void checkTriggers(){
+  int lastWordSize = lastWord.length();
+  if(charsTriggerMin <= lastWordSize && lastWordSize <= charsTriggerMax){
+    lastWord = lastWord.toLowerCase();
+    
+    for (int i = 0; i < triggerLOVE.length; i++){    
+      if(lastWord.equals(triggerLOVE[i])) triggerLOVE();
+    }
+    for (int i = 0; i < triggerDEAD.length; i++){    
+      if(lastWord.equals(triggerDEAD[i])) triggerDEAD();
+    }
+    for (int i = 0; i < triggerGLITCH.length; i++){    
+      if(lastWord.equals(triggerGLITCH[i])) triggerGLITCH();
+    }
+  }
+}
 void triggerDEAD(){
   for (Star s : stars) {
     s.txt = "@";
   } 
 }
-
 void triggerLOVE(){
   for (Star s : stars) {
     s.txt = "<3";
   } 
+}
+void triggerGLITCH(){
+  bgAlpha = 5;
 }
 
  
