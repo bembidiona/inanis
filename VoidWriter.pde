@@ -1,7 +1,7 @@
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
 
-final private String appName = "Void Writer";
+final private String appName = "Inanis";
 final private String version = "v0.1";
 
 final private Boolean startFullscreen = true;
@@ -53,6 +53,14 @@ int bgAlpha = 255;
  
 void setup() {
   frame.setTitle(appName + " " + version);
+  PImage iconImg = loadImage("icon.png");
+  PGraphics icon = createGraphics(100, 100, JAVA2D);
+  icon.beginDraw();
+  icon.image(iconImg, 0, 0, 100, 100); 
+  icon.endDraw();
+  frame.setIconImage(icon.image);
+  
+  
   size(displayWidth, displayHeight); 
   
   timerMouseInactive = millis();
