@@ -7,7 +7,7 @@ class Letter{
    
    float windX = 0.001; 
    private int windTimer = 0;
-   int windTimerMax = 5;
+   int windTimerMax = 3;
    
    Boolean isOut = false;
          

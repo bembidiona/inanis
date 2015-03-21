@@ -82,7 +82,7 @@ class Caret{
    
    void removeChar(){ 
       stream = stream.substring(0, stream.length()-1); 
-      lastWord = lastWord.substring(0, lastWord.length()-1);
+      if(lastWord.length() > 0)lastWord = lastWord.substring(0, lastWord.length()-1);
       
       letters.remove(letters.size()-1);      
       for (Letter l : letters) {
@@ -90,6 +90,14 @@ class Caret{
       }
       
       x -= step/2;
+   }
+   
+   void jump(){
+      y = floor(height/2 - 100 + random(200));
+      animation = new Ani(this, 10, "y", y + 50, Ani.EXPO_IN_OUT); 
+      
+      animation.start();
+      print("yay");
    }
    
    

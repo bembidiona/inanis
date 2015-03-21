@@ -138,6 +138,7 @@ void keyPressed() {
   
   if (keyCode == ENTER){
      caret.addChar(breaker, false);
+     caret.jump();
   }
   if (keyCode == BACKSPACE) {
     if (stream.length() > 0) {
