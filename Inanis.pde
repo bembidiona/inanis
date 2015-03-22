@@ -40,7 +40,7 @@ Boolean cursorHand = false;
 
 boolean isPressed_Ctrl = false;
 
-String lastWord;
+String lastWord = "";
 //don't forget to add new TRIGGERS in the setup section!!!
 String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
 String[] triggerDEAD = {"muerte", "dead", "fetal"};

@@ -1,5 +1,3 @@
-BUG: typear SPACE al comienzo hace explotar todo
-
 
 IDEA: Probar networking, para que haya varias navecitas volando a la vez
 
