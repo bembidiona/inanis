@@ -4,7 +4,7 @@ import de.looksgood.ani.easing.*;
 final private String appName = "Inanis";
 final private String version = "v0.1";
 
-final private Boolean startFullscreen = false;
+final private Boolean startFullscreen = true;
 
 String allText = "";
 String stream = "Type something";
@@ -50,6 +50,7 @@ Message messager;
 Caret caret;
 
 int bgAlpha = 255;
+Ani tweenGlitch;
  
 void setup() {
   frame.setTitle(appName + " " + version);
@@ -66,6 +67,8 @@ void setup() {
   timerMouseInactive = millis();
   
   Ani.init(this);
+   
+  
  
   fontOptions = loadFont("courier_15.vlw");
   
@@ -290,7 +293,7 @@ void triggerLOVE(){
   } 
 }
 void triggerGLITCH(){
-  bgAlpha = 5;
+  tweenGlitch = new Ani(this, 5, "bgAlpha", 1, Ani.EXPO_IN_OUT);  
 }
 
  
