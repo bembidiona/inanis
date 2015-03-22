@@ -78,6 +78,8 @@ class Button{
           }
           
         }
+        else if (name == "start server") startServer();
+        else if (name == "start client") messager.show("type *connect:192.168.0.10* replacing with the server IP and hit SPACE");
         else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit()", 3);
         else if (name == "?") messager.show(appName+" "+version+" by jeRemias Babini", 2);
         else if (name == "exit") exit(); 
@@ -103,7 +105,7 @@ class Button{
   void out() {
     if(!hiden){
       hiden = true;
-      Ani.to(this, 1, 0.05*buttonNum, "x", width + 100,  Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
+      Ani.to(this, 1, 0.05*buttonNum, "x", width + 150,  Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
     }      
   }
   

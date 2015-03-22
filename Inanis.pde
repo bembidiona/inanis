@@ -1,10 +1,13 @@
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
+import processing.net.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 final private String appName = "Inanis";
 final private String version = "v0.1";
 
-final private Boolean startFullscreen = true;
+final private Boolean startFullscreen = false;
 
 String allText = "";
 String stream = "Type something";
@@ -18,7 +21,7 @@ String savePath = "";
 PFont fontOptions;
 String pixFormat = "png"; 
 
-String[] buttonsNames = {".txt", ".img","-", "img", "folder", "-","day/night", "-","keys","?","-","exit"};
+String[] buttonsNames = {".txt", ".img","-", "img", "folder", "-","day/night","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 ArrayList<Star> stars = new ArrayList<Star>();
@@ -38,9 +41,11 @@ Boolean cursorHand = false;
 boolean isPressed_Ctrl = false;
 
 String lastWord;
+//don't forget to add new TRIGGERS in the setup section!!!
 String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
 String[] triggerDEAD = {"muerte", "dead", "fetal"};
 String[] triggerGLITCH = {"glitch", "bakun", "art"};
+String[] triggerCLIENT = {"connect", "conectar"};
 private int charsTriggerMax;
 private int charsTriggerMin;
 
@@ -51,6 +56,15 @@ Caret caret;
 
 int bgAlpha = 255;
 Ani tweenGlitch;
+
+
+//net
+Boolean conectedServer = false;
+Boolean conectedClient = false;
+Server server;
+Client client;
+private final int port = 12345;
+String input;
  
 void setup() {
   frame.setTitle(appName + " " + version);
@@ -61,6 +75,9 @@ void setup() {
   icon.endDraw();
   frame.setIconImage(icon.image);
   
+ 
+  
+  //---------------
   
   size(displayWidth, displayHeight); 
   
@@ -97,6 +114,9 @@ void setup() {
   }
   for (int i = 0; i < triggerGLITCH.length; i++){    
     setMaxMinTriggers(triggerGLITCH[i].length());
+  }
+  for (int i = 0; i < triggerCLIENT.length; i++){    
+    setMaxMinTriggers(triggerCLIENT[i].length());
   }
 }
  
@@ -146,10 +166,37 @@ void draw() {
     timerKeysInactive = millis();
     keysInactive = true;    
   }
+  
+  //net
+  if (conectedServer || conectedClient){
+    text("m8 say: "+input, width/2 , height/2+50);
+    
+    
+    if(conectedServer){
+       server.write(lastWord);
+      
+       client = server.available();
+       if (client != null){         
+         checkNetInput(); 
+       }
+    }
+    else if(conectedClient){
+      client.write(lastWord);
+      
+      if (client.available() > 0) {        
+        checkNetInput();        
+      }
+    }
+    
+    
+  }
+  
+  
 }
  
 void keyPressed() {
   keysInactive = false;
+  messager.itsEnded();
   
   if (firstBlood){
     for (Button b : buttons) {
@@ -267,8 +314,11 @@ void setMaxMinTriggers(int _charsNum){
 }
 
 void checkTriggers(){
+  
   int lastWordSize = lastWord.length();
-  if(charsTriggerMin <= lastWordSize && lastWordSize <= charsTriggerMax){
+  
+  if(lastWordSize < charsTriggerMin) return;
+  if(lastWordSize <= charsTriggerMax){
     lastWord = lastWord.toLowerCase();
     
     for (int i = 0; i < triggerLOVE.length; i++){    
@@ -279,6 +329,14 @@ void checkTriggers(){
     }
     for (int i = 0; i < triggerGLITCH.length; i++){    
       if(lastWord.equals(triggerGLITCH[i])) triggerGLITCH();
+    }    
+  }
+  else{ //lastWord is bigger than charsTriggerMax    
+    for (int i = 0; i < triggerCLIENT.length; i++){       
+      String lt = lastWord.substring(0, triggerCLIENT[i].length()); 
+      String ltIp = lastWord.substring(triggerCLIENT[i].length() + 1);
+      
+      if(lt.equals(triggerCLIENT[i])) startClient(ltIp);    
     }
   }
 }
@@ -288,12 +346,46 @@ void triggerDEAD(){
   } 
 }
 void triggerLOVE(){
-  for (Star s : stars) {
+  for (Star s : stars) {      
     s.txt = "<3";
   } 
 }
 void triggerGLITCH(){
   tweenGlitch = new Ani(this, 5, "bgAlpha", 1, Ani.EXPO_IN_OUT);  
+}
+
+// NET
+void startServer(){
+  try {
+    String[] ip = loadStrings("http://icanhazip.com/");
+    
+    InetAddress me = InetAddress.getLocalHost();
+    String dottedQuad = me.getHostAddress();
+    messager.show("server started. Your IPs are -> LOCAL: "+dottedQuad +" - PUBLIC: " + ip[0]);
+    
+    server = new Server(this, port);
+    
+    conectedServer = true;
+    
+  } catch (UnknownHostException e) {
+    messager.show("FAIL", 1);
+  } 
+}
+void triggerCLIENT(){    
+}
+void startClient(String _ip){
+  try {
+    client = new Client(this, _ip, port);
+    messager.show("conected!", 1);  
+  
+    conectedClient = true;  
+  } catch (Error e) {
+    messager.show("FAIL", 1);
+  } 
+}
+
+void checkNetInput(){
+  input = client.readString();
 }
 
  
