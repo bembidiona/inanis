@@ -1,5 +1,6 @@
+BUG: ALT + XXX creo que está usando ANSI en vez de ASCII http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html
+
 - soporte para acentos
-- soporte para ALT+XXX
 - hacer un savefile que contenga la teclas tipeadas + el tiempo en que se van tecleando
 	* al cargarlo, un caret aparece y comienza a tipear en tiempo real lo que el savefile tenia
 	* se puede escribir con otro caret mientras se ve la interpretacion cargada?

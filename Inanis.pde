@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 final private String appName = "Inanis";
 final private String version = "v0.1";
 
-final private Boolean startFullscreen = false;
+final private Boolean DEBUG = true;
 
 String allText = "";
 String stream = "Type something";
@@ -88,8 +88,7 @@ void setup() {
   Ani.init(this);
    
   
- 
-  fontOptions = loadFont("courier_15.vlw");
+  fontOptions = loadFont("courier_15.vlw");  
   
   textAlign(RIGHT, CENTER);
   textSize(30);
@@ -192,15 +191,16 @@ void draw() {
     
     
   }
-  
+  //debug
+  if (DEBUG) {
+    text("DEBUG: "+"ñññº¿®", width/2,height/2-150);
+  }
   
 }
  
 void keyPressed() {
   keysInactive = false;
   messager.itsEnded();
-  
-  println(str(key) +" - "+key);
   
   if (firstBlood){
     for (Button b : buttons) {
@@ -234,7 +234,7 @@ void keyPressed() {
       else if(keyCode == 69) savePix(); //e      
     }
     else if(isPressed_Alt){
-      
+      altKeys = altKeys + str(key);
     }
     else{
       if(keyCode == 32){ // space
@@ -255,12 +255,15 @@ void keyReleased() {
   }
   if (keyCode == ALT){
     isPressed_Alt = false;
+    int i = int(altKeys);
+    caret.addChar(Character.toString((char)i), false); 
+    altKeys = "";
   }
 }
 
 
 boolean sketchFullScreen() {
-  return startFullscreen;
+  return !DEBUG;
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, boolean axisX ) {
