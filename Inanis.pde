@@ -11,6 +11,7 @@ final private Boolean startFullscreen = false;
 
 String allText = "";
 String stream = "Type something";
+String altKeys = "";
 int colorBg = 0;
 int colorTxt = 255;
 
@@ -39,6 +40,7 @@ boolean keysInactive = true;
 Boolean cursorHand = false;
 
 boolean isPressed_Ctrl = false;
+boolean isPressed_Alt = false;
 
 String lastWord = "";
 //don't forget to add new TRIGGERS in the setup section!!!
@@ -198,6 +200,8 @@ void keyPressed() {
   keysInactive = false;
   messager.itsEnded();
   
+  println(str(key) +" - "+key);
+  
   if (firstBlood){
     for (Button b : buttons) {
       b.out();
@@ -208,6 +212,9 @@ void keyPressed() {
   
   if (keyCode == CONTROL){
      isPressed_Ctrl = true;
+  }
+  if (keyCode == ALT){
+     isPressed_Alt = true;
   }
   
   
@@ -226,6 +233,9 @@ void keyPressed() {
       if(keyCode == 83) saveTxt(); //s
       else if(keyCode == 69) savePix(); //e      
     }
+    else if(isPressed_Alt){
+      
+    }
     else{
       if(keyCode == 32){ // space
         stars.add(new Star());
@@ -242,6 +252,9 @@ void keyPressed() {
 void keyReleased() {
   if (keyCode == CONTROL){
     isPressed_Ctrl = false;
+  }
+  if (keyCode == ALT){
+    isPressed_Alt = false;
   }
 }
 
