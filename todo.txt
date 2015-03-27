@@ -1,4 +1,4 @@
-BUG: ALT + XXX creo que está usando ANSI en vez de ASCII http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html
+
 
 - soporte para acentos
 - hacer un savefile que contenga la teclas tipeadas + el tiempo en que se van tecleando
@@ -7,6 +7,7 @@ BUG: ALT + XXX creo que está usando ANSI en vez de ASCII http://www.irongeek.com
 	* al guardar el archivo se suma el nuevo caret con el que escribias + el caret y stream del savefile viejo
 	* Al terminar el stream del savefile, comenzarlo de nuevo.
 - hacer una visualizacion copada para el caret y stream del otro ente que se conecta al networking
+- BUG: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 
 
 IDEA: Al dejar de tipear, aparece una frase que te haga mierda, y motive a seguir escribiendo. How DA FAC

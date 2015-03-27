@@ -8,6 +8,7 @@ final private String appName = "Inanis";
 final private String version = "v0.1";
 
 final private Boolean DEBUG = true;
+String debugLog = "LOG: ";
 
 String allText = "";
 String stream = "Type something";
@@ -193,7 +194,7 @@ void draw() {
   }
   //debug
   if (DEBUG) {
-    text("DEBUG: "+"ñññº¿®", width/2,height/2-150);
+    text(debugLog, width/2,height/2-150);
   }
   
 }
@@ -215,6 +216,9 @@ void keyPressed() {
   }
   if (keyCode == ALT){
      isPressed_Alt = true;
+  }
+  if (keyCode == DELETE){
+     debugLog = "";
   }
   
   
@@ -255,8 +259,23 @@ void keyReleased() {
   }
   if (keyCode == ALT){
     isPressed_Alt = false;
+    
+    // TODO
+    // for some reason the conversion to chars is using the second table: http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html
+    // so, hardcodie los acentos y la ñ por ahora
+    
     int i = int(altKeys);
-    caret.addChar(Character.toString((char)i), false); 
+    String hackedChar = Character.toString((char)i); 
+    
+    if(i == 164) hackedChar = "ñ";
+    else if(i == 160) hackedChar = "á";
+    else if(i == 161) hackedChar = "í";
+    else if(i == 162) hackedChar = "ó";
+    else if(i == 163) hackedChar = "ú";
+    else if(i == 130) hackedChar = "é";    
+    
+    caret.addChar(hackedChar, false); 
+     
     altKeys = "";
   }
 }
@@ -402,6 +421,10 @@ void startClient(String _ip){
 
 void checkNetInput(){
   input = client.readString();
+}
+
+void printDebug(String txt){
+  debugLog = debugLog + " // " + txt;
 }
 
  
