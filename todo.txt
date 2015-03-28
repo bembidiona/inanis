@@ -1,21 +1,21 @@
-
-
+- cargar el savefile, y mostrar el stream que contiene segun los times que contienen
 - soporte para acentos
-- hacer un savefile que contenga la teclas tipeadas + el tiempo en que se van tecleando
-	* al cargarlo, un caret aparece y comienza a tipear en tiempo real lo que el savefile tenia
-	* se puede escribir con otro caret mientras se ve la interpretacion cargada?
-	* al guardar el archivo se suma el nuevo caret con el que escribias + el caret y stream del savefile viejo
-	* Al terminar el stream del savefile, comenzarlo de nuevo.
+
+
 - hacer una visualizacion copada para el caret y stream del otro ente que se conecta al networking
 - BUG: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
+
+- hacer algo con los triggers "dia" y "noche"
 
 
 IDEA: Al dejar de tipear, aparece una frase que te haga mierda, y motive a seguir escribiendo. How DA FAC
 IDEA: Al tipear, la letra queda suelta y da impulso al cursor de input/nave, y la hace avanzar hacia la derecha. Sino se tipea, la nave cada vez se va mas hacia la izquierda. Si se va por completo, se tira un save() y se cierra el programa. Al rato de escribir empiezan a aparecer pixeles de derecha a izquierda como un star field. Si se tipean palabras claves como "amor" "muerte" "silvia suler" los pixeles cambian de iconito, a corazoncitos, calaveras, tetas, etc.
-
-
-///--------------------------------------------------
-- intentar hacer llover frases ya escritas cuando se deja de escribir
+IDEA: hacer un savefile que contenga la teclas tipeadas + el tiempo en que se van tecleando
+	* al cargarlo, un caret aparece y comienza a tipear en tiempo real lo que el savefile tenia
+	* se puede escribir con otro caret mientras se ve la interpretacion cargada?
+	* al guardar el archivo se suma el nuevo caret con el que escribias + el caret y stream del savefile viejo
+	* Al terminar el stream del savefile, comenzarlo de nuevo.
+IDEAS : - intentar hacer llover frases ya escritas cuando se deja de escribir
 - algun glitchaje para cuando va a full
 - El sonido de typeado puede cambiar a mini grititos
 - La línea de txt colapsa pasado x tiempo de no escribir-idea-

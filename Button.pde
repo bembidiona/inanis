@@ -60,7 +60,9 @@ class Button{
    
    void checkClick(){
      if(isOver()){
-        if(name == ".txt") saveTxt();
+        if(name == "saveJson") saveJson();
+        else if(name == "loadJson") loadJson();
+        else if(name == ".txt") saveTxt();
         else if(name == ".img") savePix();
         else if (name == "img"){
            if (pixFormat == "bmp") pixFormat = "png";

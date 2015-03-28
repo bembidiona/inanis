@@ -4,6 +4,11 @@ import processing.net.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+JSONObject json;
+JSONArray inputs = new JSONArray();
+int inputNum = 0; 
+
+
 final private String appName = "Inanis";
 final private String version = "v0.1";
 
@@ -23,7 +28,7 @@ String savePath = "";
 PFont fontOptions;
 String pixFormat = "png"; 
 
-String[] buttonsNames = {".txt", ".img","-", "img", "folder", "-","day/night","-","start server","start client","-","keys","?","-","exit"};
+String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 ArrayList<Star> stars = new ArrayList<Star>();
@@ -83,7 +88,7 @@ void setup() {
   //---------------
   
   size(displayWidth, displayHeight); 
-  
+  json = new JSONObject();
   timerMouseInactive = millis();
   
   Ani.init(this);
@@ -211,6 +216,9 @@ void keyPressed() {
     firstBlood = false;
   }
   
+  
+  writeKeyJson(keyCode, false);
+    
   if (keyCode == CONTROL){
      isPressed_Ctrl = true;
   }
@@ -323,6 +331,22 @@ void mouseMoved(){
 
 
 // Save stuff
+void saveJson(){
+  
+   json = new JSONObject();
+   json.setJSONArray("inputs", inputs);
+      
+   saveJSONObject(json, savePath + "/stream.json");
+ 
+   messager.show("json saved", 1);
+}
+void loadJson(){
+  
+   JSONObject jsonL = loadJSONObject( savePath + "/stream.json");
+  
+   messager.show("work in progress", 1);
+}
+
 void saveTxt(){
    String[] list = split(stream, breaker);
    saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
@@ -426,7 +450,19 @@ void checkNetInput(){
 void printDebug(String txt){
   debugLog = debugLog + " // " + txt;
 }
-
+//------------
+void writeKeyJson(int _key, Boolean wasReleased){
+  
+  JSONObject input = new JSONObject();
+  
+  input.setInt("time", millis());
+  input.setInt("key", _key); 
+  input.setBoolean("release", wasReleased);
+  
+  inputs.setJSONObject(inputNum, input);
+  
+  inputNum++;
+}
  
 
 
