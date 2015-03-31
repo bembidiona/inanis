@@ -47,6 +47,7 @@ Boolean cursorHand = false;
 
 boolean isPressed_Ctrl = false;
 boolean isPressed_Alt = false;
+boolean wasPressed_Tilde = false;
 
 String lastWord = "";
 //don't forget to add new TRIGGERS in the setup section!!!
@@ -205,6 +206,7 @@ void draw() {
 }
  
 void keyPressed() {
+    
   keysInactive = false;
   messager.itsEnded();
   
@@ -222,24 +224,28 @@ void keyPressed() {
   if (keyCode == CONTROL){
      isPressed_Ctrl = true;
   }
-  if (keyCode == ALT){
+  else if (keyCode == ALT){
      isPressed_Alt = true;
   }
-  if (keyCode == DELETE){
+  else if (keyCode == DELETE){
      debugLog = "";
   }
-  
-  
-  
-  if (keyCode == ENTER){
+  else if (keyCode == 129){ //tilde
+     if (wasPressed_Tilde == true){
+       caret.addChar("'", false);
+       wasPressed_Tilde = false; 
+     }
+     else wasPressed_Tilde = true;
+  }  
+  else if (keyCode == ENTER){
      caret.addChar(breaker, false);
      caret.jump();
   }
-  if (keyCode == BACKSPACE) {
+  else if (keyCode == BACKSPACE) {
     if (stream.length() > 0) {
       caret.removeChar();      
     }
-  } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT && keyCode != ENTER) {
+  } else if (keyCode != SHIFT) {
     
     if(isPressed_Ctrl){
       if(keyCode == 83) saveTxt(); //s
@@ -257,7 +263,19 @@ void keyPressed() {
         
         caret.addChar(str(key), true);
       }
-      else caret.addChar(str(key), false);      
+      else if (wasPressed_Tilde){
+        wasPressed_Tilde = false;
+        
+        String c = "´";
+        if(keyCode == 65) c = "á";
+        else if(keyCode == 69) c = "é";
+        else if(keyCode == 65) c = "í";
+        else if(keyCode == 79) c = "ó";
+        else if(keyCode == 85) c = "ú";
+        
+        caret.addChar(c, false);
+      }
+      else caret.addChar(str(key), false);
     }
   }
 }
