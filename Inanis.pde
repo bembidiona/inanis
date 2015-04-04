@@ -28,6 +28,8 @@ String savePath = "";
 PFont fontOptions;
 String pixFormat = "png"; 
 
+Boolean filterInvert = false;
+
 String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
@@ -203,6 +205,8 @@ void draw() {
     text(debugLog, width/2,height/2-150);
   }
   
+  if (filterInvert) filter(INVERT);
+  
 }
  
 void keyPressed() {
@@ -363,6 +367,19 @@ void loadJson(){
    JSONObject jsonL = loadJSONObject( savePath + "/stream.json");
   
    messager.show("work in progress", 1);
+   
+    /*JSONArray values = json.getJSONArray("inputs");
+  
+    for (int i = 0; i < values.size(); i++) {
+      
+      JSONObject animal = values.getJSONObject(i); 
+  
+      int id = animal.getInt("id");
+      String species = animal.getString("species");
+      String name = animal.getString("name");
+  
+      println(id + ", " + species + ", " + name);
+    }*/
 }
 
 void saveTxt(){

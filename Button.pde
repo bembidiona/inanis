@@ -70,13 +70,11 @@ class Button{
         }
         else if (name == "folder") selectFolder("On exit Save to this folder", "checkPath");
         else if (name == "day/night") {
-          if(colorBg == 0) {
-            colorBg = 255;
-            colorTxt = 0;
+          if(filterInvert) {
+            filterInvert = false;
           }
           else{
-            colorBg = 0;
-            colorTxt = 255;
+            filterInvert = true;
           }
           
         }
