@@ -17,9 +17,11 @@ class Star{
    
    void display(){
      
+     fill(colorTxt, 100);
      text(txt,x,y); 
      
-     if(x < 0) isOut = true;
+     if(x < 0) isOut = true;     
+     
    }
    
    void stepForward(){

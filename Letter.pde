@@ -23,6 +23,9 @@ class Letter{
       fill(colorTxt);
       text(letter, x, y + glitch() );
       
+      fill(colorTxt, 100);
+      text(letter, x+random(3), y + glitch() +random(3));
+      
       if (windTimer > windTimerMax){
         x -= windX;
         
@@ -41,7 +44,10 @@ class Letter{
    }
    
    float glitch(){
-     float num = (width - x)/(1000 - random(1000));
-     return random(num)-num/2;
+     int _x = x;
+     if(_x > width/2) _x = width/2;
+     
+     float num = (width/2 - _x) * 0.2;
+     return random(num);
    }
 }
