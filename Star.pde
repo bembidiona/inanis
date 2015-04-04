@@ -4,6 +4,7 @@ class Star{
    private int y = 0;   
    private float speed = 3;
    private float paralaje;
+   private Boolean virgen = true;
    
    String txt = "*";
    
@@ -30,4 +31,11 @@ class Star{
    void stepBack(){
      x += speed*paralaje;
    } 
+
+   void change(String newTxt){
+    if(virgen){
+      virgen = false;
+      txt = newTxt;
+    }    
+   }
 }   

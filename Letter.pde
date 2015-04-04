@@ -21,11 +21,25 @@ class Letter{
    void display(){
       noStroke();  
       fill(colorTxt);
+
+      //y = int( noise(millis())*height );
+
       text(letter, x, y + glitch() );
       
-      fill(colorTxt, 100);
-      text(letter, x+random(3), y + glitch() +random(3));
+      for (int i = 0; i < 2; i++){  
+        fill(colorTxt, 100);
+        text(letter, x+random(3), y + glitch() +random(3));
+      }
+      if(blood > 0){
+        for (int i = 0; i < 2; i++){  
+          fill(colorTxt);
+          rect(x-8/2 + random(8) ,y, 1, random(blood));
+        }  
+      }
       
+      
+      
+
       if (windTimer > windTimerMax){
         x -= windX;
         
@@ -45,9 +59,11 @@ class Letter{
    
    float glitch(){
      int _x = x;
-     if(_x > width/2) _x = width/2;
+     int threshold = floor(width/1.1);
+
+     if(_x > threshold) _x = threshold;
      
-     float num = (width/2 - _x) * 0.2;
+     float num = (threshold - _x) * letterGlitch;
      return random(num);
    }
 }

@@ -30,7 +30,7 @@ String pixFormat = "png";
 
 Boolean filterInvert = false;
 
-String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","-","start server","start client","-","keys","?","-","exit"};
+String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","wavesUp","wavesDown","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 ArrayList<Star> stars = new ArrayList<Star>();
@@ -57,6 +57,10 @@ String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
 String[] triggerDEAD = {"muerte", "dead", "fetal"};
 String[] triggerGLITCH = {"glitch", "bakun", "art"};
 String[] triggerCLIENT = {"connect", "conectar"};
+String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
+String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
+String[] triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico"};
+String[] triggerPICADO = {"odio", "mar", "ocean", "hate", "water", "tormenta"};
 private int charsTriggerMax;
 private int charsTriggerMin;
 
@@ -67,6 +71,15 @@ Caret caret;
 
 int bgAlpha = 255;
 Ani tweenGlitch;
+Ani tweenScale;
+Ani tweenBlood;
+Ani tweenLetterGlicth;
+Ani tweenPicado;
+
+float scaleAll = 1;
+int blood = 0;
+
+float letterGlitch = 0;
 
 
 //net
@@ -76,6 +89,13 @@ Server server;
 Client client;
 private final int port = 12345;
 String input;
+
+// perlin waves
+float yoff = 0.0;
+private int wavesY;
+final private int wavesStep = 5; 
+int picado = 20;
+
  
 void setup() {
   frame.setTitle(appName + " " + version);
@@ -128,6 +148,20 @@ void setup() {
   for (int i = 0; i < triggerCLIENT.length; i++){    
     setMaxMinTriggers(triggerCLIENT[i].length());
   }
+  for (int i = 0; i < triggerSCALE.length; i++){    
+    setMaxMinTriggers(triggerSCALE[i].length());
+  }
+  for (int i = 0; i < triggerPANIC.length; i++){    
+    setMaxMinTriggers(triggerPANIC[i].length());
+  }
+  for (int i = 0; i < triggerBLOOD.length; i++){    
+    setMaxMinTriggers(triggerBLOOD[i].length());
+  }
+  for (int i = 0; i < triggerPICADO.length; i++){    
+    setMaxMinTriggers(triggerPICADO[i].length());
+  }
+
+  wavesY = height - height/10;
 }
  
 void draw() {
@@ -136,6 +170,14 @@ void draw() {
    
   cursorHand = false;
   
+  if(scaleAll != 1){
+    translate( width/2, height/2);  
+    scale(scaleAll);      
+    translate( -(width/2), -(height/2));  
+  }
+
+
+
   noStroke();  
   fill(colorTxt);
   caret.display();
@@ -204,8 +246,31 @@ void draw() {
   if (DEBUG) {
     text(debugLog, width/2,height/2-150);
   }
+
+
+  // -------------------
+  // perlin ocean
+  // --------------------
+  beginShape();  
+  float xoff = 0;  
+  for (float x = 0; x <= width; x += 10) {
+    float y = map(noise(xoff, yoff), 0, 1, wavesY, wavesY + picado);
+    
+    vertex(x, y); 
+    
+    xoff += 0.05;
+  }
+  yoff += 0.01;
+  vertex(width, height);
+  vertex(0, height);
+  endShape(CLOSE);
+  //-------------------------
+
+  
   
   if (filterInvert) filter(INVERT);
+  //filter(THRESHOLD);
+  
   
 }
  
@@ -220,12 +285,17 @@ void keyPressed() {
     }
     stream = "";    
     firstBlood = false;
-  }
-  
+  }  
   
   writeKeyJson(keyCode, false);
-    
-  if (keyCode == CONTROL){
+  
+  if (keyCode == UP){
+    wavesUp();
+  }
+  else if (keyCode == DOWN){
+    wavesDown();
+  }
+  else if (keyCode == CONTROL){
      isPressed_Ctrl = true;
   }
   else if (keyCode == ALT){
@@ -423,7 +493,19 @@ void checkTriggers(){
     }
     for (int i = 0; i < triggerGLITCH.length; i++){    
       if(lastWord.equals(triggerGLITCH[i])) triggerGLITCH();
-    }    
+    }
+    for (int i = 0; i < triggerSCALE.length; i++){    
+      if(lastWord.equals(triggerSCALE[i])) triggerSCALE();
+    }
+    for (int i = 0; i < triggerBLOOD.length; i++){    
+      if(lastWord.equals(triggerBLOOD[i])) triggerBLOOD();
+    }
+    for (int i = 0; i < triggerPANIC.length; i++){    
+      if(lastWord.equals(triggerPANIC[i])) triggerPANIC();
+    }
+    for (int i = 0; i < triggerPICADO.length; i++){    
+      if(lastWord.equals(triggerPICADO[i])) triggerPICADO();
+    }         
   }
   else{ //lastWord is bigger than charsTriggerMax    
     for (int i = 0; i < triggerCLIENT.length; i++){       
@@ -434,18 +516,41 @@ void checkTriggers(){
     }
   }
 }
-void triggerDEAD(){
+void changeStars(String _txt){
   for (Star s : stars) {
-    s.txt = "†";
-  } 
+    s.change(_txt);
+  }
+}
+void triggerDEAD(){
+  changeStars("†");
 }
 void triggerLOVE(){
-  for (Star s : stars) {      
-    s.txt = "<3";
-  } 
+  changeStars("<3");
 }
 void triggerGLITCH(){
-  tweenGlitch = new Ani(this, 5, "bgAlpha", 1, Ani.EXPO_IN_OUT);  
+  tweenGlitch = new Ani(this, 10, "bgAlpha", 1, Ani.EXPO_IN_OUT);
+  tweenGlitch.setPlayMode(Ani.YOYO);
+  tweenGlitch.repeat(2);
+}
+void triggerSCALE(){
+  tweenScale = new Ani(this, 10, "scaleAll", 2, Ani.EXPO_IN_OUT);
+  tweenScale.setPlayMode(Ani.YOYO);
+  tweenScale.repeat(2);
+}
+void triggerBLOOD(){
+  tweenBlood = new Ani(this, 10, "blood", height, Ani.EXPO_IN_OUT);
+  tweenBlood.setPlayMode(Ani.YOYO);
+  tweenBlood.repeat(2);
+}
+void triggerPANIC(){
+  tweenLetterGlicth = new Ani(this, 10, "letterGlitch", 0.5, Ani.EXPO_IN_OUT);
+  tweenLetterGlicth.setPlayMode(Ani.YOYO);
+  tweenLetterGlicth.repeat(2);  
+}
+void triggerPICADO(){
+  tweenPicado = new Ani(this, 20, "picado", 60, Ani.EXPO_IN_OUT);
+  tweenPicado.setPlayMode(Ani.YOYO);
+  tweenPicado.repeat(2);  
 }
 
 // NET
@@ -499,5 +604,16 @@ void writeKeyJson(int _key, Boolean wasReleased){
   inputNum++;
 }
  
+void wavesUp(){
+  wavesY -= wavesStep;
+  int tope = height/2 + height/8;
 
+  if(wavesY < tope) wavesY = tope;
+}
+void wavesDown(){
+  wavesY += wavesStep;
+  int tope = height + (picado*2);
+
+  if(wavesY > tope) wavesY = tope;
+}
 
