@@ -10,9 +10,9 @@ int inputNum = 0;
 
 
 final private String appName = "Inanis";
-final private String version = "v0.1";
+final private String version = "v0.2";
 
-final private Boolean DEBUG = true;
+final private Boolean DEBUG = false;
 String debugLog = "LOG: ";
 
 String allText = "";
@@ -30,20 +30,22 @@ String pixFormat = "png";
 
 Boolean filterInvert = false;
 
-String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","wavesUp","wavesDown","-","start server","start client","-","keys","?","-","exit"};
+String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 ArrayList<Star> stars = new ArrayList<Star>();
+ArrayList<Rain> rain = new ArrayList<Rain>();
+Boolean isRaining = false;
 
 Boolean firstBlood = true;
 
 int timerMouseInactive = 0;
 int timeMouseInactive = 2000;
-boolean mouseInactive = false;
+Boolean mouseInactive = false;
 
 int timerKeysInactive = 0;
 int timeKeysInactive = 2000;
-boolean keysInactive = true;
+Boolean keysInactive = true;
 
 Boolean cursorHand = false;
 
@@ -61,6 +63,7 @@ String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
 String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
 String[] triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico"};
 String[] triggerPICADO = {"odio", "mar", "ocean", "hate", "water", "tormenta"};
+String[] triggerRAIN = {"lluvia", "rain", "llorar", "cry"};
 private int charsTriggerMax;
 private int charsTriggerMin;
 
@@ -160,6 +163,9 @@ void setup() {
   for (int i = 0; i < triggerPICADO.length; i++){    
     setMaxMinTriggers(triggerPICADO[i].length());
   }
+  for (int i = 0; i < triggerRAIN.length; i++){    
+    setMaxMinTriggers(triggerRAIN[i].length());
+  }
 
   wavesY = height - height/10;
 }
@@ -186,17 +192,13 @@ void draw() {
     if (l.isOut) letters.remove(i);
     else l.display();
   }  
-  for (int i=stars.size()-1; i >= 0; i--) {
-    Star s = stars.get(i);
-    if (s.isOut) stars.remove(i);
-    else s.display();
-  }
+  
     
   //tapon  
-  fill(colorBg);
+  /*fill(colorBg);
   rect(0, 0, width/6, height);  
   noFill();  
-  setGradient(width/6, 0, width/4, height, color(colorBg, colorBg, colorBg), color(colorBg, colorBg, colorBg, 0), true);
+  setGradient(width/6, 0, width/4, height, color(colorBg, colorBg, colorBg), color(colorBg, colorBg, colorBg, 0), true);*/
   
   for (Button b : buttons) {
     b.display();
@@ -207,6 +209,24 @@ void draw() {
     if (cursorHand) cursor(HAND);
     else cursor(CROSS);
   }
+
+  //stars
+  for (int i=stars.size()-1; i >= 0; i--) {
+    Star s = stars.get(i);
+    if (s.isOut) stars.remove(i);
+    else s.display();
+  }
+
+  // RAIN
+  if(isRaining){
+    rain.add(new Rain());  
+  }
+  for (int i=rain.size()-1; i >= 0; i--) {
+    Rain r = rain.get(i);
+    if (r.isOut) rain.remove(i);
+    else r.display();
+  }  
+  
   
   //Timers
   if(millis() - timerMouseInactive >= timeMouseInactive && !cursorHand){
@@ -251,6 +271,7 @@ void draw() {
   // -------------------
   // perlin ocean
   // --------------------
+  fill(colorTxt);
   beginShape();  
   float xoff = 0;  
   for (float x = 0; x <= width; x += 10) {
@@ -399,9 +420,15 @@ void setGradient(int x, int y, float w, float h, color c1, color c2, boolean axi
 }
 
 void mousePressed(){
-  for (Button b : buttons) {
-    b.checkClick();
-  }  
+  if (mouseX > width/2+width/3){
+    for (Button b : buttons) {
+      b.checkClick();
+    }
+  }
+  else{
+    if(caret.canTeleport) caret.teleport(mouseX,mouseY);  
+  }
+  
 }
 
 void mouseMoved(){
@@ -505,7 +532,10 @@ void checkTriggers(){
     }
     for (int i = 0; i < triggerPICADO.length; i++){    
       if(lastWord.equals(triggerPICADO[i])) triggerPICADO();
-    }         
+    }
+    for (int i = 0; i < triggerRAIN.length; i++){    
+      if(lastWord.equals(triggerRAIN[i])) triggerRAIN();
+    }           
   }
   else{ //lastWord is bigger than charsTriggerMax    
     for (int i = 0; i < triggerCLIENT.length; i++){       
@@ -551,6 +581,9 @@ void triggerPICADO(){
   tweenPicado = new Ani(this, 20, "picado", 60, Ani.EXPO_IN_OUT);
   tweenPicado.setPlayMode(Ani.YOYO);
   tweenPicado.repeat(2);  
+}
+void triggerRAIN(){
+  isRaining = true; 
 }
 
 // NET

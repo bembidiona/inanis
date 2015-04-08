@@ -10,6 +10,8 @@ class Letter{
    int windTimerMax = 3;
    
    Boolean isOut = false;
+
+   private int alpha = 255;
          
    Letter(String _letter){
       letter = _letter; 
@@ -20,14 +22,17 @@ class Letter{
    
    void display(){
       noStroke();  
-      fill(colorTxt);
 
-      //y = int( noise(millis())*height );
+
+      int margen = 500;
+      if(x < margen) alpha = floor((((x*100)/margen) * 255 ) / 100);
+      else alpha = 255;
+      fill(colorTxt,alpha);      
 
       text(letter, x, y + glitch() );
       
       for (int i = 0; i < 2; i++){  
-        fill(colorTxt, 100);
+        fill(colorTxt, alpha/2.5);
         text(letter, x+random(3), y + glitch() +random(3));
       }
       if(blood > 0){

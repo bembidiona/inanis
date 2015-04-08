@@ -78,11 +78,11 @@ class Button{
           }
           
         }
-        else if (name == "wavesUp") wavesUp(); 
-        else if (name == "wavesDown") wavesDown();
+        else if (name == "seaUp") wavesUp(); 
+        else if (name == "seaDown") wavesDown();
         else if (name == "start server") startServer();
         else if (name == "start client") messager.show("type *connect:192.168.0.10* replacing with the server IP and hit SPACE");
-        else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit()", 3);
+        else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit() / ↑or↓:moveSea()", 3);
         else if (name == "?") messager.show(appName+" "+version+" by jeRemias Babini", 2);
         else if (name == "exit") exit(); 
      }

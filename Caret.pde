@@ -6,27 +6,30 @@ class Caret{
    private int blinkTimer = 0;
    int blinkTimerMax = 20;
    
-   Ani animation;
+   Ani animationX;
+   Ani animationY;
    
    PImage sprite;
    
-   private final int xMin = width/2;
-   private final int xMax = width/2+width/4;
+   private final int xMin = width/2-width/3;
+   private final int xMax = width/2+width/3;
    
    private final float stepBack = step/2;
+
+   Boolean canTeleport = true;
       
    Caret(){
      
      x = width/2;
      y = height/2;
      
-     animation = new Ani(this, 10, "y", height/2 + 50, Ani.EXPO_IN_OUT);
+     animationY = new Ani(this, 10, "y", height/2 + 50, Ani.EXPO_IN_OUT);
      
      sprite = loadImage("caret.png");
      
      // FORWARD, BACKWARD, YOYO
-     animation.setPlayMode(Ani.YOYO);
-     animation.repeat();
+     animationY.setPlayMode(Ani.YOYO);
+     animationY.repeat();
      
    }   
    
@@ -43,7 +46,7 @@ class Caret{
         else { 
            blinkTimer = 0;
            
-           x -= stepBack;
+           if(!firstBlood) x -= stepBack;
         }   
 
                 
@@ -93,11 +96,26 @@ class Caret{
    }
    
    void jump(){
-      y = floor(height/2 - 100 + random(200));
-      animation = new Ani(this, 10, "y", y + 50, Ani.EXPO_IN_OUT); 
-      
-      animation.start();
-      print("yay");
+      teleport(x, floor(height/2 - 100 + random(200)) );           
+   }
+
+   void teleport(int _x, int _y){
+    canTeleport = false;
+    animationY.pause();
+    animationX = new Ani(this, 0.5, "x", _x, Ani.EXPO_IN_OUT,"onStart:blank, onEnd:startIdle");
+    animationY = new Ani(this, 0.5, "y", _y, Ani.EXPO_IN_OUT);    
+   }
+
+   void startIdle(){
+    canTeleport = true;
+    animationY = new Ani(this, 10, "y", y + 50, Ani.EXPO_IN_OUT);       
+    animationY.start();
+    animationY.setPlayMode(Ani.YOYO);
+    animationY.repeat();
+   }
+
+   private void blank(){
+
    }
    
    

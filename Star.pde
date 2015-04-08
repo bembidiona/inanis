@@ -6,6 +6,8 @@ class Star{
    private float paralaje;
    private Boolean virgen = true;
    
+   final private int alpha = floor(random (100) + 100);
+   
    String txt = "*";
    
    Boolean isOut = false;
@@ -18,7 +20,7 @@ class Star{
    
    void display(){
      
-     fill(colorTxt, 100);
+     fill(colorTxt, alpha);
      text(txt,x,y); 
      
      if(x < 0) isOut = true;     
