@@ -12,7 +12,7 @@ int inputNum = 0;
 final private String appName = "Inanis";
 final private String version = "v0.2";
 
-final private Boolean DEBUG = false;
+final private Boolean DEBUG = true;
 String debugLog = "LOG: ";
 
 String allText = "";
@@ -505,6 +505,8 @@ void setMaxMinTriggers(int _charsNum){
 }
 
 void checkTriggers(){
+
+  println("-"+lastWord+"-"); 
   
   int lastWordSize = lastWord.length();
   

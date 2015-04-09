@@ -100,6 +100,9 @@ class Caret{
    }
 
    void teleport(int _x, int _y){
+    checkTriggers();        
+    lastWord = ""; 
+     
     canTeleport = false;
     animationY.pause();
     animationX = new Ani(this, 0.5, "x", _x, Ani.EXPO_IN_OUT,"onStart:blank, onEnd:startIdle");
