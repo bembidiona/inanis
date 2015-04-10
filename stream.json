@@ -1,22 +1,6 @@
 [
   {
-    "time": 2972,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 66,
-    "x": 0
-  },
-  {
-    "time": 3059,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 66,
-    "x": 0
-  },
-  {
-    "time": 3121,
+    "time": 4546,
     "type": "key",
     "release": false,
     "y": 0,
@@ -24,15 +8,7 @@
     "x": 0
   },
   {
-    "time": 3198,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 75,
-    "x": 0
-  },
-  {
-    "time": 3223,
+    "time": 4646,
     "type": "key",
     "release": true,
     "y": 0,
@@ -40,119 +16,7 @@
     "x": 0
   },
   {
-    "time": 3279,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 75,
-    "x": 0
-  },
-  {
-    "time": 3420,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 85,
-    "x": 0
-  },
-  {
-    "time": 3482,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 85,
-    "x": 0
-  },
-  {
-    "time": 3859,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 78,
-    "x": 0
-  },
-  {
-    "time": 3952,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 78,
-    "x": 0
-  },
-  {
-    "time": 4562,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 4658,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 4984,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 5151,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 46,
-    "x": 0
-  },
-  {
-    "time": 5231,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 46,
-    "x": 0
-  },
-  {
-    "time": 5429,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 6150,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 6200,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 7461,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 7697,
+    "time": 5190,
     "type": "key",
     "release": false,
     "y": 0,
@@ -160,15 +24,7 @@
     "x": 0
   },
   {
-    "time": 7727,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 7806,
+    "time": 5311,
     "type": "key",
     "release": true,
     "y": 0,
@@ -176,23 +32,23 @@
     "x": 0
   },
   {
-    "time": 7868,
+    "time": 5537,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 85,
+    "key": 161,
     "x": 0
   },
   {
-    "time": 7930,
+    "time": 5613,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 85,
+    "key": 161,
     "x": 0
   },
   {
-    "time": 7961,
+    "time": 5661,
     "type": "key",
     "release": false,
     "y": 0,
@@ -200,7 +56,7 @@
     "x": 0
   },
   {
-    "time": 8041,
+    "time": 5726,
     "type": "key",
     "release": true,
     "y": 0,
@@ -208,39 +64,55 @@
     "x": 0
   },
   {
-    "time": 8041,
+    "time": 7567,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 78,
+    "key": 129,
     "x": 0
   },
   {
-    "time": 8128,
+    "time": 7620,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 78,
+    "key": 129,
     "x": 0
   },
   {
-    "time": 8128,
+    "time": 7749,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 68,
+    "key": 65,
     "x": 0
   },
   {
-    "time": 8233,
+    "time": 7812,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 68,
+    "key": 65,
     "x": 0
   },
   {
-    "time": 8264,
+    "time": 9238,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 67,
+    "x": 0
+  },
+  {
+    "time": 9337,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 67,
+    "x": 0
+  },
+  {
+    "time": 9392,
     "type": "key",
     "release": false,
     "y": 0,
@@ -248,7 +120,7 @@
     "x": 0
   },
   {
-    "time": 8324,
+    "time": 9467,
     "type": "key",
     "release": true,
     "y": 0,
@@ -256,7 +128,39 @@
     "x": 0
   },
   {
-    "time": 8608,
+    "time": 9591,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 77,
+    "x": 0
+  },
+  {
+    "time": 9691,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 77,
+    "x": 0
+  },
+  {
+    "time": 9773,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 79,
+    "x": 0
+  },
+  {
+    "time": 9848,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 79,
+    "x": 0
+  },
+  {
+    "time": 10017,
     "type": "key",
     "release": false,
     "y": 0,
@@ -264,7 +168,7 @@
     "x": 0
   },
   {
-    "time": 8685,
+    "time": 10069,
     "type": "key",
     "release": true,
     "y": 0,
@@ -272,7 +176,23 @@
     "x": 0
   },
   {
-    "time": 8808,
+    "time": 11002,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 69,
+    "x": 0
+  },
+  {
+    "time": 11096,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 69,
+    "x": 0
+  },
+  {
+    "time": 11217,
     "type": "key",
     "release": false,
     "y": 0,
@@ -280,7 +200,7 @@
     "x": 0
   },
   {
-    "time": 8896,
+    "time": 11277,
     "type": "key",
     "release": true,
     "y": 0,
@@ -288,199 +208,39 @@
     "x": 0
   },
   {
-    "time": 9000,
+    "time": 11350,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 69,
+    "key": 84,
     "x": 0
   },
   {
-    "time": 9092,
+    "time": 11422,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 69,
+    "key": 84,
     "x": 0
   },
   {
-    "time": 9204,
+    "time": 12063,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 82,
+    "key": 129,
     "x": 0
   },
   {
-    "time": 9265,
+    "time": 12130,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 82,
+    "key": 129,
     "x": 0
   },
   {
-    "time": 9523,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 18,
-    "x": 0
-  },
-  {
-    "time": 9554,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 97,
-    "x": 0
-  },
-  {
-    "time": 9616,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 97,
-    "x": 0
-  },
-  {
-    "time": 9680,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 102,
-    "x": 0
-  },
-  {
-    "time": 9727,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 102,
-    "x": 0
-  },
-  {
-    "time": 9758,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 96,
-    "x": 0
-  },
-  {
-    "time": 9819,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 96,
-    "x": 0
-  },
-  {
-    "time": 9875,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 18,
-    "x": 0
-  },
-  {
-    "time": 10617,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 10734,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 10798,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 10891,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 10954,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 76,
-    "x": 0
-  },
-  {
-    "time": 11015,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 76,
-    "x": 0
-  },
-  {
-    "time": 11126,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 11188,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 11188,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 68,
-    "x": 0
-  },
-  {
-    "time": 11305,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 68,
-    "x": 0
-  },
-  {
-    "time": 11305,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 73,
-    "x": 0
-  },
-  {
-    "time": 11367,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 73,
-    "x": 0
-  },
-  {
-    "time": 11427,
+    "time": 12192,
     "type": "key",
     "release": false,
     "y": 0,
@@ -488,247 +248,23 @@
     "x": 0
   },
   {
-    "time": 11502,
+    "time": 12260,
     "type": "key",
     "release": true,
     "y": 0,
     "key": 65,
-    "x": 0
-  },
-  {
-    "time": 11533,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 11582,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 11613,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 81,
-    "x": 0
-  },
-  {
-    "time": 11675,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 81,
-    "x": 0
-  },
-  {
-    "time": 11737,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 85,
-    "x": 0
-  },
-  {
-    "time": 11781,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 85,
-    "x": 0
-  },
-  {
-    "time": 11806,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 11882,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 12000,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 12080,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 12385,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 86,
-    "x": 0
-  },
-  {
-    "time": 12446,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 86,
-    "x": 0
-  },
-  {
-    "time": 12527,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 12603,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 12726,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 78,
-    "x": 0
-  },
-  {
-    "time": 12757,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 78,
-    "x": 0
-  },
-  {
-    "time": 12850,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 68,
-    "x": 0
-  },
-  {
-    "time": 12951,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 68,
-    "x": 0
-  },
-  {
-    "time": 13105,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 82,
     "x": 0
   },
   {
     "time": 13166,
     "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 82,
-    "x": 0
-  },
-  {
-    "time": 13401,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 18,
-    "x": 0
-  },
-  {
-    "time": 13482,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 97,
-    "x": 0
-  },
-  {
-    "time": 13543,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 97,
-    "x": 0
-  },
-  {
-    "time": 13605,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 102,
-    "x": 0
-  },
-  {
-    "time": 13666,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 102,
-    "x": 0
-  },
-  {
-    "time": 13716,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 96,
-    "x": 0
-  },
-  {
-    "time": 13763,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 96,
-    "x": 0
-  },
-  {
-    "time": 13825,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 18,
-    "x": 0
-  },
-  {
-    "time": 14259,
-    "type": "key",
     "release": false,
     "y": 0,
     "key": 83,
     "x": 0
   },
   {
-    "time": 14353,
+    "time": 13264,
     "type": "key",
     "release": true,
     "y": 0,
@@ -736,71 +272,55 @@
     "x": 0
   },
   {
-    "time": 14655,
+    "time": 14513,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 16,
+    "key": 32,
     "x": 0
   },
   {
-    "time": 14840,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 222,
-    "x": 0
-  },
-  {
-    "time": 14920,
+    "time": 14604,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 222,
+    "key": 32,
     "x": 0
   },
   {
-    "time": 15043,
+    "time": 14648,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 67,
+    "x": 0
+  },
+  {
+    "time": 14712,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 16,
+    "key": 67,
     "x": 0
   },
   {
-    "time": 16416,
+    "time": 14900,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 10,
+    "key": 65,
     "x": 0
   },
   {
-    "time": 16416,
-    "type": "mouse",
-    "release": false,
-    "y": 355,
-    "key": 0,
-    "x": 920
-  },
-  {
-    "time": 16508,
+    "time": 14925,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 10,
+    "key": 65,
     "x": 0
   },
   {
-    "time": 18064,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 18261,
+    "time": 14975,
     "type": "key",
     "release": false,
     "y": 0,
@@ -808,15 +328,7 @@
     "x": 0
   },
   {
-    "time": 18311,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 18373,
+    "time": 15066,
     "type": "key",
     "release": true,
     "y": 0,
@@ -824,167 +336,7 @@
     "x": 0
   },
   {
-    "time": 18420,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 18521,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 18638,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 84,
-    "x": 0
-  },
-  {
-    "time": 18689,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 84,
-    "x": 0
-  },
-  {
-    "time": 18750,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 18812,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 18886,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 18948,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 19008,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 19089,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 19151,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 76,
-    "x": 0
-  },
-  {
-    "time": 19212,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 76,
-    "x": 0
-  },
-  {
-    "time": 19242,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 19292,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 19354,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 19446,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 19682,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 19817,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 19817,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 83,
-    "x": 0
-  },
-  {
-    "time": 19922,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 83,
-    "x": 0
-  },
-  {
-    "time": 19953,
+    "time": 15233,
     "type": "key",
     "release": false,
     "y": 0,
@@ -992,7 +344,7 @@
     "x": 0
   },
   {
-    "time": 20044,
+    "time": 15281,
     "type": "key",
     "release": true,
     "y": 0,
@@ -1000,191 +352,39 @@
     "x": 0
   },
   {
-    "time": 20094,
+    "time": 15512,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 83,
+    "key": 78,
     "x": 0
   },
   {
-    "time": 20187,
+    "time": 15583,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 83,
+    "key": 78,
     "x": 0
   },
   {
-    "time": 20281,
+    "time": 16295,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 84,
+    "key": 129,
     "x": 0
   },
   {
-    "time": 20345,
+    "time": 16387,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 84,
+    "key": 129,
     "x": 0
   },
   {
-    "time": 20345,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 20438,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 20549,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 82,
-    "x": 0
-  },
-  {
-    "time": 20610,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 82,
-    "x": 0
-  },
-  {
-    "time": 21750,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 10,
-    "x": 0
-  },
-  {
-    "time": 21750,
-    "type": "mouse",
-    "release": false,
-    "y": 443,
-    "key": 0,
-    "x": 1000
-  },
-  {
-    "time": 21794,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 10,
-    "x": 0
-  },
-  {
-    "time": 23203,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 23388,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 86,
-    "x": 0
-  },
-  {
-    "time": 23437,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 16,
-    "x": 0
-  },
-  {
-    "time": 23499,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 86,
-    "x": 0
-  },
-  {
-    "time": 23616,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 73,
-    "x": 0
-  },
-  {
-    "time": 23661,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 73,
-    "x": 0
-  },
-  {
-    "time": 23743,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 86,
-    "x": 0
-  },
-  {
-    "time": 23834,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 86,
-    "x": 0
-  },
-  {
-    "time": 23957,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 24068,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 24130,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 77,
-    "x": 0
-  },
-  {
-    "time": 24222,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 77,
-    "x": 0
-  },
-  {
-    "time": 24302,
+    "time": 16584,
     "type": "key",
     "release": false,
     "y": 0,
@@ -1192,7 +392,7 @@
     "x": 0
   },
   {
-    "time": 24350,
+    "time": 16647,
     "type": "key",
     "release": true,
     "y": 0,
@@ -1200,411 +400,19 @@
     "x": 0
   },
   {
-    "time": 24379,
+    "time": 17086,
     "type": "key",
     "release": false,
     "y": 0,
-    "key": 83,
+    "key": 78,
     "x": 0
   },
   {
-    "time": 24465,
+    "time": 17130,
     "type": "key",
     "release": true,
     "y": 0,
-    "key": 83,
-    "x": 0
-  },
-  {
-    "time": 24601,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 24691,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 24846,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 66,
-    "x": 0
-  },
-  {
-    "time": 24908,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 66,
-    "x": 0
-  },
-  {
-    "time": 24940,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 25038,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 25068,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 74,
-    "x": 0
-  },
-  {
-    "time": 25149,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 74,
-    "x": 0
-  },
-  {
-    "time": 25242,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 79,
-    "x": 0
-  },
-  {
-    "time": 25311,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 79,
-    "x": 0
-  },
-  {
-    "time": 25416,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 25479,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 25479,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 25564,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 69,
-    "x": 0
-  },
-  {
-    "time": 25564,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 76,
-    "x": 0
-  },
-  {
-    "time": 25626,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 76,
-    "x": 0
-  },
-  {
-    "time": 25767,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 25860,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 32,
-    "x": 0
-  },
-  {
-    "time": 25971,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 77,
-    "x": 0
-  },
-  {
-    "time": 26033,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 77,
-    "x": 0
-  },
-  {
-    "time": 26095,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 26186,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 65,
-    "x": 0
-  },
-  {
-    "time": 26313,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 82,
-    "x": 0
-  },
-  {
-    "time": 26403,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 82,
-    "x": 0
-  },
-  {
-    "time": 26909,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 10,
-    "x": 0
-  },
-  {
-    "time": 26909,
-    "type": "mouse",
-    "release": false,
-    "y": 433,
-    "key": 0,
-    "x": 1100
-  },
-  {
-    "time": 26970,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 10,
-    "x": 0
-  },
-  {
-    "time": 28905,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 153,
-    "x": 0
-  },
-  {
-    "time": 28997,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 153,
-    "x": 0
-  },
-  {
-    "time": 30280,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 30341,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31340,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31371,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31528,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31589,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31699,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31729,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31854,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 31908,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32032,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32081,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32204,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32248,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32372,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32402,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32538,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32572,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32714,
-    "type": "key",
-    "release": false,
-    "y": 0,
-    "key": 99,
-    "x": 0
-  },
-  {
-    "time": 32776,
-    "type": "key",
-    "release": true,
-    "y": 0,
-    "key": 99,
+    "key": 78,
     "x": 0
   }
 ]

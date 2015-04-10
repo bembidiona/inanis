@@ -40,6 +40,7 @@ Boolean filterInvert = false;
 
 String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
+ArrayList<Button> streams = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 ArrayList<Star> stars = new ArrayList<Star>();
 ArrayList<Rain> rain = new ArrayList<Rain>();
@@ -150,6 +151,18 @@ void setup() {
     }
     else uiBlank++;
   }
+
+  uiBlank = 0;
+  File dataFolder = new File(sketchPath + "/streams");
+  String[] fileList = dataFolder.list();  
+  for (int i = 0; i < fileList.length; i++){
+    streams.add(new Button(fileList[i],i,uiBlank));    
+    uiBlank++;    
+  }
+
+
+
+
   
   messager = new Message();
   caret = new Caret();
@@ -218,7 +231,10 @@ void draw() {
   
   for (Button b : buttons) {
     b.display();
-  } 
+  }
+  for (Button s : streams) {
+    s.display();
+  }  
   messager.display();
   
   if(!mouseInactive){
@@ -668,7 +684,7 @@ void checkLoadedInputs(){
     }
     else{
       readingLoadedInputs = false;
-      //end of loaded perfo
+      messager.show("end of stream", 1);
     }
   }  
 }
@@ -697,21 +713,22 @@ class LoadedInput {
 
 // Save stuff
 void saveJson(){      
-   saveJSONArray(inputs, savePath + "/stream.json"); 
-   messager.show("json loaded", 1);
+   saveJSONArray(inputs, savePath + "/streams/"+
+                                      lastWord +
+                                      "_"+day()+"-"+month()+"-"+year() +
+                                      ".json"); 
+   messager.show("json saved", 1);
 }
 void loadJson(){
   
-  messager.show("work in progress", 1);
+  messager.show("json loaded", 1);
    
-  JSONArray inputValues = loadJSONArray(savePath + "/stream.json");
+  JSONArray inputValues = loadJSONArray(savePath + "/streams/stream.json");
   
-  println("inputValues.size(): "+inputValues.size());
-   println("");
-   
+     
 
   for (int i = 0; i < inputValues.size()-1; i++) { 
-     print(" - ");
+     
      JSONObject in = inputValues.getJSONObject(i); 
     
      loadedInputs.add(new LoadedInput(
@@ -725,7 +742,6 @@ void loadJson(){
      loadedTimeOffset = millis();
      readingLoadedInputs = true;
   }
-  println("");
-  println("loadedInputs.size(): "+loadedInputs.size());
+  
 }
 

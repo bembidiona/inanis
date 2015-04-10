@@ -113,7 +113,7 @@ class Caret{
 
    void startIdle(){
     canTeleport = true;
-    animationY = new Ani(this, 10, "y", y + 50, Ani.EXPO_IN_OUT);       
+    animationY = new Ani(this, 10, "y", y + 20, Ani.EXPO_IN_OUT);       
     animationY.start();
     animationY.setPlayMode(Ani.YOYO);
     animationY.repeat();

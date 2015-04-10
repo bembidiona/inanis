@@ -1,4 +1,3 @@
-- BUG: El robot no relesea bien las teclas
 - BUG: El robot hace glitchear el tween idle del caret
 - Abria que levantar todos los json de una carpeta, y mostrarlos en una lista desplegable a la izquierda, o que aparezcan al clickear loadjson
 

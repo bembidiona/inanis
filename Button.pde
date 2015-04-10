@@ -61,7 +61,7 @@ class Button{
    void checkClick(){
      if(isOver()){
         if(name == "saveJson") saveJson();
-        else if(name == "loadJson") loadJson();
+        else if(name == "loadJson") showStreams();
         else if(name == ".txt") saveTxt();
         else if(name == ".img") savePix();
         else if (name == "img"){
@@ -114,6 +114,11 @@ class Button{
   void itsStarted(){  
   }
   void itsEnded(){    
+  }
+
+  void showStreams(){
+
+    
   }
    
 }   
