@@ -6,8 +6,12 @@ import java.net.UnknownHostException;
 
 JSONObject json;
 JSONArray inputs = new JSONArray();
-int inputNum = 0; 
-
+int inputNum = 0;
+ArrayList<LoadedInput> loadedInputs = new ArrayList<LoadedInput>();
+int loadedInputNum = 0;
+int loadedInputTime = 0;
+int loadedTimeOffset;
+Boolean readingLoadedInputs = false;
 
 final private String appName = "Inanis";
 final private String version = "v0.2";
@@ -119,6 +123,7 @@ void setup() {
   
   Ani.init(this);
    
+  loadedInputs.add(new LoadedInput("skip", 0, 0, false, 0, 0 ));
   
   fontOptions = loadFont("courier_15.vlw");  
   
@@ -292,6 +297,8 @@ void draw() {
   if (filterInvert) filter(INVERT);
   //filter(THRESHOLD);
   
+  // Loaded automation
+  if(readingLoadedInputs) checkLoadedInputs();
   
 }
  
@@ -308,7 +315,7 @@ void keyPressed() {
     firstBlood = false;
   }  
   
-  writeKeyJson(keyCode, false);
+  writeInput("key", keyCode, false, 0, 0);
   
   if (keyCode == UP){
     wavesUp();
@@ -450,33 +457,40 @@ void mouseMoved(){
 
 
 // Save stuff
-void saveJson(){
-  
-   json = new JSONObject();
-   json.setJSONArray("inputs", inputs);
-      
-   saveJSONObject(json, savePath + "/stream.json");
+void saveJson(){      
+   saveJSONArray(inputs, savePath + "/stream.json");
  
-   messager.show("json saved", 1);
+   messager.show("json loaded", 1);
 }
 void loadJson(){
   
-   JSONObject jsonL = loadJSONObject( savePath + "/stream.json");
-  
-   messager.show("work in progress", 1);
+  messager.show("work in progress", 1);
    
-    /*JSONArray values = json.getJSONArray("inputs");
+  JSONArray inputValues = loadJSONArray(savePath + "/stream.json");
   
-    for (int i = 0; i < values.size(); i++) {
-      
-      JSONObject animal = values.getJSONObject(i); 
-  
-      int id = animal.getInt("id");
-      String species = animal.getString("species");
-      String name = animal.getString("name");
-  
-      println(id + ", " + species + ", " + name);
-    }*/
+  println("inputValues.size(): "+inputValues.size());
+   println("");
+   
+
+  for (int i = 0; i < inputValues.size()-1; i++) { 
+     print(" - ");
+     JSONObject in = inputValues.getJSONObject(i); 
+    
+     String type = in.getString("type");
+     
+     loadedInputs.add(new LoadedInput(
+                               in.getString("type"),
+                               in.getInt("time"),  
+                               in.getInt("key"),
+                               in.getBoolean("release"),
+                               0,
+                               0 ));     
+         
+     loadedTimeOffset = millis();
+     readingLoadedInputs = true;
+  }
+  println("");
+  println("loadedInputs.size(): "+loadedInputs.size());
 }
 
 void saveTxt(){
@@ -506,8 +520,6 @@ void setMaxMinTriggers(int _charsNum){
 
 void checkTriggers(){
 
-  println("-"+lastWord+"-"); 
-  
   int lastWordSize = lastWord.length();
   
   if(lastWordSize < charsTriggerMin) return;
@@ -626,13 +638,15 @@ void printDebug(String txt){
   debugLog = debugLog + " // " + txt;
 }
 //------------
-void writeKeyJson(int _key, Boolean wasReleased){
-  
+void writeInput(String _type, int _key, Boolean wasReleased, int _x, int _y){  
   JSONObject input = new JSONObject();
   
   input.setInt("time", millis());
+  input.setString("type", _type);
   input.setInt("key", _key); 
   input.setBoolean("release", wasReleased);
+  input.setInt("x", _x);
+  input.setInt("y", _y); 
   
   inputs.setJSONObject(inputNum, input);
   
@@ -652,3 +666,53 @@ void wavesDown(){
   if(wavesY > tope) wavesY = tope;
 }
 
+void checkLoadedInputs(){
+  if(millis() > loadedInputTime + loadedTimeOffset){
+    
+    
+    
+    LoadedInput in = loadedInputs.get(loadedInputNum);
+    
+    String tt = in.type;
+    println(tt); 
+     
+    if(tt == "key"){
+    }
+    else if(tt == "mouse"){
+      println("tele");
+      caret.teleport(in.x, in.y);
+    }
+    
+    println("size: "+loadedInputs.size() +" - num: "+(loadedInputNum));
+    if(loadedInputs.size() > loadedInputNum+1){
+      loadedInputNum += 1;      
+      in = loadedInputs.get(loadedInputNum);
+      loadedInputTime = in.t;
+    }
+    else{
+      readingLoadedInputs = false;
+      println("the end");
+    }
+  }  
+}
+
+
+
+//=======================
+class LoadedInput { 
+  String type;
+  int t;
+  int k;
+  Boolean r;
+  int x;
+  int y;
+
+  LoadedInput(String _type, int _t, int _k, boolean _r, int _x, int _y ) {
+    type = _type; 
+    t = _x;
+    k = _k;
+    r = _r;
+    x = _x;
+    y = _y;    
+  } 
+} 

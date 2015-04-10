@@ -100,6 +100,8 @@ class Caret{
    }
 
    void teleport(int _x, int _y){
+    writeInput("mouse", 0, false, _x, _y);
+
     checkTriggers();        
     lastWord = ""; 
      
