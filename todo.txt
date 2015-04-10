@@ -1,4 +1,6 @@
 - BUG: El robot no relesea bien las teclas
+- BUG: El robot hace glitchear el tween idle del caret
+- Abria que levantar todos los json de una carpeta, y mostrarlos en una lista desplegable a la izquierda, o que aparezcan al clickear loadjson
 
 
 - hacer una visualizacion copada para el caret y stream del otro ente que se conecta al networking
@@ -17,3 +19,4 @@ IDEAS:
 - intentar hacer llover frases ya escritas cuando se deja de escribir
 - El sonido de typeado puede cambiar a mini grititos
 - La línea de txt colapsa pasado x tiempo de no escribir-idea-
+- Inanis como poesia con la dimensión de tiempo?
