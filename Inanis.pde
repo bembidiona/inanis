@@ -38,9 +38,9 @@ String pixFormat = "png";
 
 Boolean filterInvert = false;
 
+boolean mainShow = true;
 String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
-ArrayList<Button> streams = new ArrayList<Button>();
 ArrayList<Letter> letters = new ArrayList<Letter>();
 ArrayList<Star> stars = new ArrayList<Star>();
 ArrayList<Rain> rain = new ArrayList<Rain>();
@@ -147,7 +147,7 @@ void setup() {
   int uiBlank = 0;
   for (int i = 0; i < buttonsNames.length; i++){
     if (buttonsNames[i] != "-"){
-      buttons.add(new Button(buttonsNames[i],i,uiBlank));
+      buttons.add(new Button("main", buttonsNames[i],i,uiBlank));
     }
     else uiBlank++;
   }
@@ -156,8 +156,7 @@ void setup() {
   File dataFolder = new File(sketchPath + "/streams");
   String[] fileList = dataFolder.list();  
   for (int i = 0; i < fileList.length; i++){
-    streams.add(new Button(fileList[i],i,uiBlank));    
-    uiBlank++;    
+    buttons.add(new Button("streams", fileList[i],i,uiBlank));        
   }
 
 
@@ -231,9 +230,6 @@ void draw() {
   
   for (Button b : buttons) {
     b.display();
-  }
-  for (Button s : streams) {
-    s.display();
   }  
   messager.display();
   
@@ -472,14 +468,20 @@ void mouseMoved(){
   
   if(!firstBlood){
     if(mouseX > width - 100){     
-        for (Button b : buttons) {
-          b.in();
-        }
-    }
+        if(mainShow){
+          for (Button b : buttons) {
+            if(b.menu.equals("main")){
+              b.in();
+            }
+          }
+        } 
+        
+    }    
     else{
+        mainShow = true;
         for (Button b : buttons) {
           b.out();
-        }
+        }     
     }
   }
 }
@@ -719,11 +721,11 @@ void saveJson(){
                                       ".json"); 
    messager.show("json saved", 1);
 }
-void loadJson(){
+void loadJson(String _filename){
   
-  messager.show("json loaded", 1);
+  messager.show(_filename + " loaded", 1);
    
-  JSONArray inputValues = loadJSONArray(savePath + "/streams/stream.json");
+  JSONArray inputValues = loadJSONArray(savePath + "/streams/"+ _filename);
   
      
 

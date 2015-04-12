@@ -18,50 +18,62 @@ class Button{
    
    boolean hiden = true;
    private String txt;
+   String menu;
+
    
-   Button(String _name, int _buttonNum, int _blank){    
+   
+   Button(String _menu, String _name, int _buttonNum, int _blank){    
+     menu = _menu;
+
      name = _name;     
      buttonNum = _buttonNum;
+
      
      int separation = 20;
      int safe = 5;
      w = name.length() * 11;
      h = 15;
      
-     x = width - name.length() - margen;
+     if (menu == "main") x = width - name.length() - margen;
+     else x = width + name.length() + 200;
      y = h + safe + separation*buttonNum - _blank*10;
      
      cX = x - w + 5;
      cY = y-h+5;
      
-     hiden = false;
+      if (menu == "main") hiden = false;
+      else hiden = true;
    }
    
    
-   void display(){   
-     textFont(fontOptions);                 
-     fill(colorTxt);  
-     textAlign(RIGHT);     
+   void display(){ 
+    cX = x - w + 5;
+    cY = y-h+5;
+
+    textFont(fontOptions);                 
+    fill(colorTxt);  
      
-     if (name == ".img") txt = "."+pixFormat;
-     else txt = name;     
-     if (isOver()){
-       txt = "_" + txt;
+    textAlign(RIGHT);
+     
+    if (name == ".img") txt = "."+pixFormat;
+    else txt = name;     
+    if (isOver()){
+      txt = "_" + txt;
        
-       cursorHand = true;
-     }     
-     text(txt, x, y);    
+      cursorHand = true;
+    }     
+    text(txt, x, y);    
      
-     /*noFill();
+     noFill();
      stroke(255,0,0);
-     rect(cX, cY, w, h);*/
+     rect(cX, cY, w, h);
    }
    
    
    void checkClick(){
      if(isOver()){
         if(name == "saveJson") saveJson();
-        else if(name == "loadJson") showStreams();
+        else if(name == "loadJson") showSubMenu("streams");
         else if(name == ".txt") saveTxt();
         else if(name == ".img") savePix();
         else if (name == "img"){
@@ -85,6 +97,8 @@ class Button{
         else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit() / ↑or↓:moveSea()", 3);
         else if (name == "?") messager.show(appName+" "+version+" by jeRemias Babini", 2);
         else if (name == "exit") exit(); 
+
+        if(menu == "streams") loadJson(name);
      }
    }
    
@@ -98,16 +112,17 @@ class Button{
    }
    
   void in() {
+    println(txt);
     if(hiden){
       hiden = false;
-      Ani.to(this, 1, 0.05*buttonNum, "x", width - margen, Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
+      Ani.to(this, 0.8, 0.03*buttonNum, "x", width - margen, Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
     }    
   }
   
   void out() {
     if(!hiden){
       hiden = true;
-      Ani.to(this, 1, 0.05*buttonNum, "x", width + 150,  Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
+      Ani.to(this, 0.8, 0.03*buttonNum, "x", width + 1000,  Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
     }      
   }
   
@@ -116,9 +131,16 @@ class Button{
   void itsEnded(){    
   }
 
-  void showStreams(){
+  void showSubMenu(String _menu){
+    mainShow = false;
 
+    for (Button b : buttons) {
+      if(b.menu.equals("main")) b.out();
+      //else if (menu.equals(_menu)) b.in();
+      else b.in();
+    }
     
+
   }
    
 }   
