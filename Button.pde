@@ -63,10 +63,12 @@ class Button{
       cursorHand = true;
     }     
     text(txt, x, y);    
-     
-     noFill();
-     stroke(255,0,0);
-     rect(cX, cY, w, h);
+    
+    if(DEBUG){ 
+      noFill();
+      stroke(255,0,0);
+      rect(cX, cY, w, h);
+    }
    }
    
    
@@ -111,8 +113,7 @@ class Button{
      }
    }
    
-  void in() {
-    println(txt);
+  void in() {    
     if(hiden){
       hiden = false;
       Ani.to(this, 0.8, 0.03*buttonNum, "x", width - margen, Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
@@ -131,16 +132,13 @@ class Button{
   void itsEnded(){    
   }
 
-  void showSubMenu(String _menu){
+  void showSubMenu(String _menu){    
     mainShow = false;
-
+  
     for (Button b : buttons) {
       if(b.menu.equals("main")) b.out();
       //else if (menu.equals(_menu)) b.in();
       else b.in();
     }
-    
-
-  }
-   
+  }   
 }   

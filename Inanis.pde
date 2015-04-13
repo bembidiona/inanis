@@ -1,3 +1,7 @@
+final private String appName = "Inanis";
+final private String version = "v0.2";
+final Boolean DEBUG = false;
+
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
 import processing.net.*;
@@ -11,16 +15,15 @@ JSONObject json;
 JSONArray inputs = new JSONArray();
 int inputNum = 0;
 ArrayList<LoadedInput> loadedInputs = new ArrayList<LoadedInput>();
-int loadedInputNum = 0;
+int loadedInputNum = 1;
 int loadedInputTime = 0;
 int loadedTimeOffset;
 Boolean readingLoadedInputs = false;
 Robot robot;
 
-final private String appName = "Inanis";
-final private String version = "v0.2";
 
-final private Boolean DEBUG = true;
+
+
 String debugLog = "LOG: ";
 
 String allText = "";
@@ -117,9 +120,6 @@ void setup() {
   icon.image(iconImg, 0, 0, 256, 256); 
   icon.endDraw();
   frame.setIconImage(icon.image);
-  
- 
-  
   //---------------
   
   try{
@@ -129,7 +129,7 @@ void setup() {
     println(e);
   }
   
-  size(displayWidth, displayHeight); 
+  size(displayWidth, displayHeight);   
   json = new JSONObject();
   timerMouseInactive = millis();
   
@@ -152,12 +152,7 @@ void setup() {
     else uiBlank++;
   }
 
-  uiBlank = 0;
-  File dataFolder = new File(sketchPath + "/streams");
-  String[] fileList = dataFolder.list();  
-  for (int i = 0; i < fileList.length; i++){
-    buttons.add(new Button("streams", fileList[i],i,uiBlank));        
-  }
+  createUIStreams();
 
 
 
@@ -198,7 +193,7 @@ void setup() {
   wavesY = height - height/10;
 }
  
-void draw() {
+void draw() {  
   fill(colorBg, bgAlpha);
   rect(0,0,width,height); 
    
@@ -458,7 +453,10 @@ void mousePressed(){
     }
   }
   else{
-    if(caret.canTeleport) caret.teleport(mouseX,mouseY);  
+    if(caret.canTeleport){
+      caret.addChar(breaker, false);
+      caret.teleport(mouseX,mouseY);
+    }  
   }
   
 }
@@ -664,29 +662,31 @@ void wavesDown(){
 
 void checkLoadedInputs(){
   if(millis() > loadedInputTime + loadedTimeOffset){
-    
-    LoadedInput in = loadedInputs.get(loadedInputNum);
-    
-    //println("type: "+ in.type +" / time: "+ in.t +" / key: "+in.k +" / rel: "+in.r +" / x: "+in.x +" / y: "+in.y);
-
-    if(in.type.equals("mouse")){
-      caret.teleport(in.x, in.y);
-    }
-    else if (in.type.equals("key")){
-      if(in.r) robot.keyRelease(in.k);
-      else robot.keyPress(in.k);
-    }
-    
-    //println("size: "+loadedInputs.size() +" - num: "+(loadedInputNum));D
-
-    if(loadedInputs.size() > loadedInputNum+1){
-      loadedInputNum += 1;      
-      in = loadedInputs.get(loadedInputNum);
+    println("size(): "+loadedInputs.size() +" /// loadedInputNum: " + loadedInputNum);
+      
+    if(loadedInputs.size() > loadedInputNum){
+     
+      LoadedInput in = loadedInputs.get(loadedInputNum);    //start at 0
+      println(in.type);
+      if(in.type.equals("mouse")){
+        caret.teleport(in.x, in.y);
+      }
+      else if (in.type.equals("key")){
+        if(in.r) robot.keyRelease(in.k);
+        else robot.keyPress(in.k);
+      }
+      
+            
       loadedInputTime = in.t;
+      loadedInputNum++;
     }
     else{
-      readingLoadedInputs = false;
-      messager.show("end of stream", 1);
+      messager.show("end of stream", 3);
+      
+      loadedInputs.clear();
+      loadedInputNum = 0;
+      loadedInputTime = 0;
+      readingLoadedInputs = false;      
     }
   }  
 }
@@ -727,9 +727,9 @@ void loadJson(String _filename){
    
   JSONArray inputValues = loadJSONArray(savePath + "/streams/"+ _filename);
   
-     
+  loadedInputs.clear();  
 
-  for (int i = 0; i < inputValues.size()-1; i++) { 
+  for (int i = 0; i < inputValues.size(); i++) { 
      
      JSONObject in = inputValues.getJSONObject(i); 
     
@@ -739,11 +739,23 @@ void loadJson(String _filename){
                                in.getInt("key"),
                                in.getBoolean("release"),
                                in.getInt("x"),
-                               in.getInt("y") ));     
-         
-     loadedTimeOffset = millis();
-     readingLoadedInputs = true;
+                               in.getInt("y") ));
   }
-  
+
+  loadedTimeOffset = millis();
+  readingLoadedInputs = true;
+  loadedInputNum = 0;  
+  loadedInputTime = loadedInputs.get(0).t; 
+ 
+  caret.teleport(width/2,height/2);
+}
+
+void createUIStreams(){
+ int uiBlank = 0;
+ File dataFolder = new File(sketchPath + "/streams");
+ String[] fileList = dataFolder.list();  
+ for (int i = 0; i < fileList.length; i++){
+   buttons.add(new Button("streams", fileList[i],i,uiBlank));        
+ }  
 }
 

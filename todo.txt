@@ -1,19 +1,15 @@
-- BUG: El robot hace glitchear el tween idle del caret
-- Abria que levantar todos los json de una carpeta, y mostrarlos en una lista desplegable a la izquierda, o que aparezcan al clickear loadjson
+- BUG: El robot hace glitchear el tween idle del caret cuando se teletransporta
+- Mapear sonidos de una maquina de escribir a cada tecla. Panearlas en stereo
+
+- Los streams deberian tener dos estados. Play once y loop
+- BIGONE: crear un objecto Writer que se encarge de mover su propio caret, y control de las letras que este escupe, a su vez tiene su propio lastWord, y allScrems to dump. Que pueda escuchar al tipeo, a solo a los inputs de su json, o al pal que esta conectado en networking.
 
 
 - hacer una visualizacion copada para el caret y stream del otro ente que se conecta al networking
 - BUG: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 - hacer algo con los triggers "dia" y "noche"
 
-
-
 IDEAS:
-- hacer un savefile que contenga la teclas tipeadas + el tiempo en que se van tecleando
-	* al cargarlo, un caret aparece y comienza a tipear en tiempo real lo que el savefile tenia
-	* se puede escribir con otro caret mientras se ve la interpretacion cargada?
-	* al guardar el archivo se suma el nuevo caret con el que escribias + el caret y stream del savefile viejo
-	* Al terminar el stream del savefile, comenzarlo de nuevo.
 - Al dejar de tipear, aparece una frase que te haga mierda, y motive a seguir escribiendo. How DA FAC
 - intentar hacer llover frases ya escritas cuando se deja de escribir
 - El sonido de typeado puede cambiar a mini grititos
