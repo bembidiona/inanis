@@ -20,6 +20,7 @@ int loadedInputTime = 0;
 int loadedTimeOffset;
 Boolean readingLoadedInputs = false;
 Robot robot;
+Boolean streamLoopOn = true;
 
 
 
@@ -309,7 +310,6 @@ void draw() {
   vertex(0, height);
   endShape(CLOSE);
   //-------------------------
-
   
   
   if (filterInvert) filter(INVERT);
@@ -681,12 +681,21 @@ void checkLoadedInputs(){
       loadedInputNum++;
     }
     else{
-      messager.show("end of stream", 3);
+      if(streamLoopOn){
+        loadedInputNum = 0;        
+        loadedTimeOffset = millis();
+
+        loadedInputTime = loadedInputs.get(0).t; 
+        caret.teleport(width/2,height/2);        
+      }
+      else{
+        messager.show("end of stream", 3);
       
-      loadedInputs.clear();
-      loadedInputNum = 0;
-      loadedInputTime = 0;
-      readingLoadedInputs = false;      
+        loadedInputs.clear();
+        loadedInputNum = 0;
+        loadedInputTime = 0;
+        readingLoadedInputs = false;
+      }
     }
   }  
 }
