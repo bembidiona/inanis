@@ -14,11 +14,9 @@ import java.awt.event.KeyEvent;
 JSONObject json;
 JSONArray inputs = new JSONArray();
 int inputNum = 0;
-ArrayList<LoadedInput> loadedInputs = new ArrayList<LoadedInput>();
-int loadedInputNum = 1;
-int loadedInputTime = 0;
-int loadedTimeOffset;
-Boolean readingLoadedInputs = false;
+
+
+
 Robot robot;
 Boolean streamLoopOn = true;
 
@@ -45,6 +43,7 @@ boolean mainShow = true;
 String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Writer> writers = new ArrayList<Writer>();
+int writersNum = 0;
 ArrayList<Star> stars = new ArrayList<Star>();
 ArrayList<Rain> rain = new ArrayList<Rain>();
 Boolean isRaining = false;
@@ -135,7 +134,7 @@ void setup() {
   
   Ani.init(this);
    
-  loadedInputs.add(new LoadedInput("skip", 0, 0, false, 0, 0 ));
+  
   
   fontOptions = loadFont("courier_15.vlw");  
   
@@ -306,8 +305,7 @@ void draw() {
   if (filterInvert) filter(INVERT);
   //filter(THRESHOLD);
   
-  // Loaded automation
-  if(readingLoadedInputs) checkLoadedInputs();
+ 
   
 }
  
@@ -451,6 +449,7 @@ void mousePressed(){
   }
   
 }
+
 
 void mouseMoved(){
   mouseInactive = false;
@@ -651,45 +650,7 @@ void wavesDown(){
   if(wavesY > tope) wavesY = tope;
 }
 
-void checkLoadedInputs(){
-  if(millis() > loadedInputTime + loadedTimeOffset){
-    println("size(): "+loadedInputs.size() +" /// loadedInputNum: " + loadedInputNum);
-      
-    if(loadedInputs.size() > loadedInputNum){
-     
-      LoadedInput in = loadedInputs.get(loadedInputNum);    //start at 0
-      println(in.type);
-      if(in.type.equals("mouse")){
-        writers.get(0).caret.teleport(in.x, in.y);
-      }
-      else if (in.type.equals("key")){
-        if(in.r) robot.keyRelease(in.k);
-        else robot.keyPress(in.k);
-      }
-      
-            
-      loadedInputTime = in.t;
-      loadedInputNum++;
-    }
-    else{
-      if(streamLoopOn){
-        loadedInputNum = 0;        
-        loadedTimeOffset = millis();
 
-        loadedInputTime = loadedInputs.get(0).t; 
-        writers.get(0).caret.teleport(width/2,height/2);        
-      }
-      else{
-        messager.show("end of stream", 3);
-      
-        loadedInputs.clear();
-        loadedInputNum = 0;
-        loadedInputTime = 0;
-        readingLoadedInputs = false;
-      }
-    }
-  }  
-}
 
 
 
@@ -727,13 +688,16 @@ void loadJson(String _filename){
    
   JSONArray inputValues = loadJSONArray(savePath + "/streams/"+ _filename);
   
-  loadedInputs.clear();  
+  Writer w = new Writer();
+  writers.add(w);
+  
+  w.loadedInputs.clear();  
 
   for (int i = 0; i < inputValues.size(); i++) { 
      
      JSONObject in = inputValues.getJSONObject(i); 
     
-     loadedInputs.add(new LoadedInput(
+     w.loadedInputs.add(new LoadedInput(
                                in.getString("type"),
                                in.getInt("time"),  
                                in.getInt("key"),
@@ -742,20 +706,18 @@ void loadJson(String _filename){
                                in.getInt("y") ));
   }
 
-  loadedTimeOffset = millis();
-  readingLoadedInputs = true;
-  loadedInputNum = 0;  
-  loadedInputTime = loadedInputs.get(0).t; 
- 
-  writers.get(0).caret.teleport(width/2,height/2);
+  w.loadedTimeOffset = millis();
+  w.readingLoadedInputs = true;
+  w.loadedInputNum = 0;  
+  w.loadedInputTime = w.loadedInputs.get(0).t;
 }
 
 void createUIStreams(){
  int uiBlank = 0;
  File dataFolder = new File(sketchPath + "/streams");
  String[] fileList = dataFolder.list();  
- for (int i = 0; i < fileList.length; i++){
-   buttons.add(new Button("streams", fileList[i],i,uiBlank));        
+ for (int i = 0; i < fileList.length;i++){
+   buttons.add(new Button("streams", fileList[i],i,uiBlank));
  }  
 }
 

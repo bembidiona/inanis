@@ -17,8 +17,22 @@ class Caret{
    private final float stepBack = step/2;
 
    Boolean canTeleport = true;
+   
+   private String exponent;
       
-   Caret(){
+   Caret(int _caretNum){     
+     
+     if(_caretNum == 0) exponent = "⁰";
+     else if(_caretNum == 1) exponent = "¹";
+     else if(_caretNum == 2) exponent = "²";
+     else if(_caretNum == 3) exponent = "³";
+     else if(_caretNum == 4) exponent = "⁴";
+     else if(_caretNum == 5) exponent = "⁵";
+     else if(_caretNum == 6) exponent = "⁶";
+     else if(_caretNum == 7) exponent = "⁷";
+     else if(_caretNum == 8) exponent = "⁸";
+     else if(_caretNum == 9) exponent = "⁹"; 
+     
      
      x = width/2;
      y = height/2;
@@ -64,6 +78,9 @@ class Caret{
      else if (x > xMax) x = xMax;
      
      image(sprite,x-sprite.width/1.5,y-sprite.height/1.5);
+     
+     
+     text(exponent, x+sprite.width, y);
    }
    
    
