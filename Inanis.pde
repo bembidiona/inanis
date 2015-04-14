@@ -27,8 +27,8 @@ String debugLog = "LOG: ";
 
 String stream = "Type something";
 String altKeys = "";
-int colorBg = 0;
-int colorTxt = 255;
+color colorBg = color(20,22,23,255);
+color colorTxt = color(230,255);
 
 int step = 10;
 
