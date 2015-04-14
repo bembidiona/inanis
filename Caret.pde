@@ -66,32 +66,7 @@ class Caret{
      image(sprite,x-sprite.width/1.5,y-sprite.height/1.5);
    }
    
-   void addChar(String _char, Boolean space){               
-      for (Letter l : letters) {
-        l.stepForward();
-      }
-      for (Star s : stars) {
-        s.stepForward();
-      }       
-      letters.add(new Letter(_char));
-      
-      stream = stream + _char;
-      if(!space) lastWord = lastWord + _char;
-      
-      x += step/2;
-   }
    
-   void removeChar(){ 
-      stream = stream.substring(0, stream.length()-1); 
-      if(lastWord.length() > 0)lastWord = lastWord.substring(0, lastWord.length()-1);
-      
-      letters.remove(letters.size()-1);      
-      for (Letter l : letters) {
-        l.stepBack();
-      }
-      
-      x -= step/2;
-   }
    
    void jump(){
       teleport(x, floor(height/2 - 100 + random(200)) );           

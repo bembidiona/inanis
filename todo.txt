@@ -7,7 +7,12 @@
 
 - hacer una visualizacion copada para el caret y stream del otro ente que se conecta al networking
 - BUG: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
+
+TRIGGERS:
 - hacer algo con los triggers "dia" y "noche"
+- manija
+- cuando dejas apretado mucho tiempo la tecla "a"
+
 
 IDEAS:
 - Al dejar de tipear, aparece una frase que te haga mierda, y motive a seguir escribiendo. How DA FAC

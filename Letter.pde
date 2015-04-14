@@ -16,8 +16,8 @@ class Letter{
    Letter(String _letter){
       letter = _letter; 
   
-      x = caret.x - step;
-      y = caret.y;
+      x = writers.get(0).caret.x - step;
+      y = writers.get(0).caret.y;
    }
    
    void display(){

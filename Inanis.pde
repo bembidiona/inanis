@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.2";
-final Boolean DEBUG = false;
+final Boolean DEBUG = true;
 
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
@@ -27,7 +27,6 @@ Boolean streamLoopOn = true;
 
 String debugLog = "LOG: ";
 
-String allText = "";
 String stream = "Type something";
 String altKeys = "";
 int colorBg = 0;
@@ -45,7 +44,7 @@ Boolean filterInvert = false;
 boolean mainShow = true;
 String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
-ArrayList<Letter> letters = new ArrayList<Letter>();
+ArrayList<Writer> writers = new ArrayList<Writer>();
 ArrayList<Star> stars = new ArrayList<Star>();
 ArrayList<Rain> rain = new ArrayList<Rain>();
 Boolean isRaining = false;
@@ -156,11 +155,11 @@ void setup() {
   createUIStreams();
 
 
-
+  writers.add(new Writer());  
 
   
   messager = new Message();
-  caret = new Caret();
+  
   
   //----------
   for (int i = 0; i < triggerLOVE.length; i++){    
@@ -210,19 +209,11 @@ void draw() {
 
   noStroke();  
   fill(colorTxt);
-  caret.display();
-  for (int i=letters.size()-1; i >= 0; i--) {
-    Letter l = letters.get(i);
-    if (l.isOut) letters.remove(i);
-    else l.display();
-  }  
+   
+  for (Writer w : writers) {
+    w.display();
+  }     
   
-    
-  //tapon  
-  /*fill(colorBg);
-  rect(0, 0, width/6, height);  
-  noFill();  
-  setGradient(width/6, 0, width/4, height, color(colorBg, colorBg, colorBg), color(colorBg, colorBg, colorBg, 0), true);*/
   
   for (Button b : buttons) {
     b.display();
@@ -352,18 +343,18 @@ void keyPressed() {
   }
   else if (keyCode == 129){ //tilde
      if (wasPressed_Tilde == true){
-       caret.addChar("'", false);
+       writers.get(0).addChar("'", false);
        wasPressed_Tilde = false; 
      }
      else wasPressed_Tilde = true;
   }  
   else if (keyCode == ENTER){
-     caret.addChar(breaker, false);
-     caret.jump();
+     writers.get(0).addChar(breaker, false);
+     writers.get(0).caret.jump();
   }
   else if (keyCode == BACKSPACE) {
     if (stream.length() > 0) {
-      caret.removeChar();      
+      writers.get(0).removeChar();      
     }
   } else if (keyCode != SHIFT) {
     
@@ -381,7 +372,7 @@ void keyPressed() {
         checkTriggers();        
         lastWord = "";
         
-        caret.addChar(str(key), true);
+        writers.get(0).addChar(str(key), true);
       }
       else if (wasPressed_Tilde){
         wasPressed_Tilde = false;
@@ -393,9 +384,9 @@ void keyPressed() {
         else if(keyCode == 79) c = "ó";
         else if(keyCode == 85) c = "ú";
         
-        caret.addChar(c, false);
+        writers.get(0).addChar(c, false);
       }
-      else caret.addChar(str(key), false);
+      else writers.get(0).addChar(str(key), false);
     }
   }
 }
@@ -422,7 +413,7 @@ void keyReleased() {
     else if(i == 163) hackedChar = "ú";
     else if(i == 130) hackedChar = "é";    
     
-    caret.addChar(hackedChar, false); 
+    writers.get(0).addChar(hackedChar, false); 
      
     altKeys = "";
   }
@@ -453,9 +444,9 @@ void mousePressed(){
     }
   }
   else{
-    if(caret.canTeleport){
-      caret.addChar(breaker, false);
-      caret.teleport(mouseX,mouseY);
+    if(writers.get(0).caret.canTeleport){
+      writers.get(0).addChar(breaker, false);
+      writers.get(0).caret.teleport(mouseX,mouseY);
     }  
   }
   
@@ -669,7 +660,7 @@ void checkLoadedInputs(){
       LoadedInput in = loadedInputs.get(loadedInputNum);    //start at 0
       println(in.type);
       if(in.type.equals("mouse")){
-        caret.teleport(in.x, in.y);
+        writers.get(0).caret.teleport(in.x, in.y);
       }
       else if (in.type.equals("key")){
         if(in.r) robot.keyRelease(in.k);
@@ -686,7 +677,7 @@ void checkLoadedInputs(){
         loadedTimeOffset = millis();
 
         loadedInputTime = loadedInputs.get(0).t; 
-        caret.teleport(width/2,height/2);        
+        writers.get(0).caret.teleport(width/2,height/2);        
       }
       else{
         messager.show("end of stream", 3);
@@ -756,7 +747,7 @@ void loadJson(String _filename){
   loadedInputNum = 0;  
   loadedInputTime = loadedInputs.get(0).t; 
  
-  caret.teleport(width/2,height/2);
+  writers.get(0).caret.teleport(width/2,height/2);
 }
 
 void createUIStreams(){
