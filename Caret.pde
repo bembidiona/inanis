@@ -1,7 +1,11 @@
 class Caret{
-  
+   
+   
    int x = 0;
    int y = 0;
+   
+   int startX;
+   int startY;
    
    private int blinkTimer = 0;
    int blinkTimerMax = 20;
@@ -18,24 +22,21 @@ class Caret{
 
    Boolean canTeleport = true;
    
-   private String exponent;
+   private String exponent = "";
+   
+   Writer writer;
       
-   Caret(int _caretNum){     
-     
-     if(_caretNum == 0) exponent = "⁰";
-     else if(_caretNum == 1) exponent = "¹";
-     else if(_caretNum == 2) exponent = "²";
-     else if(_caretNum == 3) exponent = "³";
-     else if(_caretNum == 4) exponent = "⁴";
-     else if(_caretNum == 5) exponent = "⁵";
-     else if(_caretNum == 6) exponent = "⁶";
-     else if(_caretNum == 7) exponent = "⁷";
-     else if(_caretNum == 8) exponent = "⁸";
-     else if(_caretNum == 9) exponent = "⁹"; 
-     
+   Caret(Writer _writer, int _startX, int _startY){
+     writer = _writer;      
+     startX = _startX;
+     startY = _startY;
+           
+     for (int i = 1; i <= writersNum; i++){
+       exponent = exponent + ".";
+     }
      
      x = width/2;
-     y = height/2;
+     y = startY;
      
      sprite = loadImage("caret.png");
      
@@ -78,9 +79,9 @@ class Caret{
      else if (x > xMax) x = xMax;
      
      image(sprite,x-sprite.width/1.5,y-sprite.height/1.5);
-     
-     
      text(exponent, x+sprite.width, y);
+     
+     noTint();
    }
    
    
@@ -92,8 +93,8 @@ class Caret{
    void teleport(int _x, int _y){
     writeInput("mouse", 0, false, _x, _y);
 
-    checkTriggers();        
-    lastWord = ""; 
+    writer.checkTriggers();        
+    writer.lastWord = ""; 
      
     canTeleport = false;
     

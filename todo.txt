@@ -1,5 +1,5 @@
-SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y control de las letras que este escupe, a su vez tiene su propio lastWord, y allScrems to dump. Que pueda escuchar al tipeo, a solo a los inputs de su json, o al pal que esta conectado en networking.
-	- Encontrarle la vuelta al tema de los inputs. Ahora un input va a quedar dirijito a todos los writers/carets
+SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y control de las letras que este escupe, a su vez tiene su propio lastWord, y allScrems to dump. Que pueda escuchar al tipeo, a solo a los inputs de su json, o al pal que esta conectado en networking.	
+
 
 
 - Al hacer backspace el caret deberia hacer unn teleport a la ultima letra	
@@ -9,6 +9,9 @@ SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y contr
 
 
 BUGS:
+- Los carets robots no muestran los ALT+XXX
+- el exponent del carent se borra con el tiempo, wtf
+- Creo que explota todo cuando ul robot borra todo su stream con backspace
 - Al cerrar Inanis pueden quedar keys sin relesearse
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 

@@ -1,6 +1,9 @@
 final private String appName = "Inanis";
-final private String version = "v0.2";
-final Boolean DEBUG = false;
+final private String version = "v0.3";
+final Boolean DEBUG = true;
+
+final int USER = 0;
+final int ROBOT = 1;
 
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
@@ -20,12 +23,13 @@ int inputNum = 0;
 Robot robot;
 Boolean streamLoopOn = true;
 
-
+int uiZone = 100;
+int uiZoneNormal = 100;
 
 
 String debugLog = "LOG: ";
 
-String stream = "Type something";
+
 String altKeys = "";
 color colorBg = color(20,22,23,255);
 color colorGradient = color(20,25,25,255);
@@ -64,11 +68,6 @@ Boolean keysInactive = true;
 
 Boolean cursorHand = false;
 
-boolean isPressed_Ctrl = false;
-boolean isPressed_Alt = false;
-boolean wasPressed_Tilde = false;
-
-String lastWord = "";
 //don't forget to add new TRIGGERS in the setup section!!!
 String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
 String[] triggerDEAD = {"muerte", "dead", "fetal"};
@@ -85,7 +84,8 @@ private int charsTriggerMin;
 String mode = "stars";
 
 Message messager;
-Caret caret;
+
+Writer user;
 
 int bgAlpha = 255;
 Ani tweenGlitch;
@@ -157,8 +157,8 @@ void setup() {
 
   createUIStreams();
 
-
-  writers.add(new Writer());  
+  user = new Writer(USER);
+  writers.add(user);  
 
   
   messager = new Message();
@@ -262,7 +262,7 @@ void draw() {
     
     
     if(conectedServer){
-       server.write(lastWord);
+       server.write(user.lastWord);
       
        client = server.available();
        if (client != null){         
@@ -270,7 +270,7 @@ void draw() {
        }
     }
     else if(conectedClient){
-      client.write(lastWord);
+      client.write(user.lastWord);
       
       if (client.available() > 0) {        
         checkNetInput();        
@@ -343,7 +343,6 @@ void draw() {
 }
  
 void keyPressed() {
-    
   keysInactive = false;
   messager.itsEnded();
   
@@ -351,103 +350,19 @@ void keyPressed() {
     for (Button b : buttons) {
       b.out();
     }
-    stream = "";    
+    user.stream = "";    
     firstBlood = false;
-  }  
-  
-  writeInput("key", keyCode, false, 0, 0);
-  
-  if (keyCode == UP){
-    wavesUp();
   }
-  else if (keyCode == DOWN){
-    wavesDown();
-  }
-  else if (keyCode == CONTROL){
-     isPressed_Ctrl = true;
-  }
-  else if (keyCode == ALT){
-     isPressed_Alt = true;
-  }
-  else if (keyCode == DELETE){
-     debugLog = "";
-  }
-  else if (keyCode == 129){ //tilde
-     if (wasPressed_Tilde == true){
-       writers.get(0).addChar("'", false);
-       wasPressed_Tilde = false; 
-     }
-     else wasPressed_Tilde = true;
-  }  
-  else if (keyCode == ENTER){
-     writers.get(0).addChar(breaker, false);
-     writers.get(0).caret.jump();
-  }
-  else if (keyCode == BACKSPACE) {
-    if (stream.length() > 0) {
-      writers.get(0).removeChar();      
-    }
-  } else if (keyCode != SHIFT) {
+  writeInput("key", int(key), false, 0, 0);
     
-    if(isPressed_Ctrl){
-      if(keyCode == 83) saveTxt(); //s
-      else if(keyCode == 69) savePix(); //e      
-    }
-    else if(isPressed_Alt){
-      altKeys = altKeys + str(key);
-    }
-    else{
-      if(keyCode == 32){ // space
-        stars.add(new Star());
-        
-        checkTriggers();        
-        lastWord = "";
-        
-        writers.get(0).addChar(str(key), true);
-      }
-      else if (wasPressed_Tilde){
-        wasPressed_Tilde = false;
-        
-        String c = "´";
-        if(keyCode == 65) c = "á";
-        else if(keyCode == 69) c = "é";
-        else if(keyCode == 65) c = "í";
-        else if(keyCode == 79) c = "ó";
-        else if(keyCode == 85) c = "ú";
-        
-        writers.get(0).addChar(c, false);
-      }
-      else writers.get(0).addChar(str(key), false);
-    }
-  }
+  if(key == CODED) user.keyPress(int(keyCode));
+  else user.keyPress(int(key));
 }
 void keyReleased() {
-  writeInput("key", keyCode, true, 0, 0);
+  writeInput("key", int(key), true, 0, 0);  
   
-  if (keyCode == CONTROL){
-    isPressed_Ctrl = false;
-  }
-  if (keyCode == ALT){
-    isPressed_Alt = false;
-    
-    // TODO
-    // for some reason the conversion to chars is using the second table: http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html
-    // so, hardcodie los acentos y la ñ por ahora
-    
-    int i = int(altKeys);
-    String hackedChar = Character.toString((char)i); 
-    
-    if(i == 164) hackedChar = "ñ";
-    else if(i == 160) hackedChar = "á";
-    else if(i == 161) hackedChar = "í";
-    else if(i == 162) hackedChar = "ó";
-    else if(i == 163) hackedChar = "ú";
-    else if(i == 130) hackedChar = "é";    
-    
-    writers.get(0).addChar(hackedChar, false); 
-     
-    altKeys = "";
-  }
+  if(key == CODED) user.keyRelease(int(keyCode));
+  else user.keyRelease(key);
 }
 
 
@@ -512,7 +427,7 @@ void mouseMoved(){
   mouseInactive = false;
   
   if(!firstBlood){
-    if(mouseX > width - 100){     
+    if(mouseX > width - uiZone){     
         if(mainShow){
           for (Button b : buttons) {
             if(b.menu.equals("main")){
@@ -524,6 +439,7 @@ void mouseMoved(){
     }    
     else{
         mainShow = true;
+        uiZone = uiZoneNormal;
         for (Button b : buttons) {
           b.out();
         }     
@@ -535,7 +451,7 @@ void mouseMoved(){
 
 
 void saveTxt(){
-   String[] list = split(stream, breaker);
+   String[] list = split(writers.get(0).stream, breaker);
    saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
  
    messager.show("txt saved", 1);
@@ -559,57 +475,7 @@ void setMaxMinTriggers(int _charsNum){
   if(_charsNum < charsTriggerMin) charsTriggerMin = _charsNum;
 }
 
-void checkTriggers(){
 
-  int lastWordSize = lastWord.length();
-  
-  if(lastWordSize < charsTriggerMin) return;
-  if(lastWordSize <= charsTriggerMax){
-    lastWord = lastWord.toLowerCase();
-    
-    for (int i = 0; i < triggerLOVE.length; i++){    
-      if(lastWord.equals(triggerLOVE[i])) { triggerLOVE(); paintWord();}
-    }
-    for (int i = 0; i < triggerDEAD.length; i++){    
-      if(lastWord.equals(triggerDEAD[i])) { triggerDEAD();  paintWord();}
-    }
-    for (int i = 0; i < triggerGLITCH.length; i++){    
-      if(lastWord.equals(triggerGLITCH[i])) { triggerGLITCH(); paintWord();}
-    }
-    for (int i = 0; i < triggerSCALE.length; i++){    
-      if(lastWord.equals(triggerSCALE[i])) {triggerSCALE(); paintWord();}
-    }
-    for (int i = 0; i < triggerBLOOD.length; i++){    
-      if(lastWord.equals(triggerBLOOD[i])) {triggerBLOOD(); paintWord();}
-    }
-    for (int i = 0; i < triggerPANIC.length; i++){    
-      if(lastWord.equals(triggerPANIC[i])) {triggerPANIC(); paintWord();}
-    }
-    for (int i = 0; i < triggerPICADO.length; i++){    
-      if(lastWord.equals(triggerPICADO[i])) {triggerPICADO(); paintWord();}
-    }
-    for (int i = 0; i < triggerRAIN.length; i++){    
-      if(lastWord.equals(triggerRAIN[i])) {triggerRAIN(); paintWord();}
-    }           
-  }
-  else{ //lastWord is bigger than charsTriggerMax    
-    for (int i = 0; i < triggerCLIENT.length; i++){       
-      String lt = lastWord.substring(0, triggerCLIENT[i].length()); 
-      String ltIp = lastWord.substring(triggerCLIENT[i].length() + 1);
-      
-      if(lt.equals(triggerCLIENT[i])) {startClient(ltIp); paintWord();}    
-    }
-  }
-}
-void paintWord(){
-  Writer w = writers.get(0);
-  int lNum = w.letters.size();  
-   
-  for (int i=0; i < lastWord.length(); i++){    
-   Letter l = w.letters.get(lNum - 1 - i);
-   l.isTrigger = true;
-  } 
-}
 
 void changeStars(String _txt){
   for (Star s : stars) {
@@ -744,7 +610,7 @@ class LoadedInput {
 // Save stuff
 void saveJson(){      
    saveJSONArray(inputs, savePath + "/streams/"+
-                                      lastWord +
+                                      user.lastWord +
                                       "_"+day()+"-"+month()+"-"+year() +
                                       ".json"); 
    messager.show("json saved", 1);
@@ -755,7 +621,7 @@ void loadJson(String _filename){
    
   JSONArray inputValues = loadJSONArray(savePath + "/streams/"+ _filename);
   
-  Writer w = new Writer();
+  Writer w = new Writer(ROBOT);
   writers.add(w);
   
   w.loadedInputs.clear();  
@@ -782,10 +648,13 @@ void loadJson(String _filename){
 void createUIStreams(){
  int uiBlank = 0;
  File dataFolder = new File(sketchPath + "/streams");
- String[] fileList = dataFolder.list();  
+ String[] fileList = dataFolder.list();
+ int longestName = 0; 
  for (int i = 0; i < fileList.length;i++){
    buttons.add(new Button("streams", fileList[i],i,uiBlank));
- }  
+   if(fileList[i].length() > longestName) longestName = fileList[i].length();
+ }
+ uiZone = longestName * 12; 
 }
 
 
