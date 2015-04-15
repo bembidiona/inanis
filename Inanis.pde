@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.2";
-final Boolean DEBUG = true;
+final Boolean DEBUG = false;
 
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
@@ -28,8 +28,11 @@ String debugLog = "LOG: ";
 String stream = "Type something";
 String altKeys = "";
 color colorBg = color(20,22,23,255);
+color colorGradient = color(20,25,25,255);
+color colorGradientAlpha = color(20,22,23,0);
 color colorTxt = color(230,255);
-color colorTrigger = color(136,255,100,255);
+color colorTrigger = color(136,200,200,255);
+
 
 int step = 10;
 
@@ -109,7 +112,7 @@ String input;
 float yoff = 0.0;
 private int wavesY;
 final private int wavesStep = 5; 
-int picado = 20;
+int picado = 5;
 
  
 void setup() {
@@ -197,7 +200,7 @@ void draw() {
   fill(colorBg, bgAlpha);
   rect(0,0,width,height); 
    
-  cursorHand = false;
+  
   
   if(scaleAll != 1){
     translate( width/2, height/2);  
@@ -215,15 +218,14 @@ void draw() {
   }     
   
   
-  for (Button b : buttons) {
-    b.display();
-  }  
-  messager.display();
+    
+  
   
   if(!mouseInactive){
     if (cursorHand) cursor(HAND);
     else cursor(CROSS);
   }
+  cursorHand = false;
 
   //stars
   for (int i=stars.size()-1; i >= 0; i--) {
@@ -283,35 +285,55 @@ void draw() {
   }
 
 
-  // -------------------
-  // perlin ocean
-  // --------------------
-  fill(colorTxt);
-  beginShape();  
-  float xoff = 0;  
-  for (float x = 0; x <= width; x += 10) {
-    float y = map(noise(xoff, yoff), 0, 1, wavesY, wavesY + picado);
-    
-    vertex(x, y); 
-    
-    xoff += 0.05;
-  }
-  yoff += 0.01;
-  vertex(width, height);
-  vertex(0, height);
-  endShape(CLOSE);
-  //-------------------------
   
+  //gradients
+  int gradientSize = 40; 
+  setGradient(0, 0, gradientSize, height, colorGradient, colorGradientAlpha, 1);
+  setGradient(width-gradientSize, 0, gradientSize, height, colorGradient, colorGradientAlpha, 2);
+  setGradient(0, 0, width, gradientSize, colorGradient, colorGradientAlpha, 3);
+  setGradient(0, height-gradientSize, width, gradientSize, colorGradient, colorGradientAlpha, 4);
   
-  //details
+  //marco
   int cosito = 5;  
   noFill();  
   for(int i = 1; i <= 5; i++){
     stroke(colorTxt, 100 - cosito*i*5);
     rect(cosito*i, cosito*i, width-cosito*2*i, height - cosito*2*i); 
   }  
-  noStroke();
+  noStroke();   
   //----------
+  
+  for (Button b : buttons) {
+    b.display();
+  }
+  messager.display();
+  
+  // -------------------
+  // perlin ocean
+  // --------------------
+  int seasDistance = 5;
+  for(int i = 0; i <= 2; i++){
+    if(true) fill(colorTxt, 255 - 100*i);
+    else {
+      noFill();
+      stroke(colorTxt, 255 - 100*i);
+    }
+    
+    beginShape();  
+    float xoff = 0;  
+    for (float x = 0; x <= width; x += 10) {
+      float y = map(noise(xoff, yoff), 0, 1, wavesY - seasDistance*i, wavesY + picado - seasDistance*i);
+      
+      vertex(x, y); 
+      
+      xoff += 0.05;
+    }
+    yoff += 0.01;
+    vertex(width, height);
+    vertex(0, height);
+    endShape(CLOSE);
+  }
+  //-------------------------
   
   if (filterInvert) filter(INVERT);
   //filter(THRESHOLD);
@@ -433,15 +455,39 @@ boolean sketchFullScreen() {
   return !DEBUG;
 }
 
-void setGradient(int x, int y, float w, float h, color c1, color c2, boolean axisX ) {
+void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
   noFill();
   noStroke();
-  if (axisX == true) {  // Left to right gradient
+  if (axis == 1) {  // Left to right gradient
     for (int i = x; i <= x+w-3; i++) {
       float inter = map(i, x, x+w, 0, 1);
       color c = lerpColor(c1, c2, inter);
       fill(c);
       rect(i, y, 1, h);
+    }
+  }
+  else if (axis == 2) {  // right to left gradient
+    for (int i = x; i <= x+w-3; i++) {
+      float inter = map(i, x, x+w, 0, 1);
+      color c = lerpColor(c2, c1, inter);
+      fill(c);
+      rect(i, y, 1, h);
+    }
+  }
+  else if (axis == 3) {  // Top to bottom gradient
+    for (int i = y; i <= y+h; i++) {
+      float inter = map(i, y, y+h, 0, 1);
+      color c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(x, i, x+w, i);
+    }
+  }
+  else if (axis == 4) {  // bottom to Top gradient
+    for (int i = y; i <= y+h; i++) {
+      float inter = map(i, y, y+h, 0, 1);
+      color c = lerpColor(c2, c1, inter);
+      stroke(c);
+      line(x, i, x+w, i);
     }
   }  
 }
@@ -741,4 +787,7 @@ void createUIStreams(){
    buttons.add(new Button("streams", fileList[i],i,uiBlank));
  }  
 }
+
+
+
 

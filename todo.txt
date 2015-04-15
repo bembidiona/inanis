@@ -2,7 +2,7 @@ SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y contr
 	- Encontrarle la vuelta al tema de los inputs. Ahora un input va a quedar dirijito a todos los writers/carets
 
 
-	
+- Al hacer backspace el caret deberia hacer unn teleport a la ultima letra	
 - Themes de colores
 - Cambiar font y tamaño
 - el area activa de la ui deberia cambair segun el largo de los streams names

@@ -1,7 +1,7 @@
 class Message{
   
    int x = width/2;
-   final private int moveDistance = 20;
+   final private int moveDistance = 30;
    int y = moveDistance*-1;
    
          

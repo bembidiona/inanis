@@ -40,7 +40,7 @@ class Letter{
         else fill(colorTxt, alpha/2.5);
         text(letter, x+random(3), y + glitch() +random(3));
       }
-      if(blood > 0){
+      if(blood > 0 && !letter.equals(" ")){
         for (int i = 0; i < 2; i++){  
           if (isTrigger) fill(colorTrigger,alpha);
           else fill(colorTxt);
