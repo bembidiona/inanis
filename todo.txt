@@ -9,7 +9,6 @@ SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y contr
 
 
 BUGS:
-- Los carets robots no muestran los ALT+XXX
 - el exponent del carent se borra con el tiempo, wtf
 - Creo que explota todo cuando ul robot borra todo su stream con backspace
 - Al cerrar Inanis pueden quedar keys sin relesearse

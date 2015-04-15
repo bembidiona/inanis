@@ -150,10 +150,7 @@ void keyPress(int _key) {
     if(isPressed_Ctrl){
       if(_key == 83) saveTxt(); //s
       else if(_key == 69) savePix(); //e      
-    }
-    else if(isPressed_Alt){
-      altKeys = altKeys + str(key);
-    }
+    }    
     else{
       if(_key == 32){ // SPACE
         stars.add(new Star());
@@ -176,11 +173,11 @@ void keyPress(int _key) {
         addChar(c, false);
       }
       else{
-        
-        char c=(char)_key; // TODO : las letras se transformas en mayusculas
+        char c=(char)_key;
         String s = str(c);
         
-        addChar(s, false); 
+        if(isPressed_Alt) altKeys = altKeys + s;
+        else addChar(s, false); 
       }
     }
   }
@@ -200,6 +197,8 @@ void keyRelease(int _key) {
     
     int i = int(altKeys);
     String hackedChar = Character.toString((char)i); 
+    
+    println(i);
     
     if(i == 164) hackedChar = "ñ";
     else if(i == 160) hackedChar = "á";

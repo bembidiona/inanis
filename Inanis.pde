@@ -353,16 +353,26 @@ void keyPressed() {
     user.stream = "";    
     firstBlood = false;
   }
-  writeInput("key", int(key), false, 0, 0);
+  
     
-  if(key == CODED) user.keyPress(int(keyCode));
-  else user.keyPress(int(key));
+  if(key == CODED){
+    writeInput("key", int(keyCode), false, 0, 0);
+    user.keyPress(int(keyCode));
+  }
+  else{
+    writeInput("key", int(key), false, 0, 0);
+    user.keyPress(int(key));    
+  }
 }
 void keyReleased() {
-  writeInput("key", int(key), true, 0, 0);  
-  
-  if(key == CODED) user.keyRelease(int(keyCode));
-  else user.keyRelease(key);
+  if(key == CODED){
+    writeInput("key", int(keyCode), true, 0, 0);
+    user.keyRelease(int(keyCode));
+  }
+  else{
+    writeInput("key", int(key), true, 0, 0);
+    user.keyRelease(key);
+  }
 }
 
 
