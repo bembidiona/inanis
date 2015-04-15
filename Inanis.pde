@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.2";
-final Boolean DEBUG = true;
+final Boolean DEBUG = false;
 
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
@@ -301,6 +301,16 @@ void draw() {
   endShape(CLOSE);
   //-------------------------
   
+  
+  //details
+  int cosito = 5;  
+  noFill();  
+  for(int i = 1; i <= 5; i++){
+    stroke(colorTxt, 100 - cosito*i*5);
+    rect(cosito*i, cosito*i, width-cosito*2*i, height - cosito*2*i); 
+  }  
+  noStroke();
+  //----------
   
   if (filterInvert) filter(INVERT);
   //filter(THRESHOLD);

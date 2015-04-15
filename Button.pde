@@ -32,9 +32,9 @@ class Button{
      int separation = 20;
      int safe = 5;
      w = name.length() * 11;
-     h = 15;
+     h = 25;
      
-     if (menu == "main") x = width - name.length() - margen;
+     if (menu == "main") x = width - name.length() - margen*4;
      else x = width + name.length() + 200;
      y = h + safe + separation*buttonNum - _blank*10;
      
@@ -116,7 +116,7 @@ class Button{
   void in() {    
     if(hiden){
       hiden = false;
-      Ani.to(this, 0.8, 0.03*buttonNum, "x", width - margen, Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
+      Ani.to(this, 0.8, 0.03*buttonNum, "x", width - margen*4, Ani.EXPO_IN_OUT, "onStart:itsStarted, onEnd:itsEnded");
     }    
   }
   
