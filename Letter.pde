@@ -12,6 +12,8 @@ class Letter{
    Boolean isOut = false;
 
    private int alpha = 255;
+   
+   Boolean isTrigger = false;
          
    Letter(String _letter){
       letter = _letter; 
@@ -27,17 +29,21 @@ class Letter{
       int margen = 500;
       if(x < margen) alpha = floor((((x*100)/margen) * 255 ) / 100);
       else alpha = 255;
-      fill(colorTxt,alpha);      
+      
+      if (isTrigger) fill(colorTrigger,alpha);
+      else fill(colorTxt,alpha);      
 
       text(letter, x, y + glitch() );
       
       for (int i = 0; i < 2; i++){  
-        fill(colorTxt, alpha/2.5);
+        if (isTrigger) fill(colorTrigger,alpha/2.5);
+        else fill(colorTxt, alpha/2.5);
         text(letter, x+random(3), y + glitch() +random(3));
       }
       if(blood > 0){
         for (int i = 0; i < 2; i++){  
-          fill(colorTxt);
+          if (isTrigger) fill(colorTrigger,alpha);
+          else fill(colorTxt);
           rect(x-8/2 + random(8) ,y, 1, random(blood));
         }  
       }

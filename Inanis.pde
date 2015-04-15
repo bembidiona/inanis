@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.2";
-final Boolean DEBUG = false;
+final Boolean DEBUG = true;
 
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
@@ -29,6 +29,7 @@ String stream = "Type something";
 String altKeys = "";
 color colorBg = color(20,22,23,255);
 color colorTxt = color(230,255);
+color colorTrigger = color(136,255,100,255);
 
 int step = 10;
 
@@ -521,28 +522,28 @@ void checkTriggers(){
     lastWord = lastWord.toLowerCase();
     
     for (int i = 0; i < triggerLOVE.length; i++){    
-      if(lastWord.equals(triggerLOVE[i])) triggerLOVE();
+      if(lastWord.equals(triggerLOVE[i])) { triggerLOVE(); paintWord();}
     }
     for (int i = 0; i < triggerDEAD.length; i++){    
-      if(lastWord.equals(triggerDEAD[i])) triggerDEAD();
+      if(lastWord.equals(triggerDEAD[i])) { triggerDEAD();  paintWord();}
     }
     for (int i = 0; i < triggerGLITCH.length; i++){    
-      if(lastWord.equals(triggerGLITCH[i])) triggerGLITCH();
+      if(lastWord.equals(triggerGLITCH[i])) { triggerGLITCH(); paintWord();}
     }
     for (int i = 0; i < triggerSCALE.length; i++){    
-      if(lastWord.equals(triggerSCALE[i])) triggerSCALE();
+      if(lastWord.equals(triggerSCALE[i])) {triggerSCALE(); paintWord();}
     }
     for (int i = 0; i < triggerBLOOD.length; i++){    
-      if(lastWord.equals(triggerBLOOD[i])) triggerBLOOD();
+      if(lastWord.equals(triggerBLOOD[i])) {triggerBLOOD(); paintWord();}
     }
     for (int i = 0; i < triggerPANIC.length; i++){    
-      if(lastWord.equals(triggerPANIC[i])) triggerPANIC();
+      if(lastWord.equals(triggerPANIC[i])) {triggerPANIC(); paintWord();}
     }
     for (int i = 0; i < triggerPICADO.length; i++){    
-      if(lastWord.equals(triggerPICADO[i])) triggerPICADO();
+      if(lastWord.equals(triggerPICADO[i])) {triggerPICADO(); paintWord();}
     }
     for (int i = 0; i < triggerRAIN.length; i++){    
-      if(lastWord.equals(triggerRAIN[i])) triggerRAIN();
+      if(lastWord.equals(triggerRAIN[i])) {triggerRAIN(); paintWord();}
     }           
   }
   else{ //lastWord is bigger than charsTriggerMax    
@@ -550,10 +551,20 @@ void checkTriggers(){
       String lt = lastWord.substring(0, triggerCLIENT[i].length()); 
       String ltIp = lastWord.substring(triggerCLIENT[i].length() + 1);
       
-      if(lt.equals(triggerCLIENT[i])) startClient(ltIp);    
+      if(lt.equals(triggerCLIENT[i])) {startClient(ltIp); paintWord();}    
     }
   }
 }
+void paintWord(){
+  Writer w = writers.get(0);
+  int lNum = w.letters.size();  
+   
+  for (int i=0; i < lastWord.length(); i++){    
+   Letter l = w.letters.get(lNum - 1 - i);
+   l.isTrigger = true;
+  } 
+}
+
 void changeStars(String _txt){
   for (Star s : stars) {
     s.change(_txt);
