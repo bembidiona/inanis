@@ -7,7 +7,7 @@ class Writer{
   boolean isPressed_Alt = false;
   boolean wasPressed_Tilde = false;
   
-   Caret caret;
+   
    ArrayList<Letter> letters = new ArrayList<Letter>(); 
    Boolean readingLoadedInputs = false;
    ArrayList<LoadedInput> loadedInputs = new ArrayList<LoadedInput>();
@@ -15,22 +15,98 @@ class Writer{
    int loadedInputTime = 0;
    int loadedTimeOffset;  
    int type; 
+   
+   //CaretStuff
+   int x = 0;
+   int y = 0;
+   
+   int startX;
+   int startY;
+   
+   private int blinkTimer = 0;
+   int blinkTimerMax = 20;
+   
+   Ani animationX;
+   Ani animationY;
+   
+   PImage sprite;
+   PImage ring;
+   
+   private final int xMin = width/2-width/3;
+   private final int xMax = width/2+width/3;
+   
+   private final float stepBack = step/2;
+
+   Boolean canTeleport = true;
+   
+   private String exponent = "";
+   
+   int hitbox = 30;
+   Boolean isBeingDraged = false; 
     
    Writer(int _type){
       type = _type;
       
-      if(type == USER) caret = new Caret(this, width/2, height/2);
-      else caret = new Caret(this, width/2, height/2 - 200 + floor(random(100)));       
+      if(type == USER){
+        x = width/2;
+        y = height/2;
+      }
+      else{
+        x = width/2;
+        y = height/2 - 200 + floor(random(100));        
+      }       
       writersNum++;
       
       loadedInputs.add(new LoadedInput("skip", 0, 0, false, 0, 0 ));
+      
+      //caret
+     startX = x;
+     startY = y;
+           
+     for (int i = 1; i <= writersNum; i++){
+       exponent = exponent + ".";
+     }
+     
+     x = width/2;
+     y = startY;
+     
+     sprite = loadImage("caret.png");
+     
+     
+     /*animationY = new Ani(this, 10, "y", height/2 + 50, Ani.EXPO_IN_OUT);
+     animationY.setPlayMode(Ani.YOYO);
+     animationY.repeat();*/
    }
 
    void display(){
+if (keysInactive){
+        if (blinkTimer < blinkTimerMax){
+          drawIt(255);
+          blinkTimer++; 
+        }
+        else if (blinkTimer < blinkTimerMax*2){
+          drawIt(100);
+          blinkTimer++;
+        }
+        else { 
+           blinkTimer = 0;
+           
+           if(!firstBlood) x -= stepBack;
+        }   
 
-
-      caret.display();
-
+                
+      }
+      else { 
+        drawIt(255);
+        blinkTimer = 0;
+      }
+      
+      if(isOver()){
+       fill(colorTxt, 25);
+       rect(x-hitbox/2,y-hitbox/2, hitbox,hitbox);
+       
+       cursorHand = true;
+      } 
       
       for (int i=letters.size()-1; i >= 0; i--) {
         Letter l = letters.get(i);
@@ -51,12 +127,12 @@ class Writer{
       for (Star s : stars) {
         s.stepForward();
       }       
-      letters.add(new Letter(_char, caret));
+      letters.add(new Letter(_char, x, y));
       
       stream = stream + _char;
       if(!space) lastWord = lastWord + _char;
       
-      caret.x += step/2;
+      x += step/2;
    }
    
    void removeChar(){ 
@@ -68,7 +144,7 @@ class Writer{
         l.stepBack();
       }
       
-      caret.x -= step/2;
+      x -= step/2;
    }
    
    
@@ -83,7 +159,7 @@ class Writer{
         LoadedInput in = loadedInputs.get(loadedInputNum);    //start at 0
         
         if(in.type.equals("mouse")){
-          caret.teleport(in.x, in.y);
+          teleport(in.x, in.y);
         }
         else if (in.type.equals("key")){
           if(in.r) keyRelease(in.k);
@@ -100,7 +176,7 @@ class Writer{
           loadedTimeOffset = millis();
   
           loadedInputTime = loadedInputs.get(0).t; 
-          caret.teleport(width/2,caret.startY);        
+          teleport(startX,startY);        
         }
         else{
           messager.show("end of stream", 3);
@@ -139,7 +215,7 @@ void keyPress(int _key) {
   }  
   else if (_key == ENTER){
      addChar(breaker, false);
-     caret.jump();
+     jump();
   }
   else if (_key == BACKSPACE) {
     if (stream.length() > 0) {
@@ -196,9 +272,7 @@ void keyRelease(int _key) {
     // so, hardcodie los acentos y la ñ por ahora
     
     int i = int(altKeys);
-    String hackedChar = Character.toString((char)i); 
-    
-    println(i);
+    String hackedChar = Character.toString((char)i);
     
     if(i == 164) hackedChar = "ñ";
     else if(i == 160) hackedChar = "á";
@@ -266,6 +340,60 @@ void paintWord(){
    l.isTrigger = true;
   } 
 }
+
+void drawIt(int _alpha){
+     tint(colorTxt, _alpha);
+     
+     if (x < xMin) x = xMin;
+     else if (x > xMax) x = xMax;
+     
+     image(sprite,x-sprite.width/2,y-sprite.height/2);
+     text(exponent, x+sprite.width, y);
+     
+     noTint();
+   }
+   
+   
+   
+   void jump(){
+      teleport(x, floor(height/2 - 100 + random(200)) );           
+   }
+
+   void teleport(int _x, int _y){
+    if(isBeingDraged) return; 
+     
+    writeInput("mouse", 0, false, _x, _y);
+
+    checkTriggers();        
+    lastWord = ""; 
+     
+    canTeleport = false;
+    
+    animationX = new Ani(this, 0.5, "x", _x, Ani.EXPO_IN_OUT,"onStart:blank, onEnd:startIdle");
+    animationY = new Ani(this, 0.5, "y", _y, Ani.EXPO_IN_OUT);    
+   }
+
+   void startIdle(){
+    canTeleport = true;
+    /*animationY = new Ani(this, 10, "y", y + 20, Ani.EXPO_IN_OUT);       
+    animationY.start();
+    animationY.setPlayMode(Ani.YOYO);
+    animationY.repeat();*/
+   }
+
+   private void blank(){
+
+   }
+   
+   boolean isOver(){
+     
+     if ((mouseX > x - hitbox/2 && mouseX < x + hitbox/2) && (mouseY > y - hitbox/2 && mouseY < y + hitbox/2)){
+       return true;
+     }
+     else{
+       return false; 
+     }
+   }
 
 
 }

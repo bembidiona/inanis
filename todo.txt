@@ -11,12 +11,10 @@ SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y contr
 BUGS:
 - el exponent del carent se borra con el tiempo, wtf
 - Creo que explota todo cuando ul robot borra todo su stream con backspace
-- Al cerrar Inanis pueden quedar keys sin relesearse
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 
 TRIGGERS:
 - hacer algo con los triggers "dia" y "noche"
-- "manija"
 - cuando dejas apretado mucho tiempo la tecla "a"
 
 IDEAS:

@@ -15,11 +15,11 @@ class Letter{
    
    Boolean isTrigger = false;
          
-   Letter(String _letter, Caret _caret){
+   Letter(String _letter, int _x, int _y){
       letter = _letter; 
   
-      x = _caret.x - step;
-      y = _caret.y;
+      x = _x - step;
+      y = _y + 3;
    }
    
    void display(){

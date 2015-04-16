@@ -70,14 +70,14 @@ Boolean cursorHand = false;
 
 //don't forget to add new TRIGGERS in the setup section!!!
 String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
-String[] triggerDEAD = {"muerte", "dead", "fetal"};
-String[] triggerGLITCH = {"glitch", "bakun", "art"};
+String[] triggerDEAD = {"muerte", "mori", "dead", "fetal"};
+String[] triggerGLITCH = {"glitch", "bakun", "art", "arte"};
 String[] triggerCLIENT = {"connect", "conectar"};
 String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
 String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
-String[] triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico"};
+String[] triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico", "manija"};
 String[] triggerPICADO = {"odio", "mar", "ocean", "hate", "water", "tormenta"};
-String[] triggerRAIN = {"lluvia", "rain", "llorar", "cry"};
+String[] triggerRAIN = {"lluvia", "llover", "rain", "llorar", "cry", "tormenta"};
 private int charsTriggerMax;
 private int charsTriggerMin;
 
@@ -86,6 +86,8 @@ String mode = "stars";
 Message messager;
 
 Writer user;
+
+Boolean mouseIsDragging = false;
 
 int bgAlpha = 255;
 Ani tweenGlitch;
@@ -417,19 +419,26 @@ void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
   }  
 }
 
-void mousePressed(){
+void mouseReleased(){
+  if(mouseIsDragging == true){
+    mouseIsDragging = false;
+    for (Writer w : writers) {
+      w.isBeingDraged = false; 
+    }
+    return;
+  }
+  
   if (mouseX > width/2+width/3){
     for (Button b : buttons) {
       b.checkClick();
     }
   }
   else{
-    if(writers.get(0).caret.canTeleport){
-      writers.get(0).addChar(breaker, false);
-      writers.get(0).caret.teleport(mouseX,mouseY);
+    if(user.canTeleport){
+      user.addChar(breaker, false);
+      user.teleport(mouseX,mouseY);
     }  
-  }
-  
+  } 
 }
 
 
@@ -454,6 +463,20 @@ void mouseMoved(){
           b.out();
         }     
     }
+  }
+}
+
+void mouseDragged() 
+{
+  mouseIsDragging = true;
+  for (Writer w : writers) {
+      if(w.isOver()){
+        w.isBeingDraged = true;
+        w.x = mouseX;
+        w.y = mouseY;
+        w.startX = w.x;
+        w.startY = w.y; 
+      }
   }
 }
 
