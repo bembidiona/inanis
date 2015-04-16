@@ -2,10 +2,13 @@ SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y contr
 
 
 
+
+
 - Al hacer backspace el caret deberia hacer unn teleport a la ultima letra	
 - Themes de colores
 - Cambiar font y tamaño
 - el area activa de la ui deberia cambair segun el largo de los streams names
+- habria que pegarse una optimizada. (perlin sea?)
 
 
 BUGS:

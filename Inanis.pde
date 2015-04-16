@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.3";
-final Boolean DEBUG = true;
+final Boolean DEBUG = false;
 
 final int USER = 0;
 final int ROBOT = 1;
@@ -61,6 +61,10 @@ Boolean firstBlood = true;
 int timerMouseInactive = 0;
 int timeMouseInactive = 2000;
 Boolean mouseInactive = false;
+Boolean clickedOverACaret = false;
+Boolean mouseIsDragging = false;
+int mousePressX = 0;
+int mousePressY = 0;
 
 int timerKeysInactive = 0;
 int timeKeysInactive = 2000;
@@ -86,8 +90,9 @@ String mode = "stars";
 Message messager;
 
 Writer user;
+Writer writerDraged;
 
-Boolean mouseIsDragging = false;
+
 
 int bgAlpha = 255;
 Ani tweenGlitch;
@@ -161,6 +166,7 @@ void setup() {
 
   user = new Writer(USER);
   writers.add(user);  
+  
 
   
   messager = new Message();
@@ -222,7 +228,7 @@ void draw() {
   
     
   
-  
+  mouseCheckDrag();
   if(!mouseInactive){
     if (cursorHand) cursor(HAND);
     else cursor(CROSS);
@@ -281,10 +287,7 @@ void draw() {
     
     
   }
-  //debug
-  if (DEBUG) {
-    text(debugLog, width/2,height/2-150);
-  }
+  
 
 
   
@@ -340,7 +343,16 @@ void draw() {
   if (filterInvert) filter(INVERT);
   //filter(THRESHOLD);
   
- 
+  //debug
+  if (DEBUG) {
+    
+    tint(colorTxt);
+    
+    text(debugLog, width/2,height/2-150);
+  }
+
+  textAlign(LEFT, CENTER);
+  text("FPS: "+str(frameRate), 30, 30);
   
 }
  
@@ -419,29 +431,55 @@ void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
   }  
 }
 
-void mouseReleased(){
-  if(mouseIsDragging == true){
-    mouseIsDragging = false;
-    for (Writer w : writers) {
-      w.isBeingDraged = false; 
+void mouseCheckDrag(){
+  if(clickedOverACaret){
+    if(mouseIsDragging){
+      writerDraged.x = mouseX;
+      writerDraged.y = mouseY;
     }
-    return;
+    else {
+      int safe = 20;
+      if ( (mouseX < mousePressX-safe || mouseX > mousePressX+safe) ||
+           (mouseY < mousePressY-safe || mouseY > mousePressY+safe)){
+         mouseIsDragging = true;
+      }       
+    }    
   }
+}
+
+void mousePressed(){
+  mousePressX = mouseX;
+  mousePressY = mouseY;
+
+  for (Writer w : writers) {
+    if(w.isOver()){
+      clickedOverACaret = true; //HACK
+      
+      writerDraged = w;
+      writerDraged.isBeingDraged = true;      
+      writerDraged.startX = mouseX;
+      writerDraged.startY = mouseY; 
+    }
+  }  
+}
+void mouseReleased(){
+  clickedOverACaret = false;
   
   if (mouseX > width/2+width/3){
     for (Button b : buttons) {
       b.checkClick();
     }
   }
-  else{
-    if(user.canTeleport){
+  else if(mouseIsDragging == true){
+    mouseIsDragging = false;
+    
+    writerDraged.isBeingDraged = false;    
+  }
+  else if (user.canTeleport){
       user.addChar(breaker, false);
       user.teleport(mouseX,mouseY);
-    }  
-  } 
+  }    
 }
-
-
 void mouseMoved(){
   mouseInactive = false;
   
@@ -466,19 +504,7 @@ void mouseMoved(){
   }
 }
 
-void mouseDragged() 
-{
-  mouseIsDragging = true;
-  for (Writer w : writers) {
-      if(w.isOver()){
-        w.isBeingDraged = true;
-        w.x = mouseX;
-        w.y = mouseY;
-        w.startX = w.x;
-        w.startY = w.y; 
-      }
-  }
-}
+
 
 
 
