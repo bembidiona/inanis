@@ -19,7 +19,7 @@ class Letter{
       letter = _letter; 
   
       x = _x - step;
-      y = _y + 3;
+      y = _y;
    }
    
    void display(){

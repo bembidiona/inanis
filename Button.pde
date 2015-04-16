@@ -21,6 +21,7 @@ class Button{
    String menu;
 
    
+      
    
    Button(String _menu, String _name, int _buttonNum, int _blank){    
      menu = _menu;
@@ -50,7 +51,7 @@ class Button{
     cX = x - w + 5;
     cY = y-h+5;
 
-    textFont(fontOptions);                 
+                     
     fill(colorTxt);  
      
     textAlign(RIGHT);
@@ -83,6 +84,8 @@ class Button{
            else if (pixFormat == "png") pixFormat = "bmp";  
         }
         else if (name == "folder") selectFolder("On exit Save to this folder", "checkPath");
+        else if (name == "font") changeFont();
+        else if (name == "theme") changeTheme();
         else if (name == "day/night") {
           if(filterInvert) {
             filterInvert = false;

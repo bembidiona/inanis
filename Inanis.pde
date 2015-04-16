@@ -31,11 +31,14 @@ String debugLog = "LOG: ";
 
 
 String altKeys = "";
-color colorBg = color(20,22,23,255);
-color colorGradient = color(20,25,25,255);
-color colorGradientAlpha = color(20,22,23,0);
-color colorTxt = color(230,255);
-color colorTrigger = color(136,200,200,255);
+color colorBg;
+color colorGradient;
+color colorGradientAlpha;
+color colorTxt;
+color colorTrigger;
+color colorExtra;
+int themeSelected = 0;
+int fontSelected = 0;
 
 
 int step = 10;
@@ -48,7 +51,7 @@ String pixFormat = "png";
 Boolean filterInvert = false;
 
 boolean mainShow = true;
-String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
+String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","font","theme","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Writer> writers = new ArrayList<Writer>();
 int writersNum = 0;
@@ -139,6 +142,8 @@ void setup() {
     println(e);
   }
   
+  changeTheme();
+  changeFont();
   size(displayWidth, displayHeight);   
   json = new JSONObject();
   timerMouseInactive = millis();
@@ -147,7 +152,7 @@ void setup() {
    
   
   
-  fontOptions = loadFont("courier_15.vlw");  
+   
   
   textAlign(RIGHT, CENTER);
   textSize(30);
@@ -204,7 +209,9 @@ void setup() {
   wavesY = height - height/10;
 }
  
-void draw() {  
+void draw() { 
+  textFont(fontOptions);
+  
   fill(colorBg, bgAlpha);
   rect(0,0,width,height); 
    
@@ -716,6 +723,53 @@ void createUIStreams(){
  uiZone = longestName * 12; 
 }
 
+void changeTheme(){
+  if(themeSelected == 1){
+      themeSelected++;
+    
+      colorTxt = color(187,214,181);
+      colorTrigger = color(238,247,225,255);
+      colorBg = color(19,82,90);
+      colorGradient = color(30,66,86,255);
+      colorGradientAlpha = color(colorGradient,0);
+      colorExtra = color(68,139,135);      
+  }
+  else if(themeSelected == 2){
+      themeSelected++;
+    
+      colorTxt = color(255,255,250);
+      colorTrigger = color(242,76,39);
+      colorBg = color(2,73,89);
+      colorGradient = color(3,126,140,50);
+      colorGradientAlpha = color(colorGradient,0);
+      colorExtra = color(255,255,250);      
+  }
+  else { //default
+      themeSelected = 1;
+    
+      colorTxt = color(230,255);
+      colorTrigger = color(136,200,200,255);
+      colorBg = color(20,22,23,255);
+      colorGradient = color(20,25,25,255);
+      colorGradientAlpha = color(colorGradient,0);      
+      colorExtra = color(255,255,250);
+  }
+}
+void changeFont(){
+ if(fontSelected == 1){
+   fontSelected++;
+   fontOptions = loadFont("anonymous-15.vlw");
+ }
+ else if(fontSelected == 2){
+   fontSelected++;
+   fontOptions = loadFont("MonospaceTypewriter-13.vlw");
+ }
+ else{
+   fontSelected = 1;
+   fontOptions = loadFont("courier-15.vlw");
+ }
+  
+}
 
 
 

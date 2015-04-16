@@ -1,9 +1,6 @@
 SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y control de las letras que este escupe, a su vez tiene su propio lastWord, y allScrems to dump. Que pueda escuchar al tipeo, a solo a los inputs de su json, o al pal que esta conectado en networking.	
 
 
-
-
-
 - Al hacer backspace el caret deberia hacer unn teleport a la ultima letra	
 - Themes de colores
 - Cambiar font y tamaño

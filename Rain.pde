@@ -16,7 +16,7 @@ class Rain{
    }
    void display(){
      
-     fill(colorTxt, alpha);
+     fill(colorExtra, alpha);
      text(txt,x,y); 
      
      if(y > height + 20 || x > width + 20) isOut = true; 
