@@ -18,7 +18,7 @@ class Letter{
    Letter(String _letter, int _x, int _y){
       letter = _letter; 
   
-      x = _x - step;
+      x = _x - floor(textWidth(letter));//step;
       y = _y;
    }
    
