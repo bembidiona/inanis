@@ -9,6 +9,7 @@ SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y contr
 
 
 BUGS:
+- No andan los shortcut keys (ctrl+S ponele)
 - el exponent del carent se borra con el tiempo, wtf
 - Creo que explota todo cuando ul robot borra todo su stream con backspace
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)

@@ -41,9 +41,9 @@ int themeSelected = 0;
 int fontSelected = 0;
 
 
-int step = 10;
+int step = 8;
 
-String breaker = "./ ";
+String pilcrow = "¶ ";
 String savePath = "";
 PFont fontOptions;
 String pixFormat = "png"; 
@@ -483,8 +483,9 @@ void mouseReleased(){
     writerDraged.isBeingDraged = false;    
   }
   else if (user.canTeleport){
-      user.addChar(breaker, false);
-      user.teleport(mouseX,mouseY);
+    user.addChar(". ", false);
+    user.stream = user.stream + pilcrow;               
+    user.teleport(mouseX,mouseY);
   }    
 }
 void mouseMoved(){
@@ -517,7 +518,7 @@ void mouseMoved(){
 
 
 void saveTxt(){
-   String[] list = split(writers.get(0).stream, breaker);
+   String[] list = split(writers.get(0).stream, pilcrow);
    saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
  
    messager.show("txt saved", 1);
@@ -763,6 +764,14 @@ void changeFont(){
  else if(fontSelected == 2){
    fontSelected++;
    fontOptions = loadFont("MonospaceTypewriter-13.vlw");
+ }
+ else if(fontSelected == 3){
+   fontSelected++;
+   fontOptions = loadFont("Jauria-15.vlw");
+ }
+ else if(fontSelected == 4){
+   fontSelected++;
+   fontOptions = loadFont("Terminus-14.vlw");
  }
  else{
    fontSelected = 1;

@@ -213,8 +213,9 @@ void keyPress(int _key) {
      }
      else wasPressed_Tilde = true;
   }  
-  else if (_key == ENTER){
-     addChar(breaker, false);
+  else if (_key == ENTER){     
+     addChar(". ", false);
+     stream = stream + pilcrow;
      jump();
   }
   else if (_key == BACKSPACE) {
