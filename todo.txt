@@ -1,12 +1,9 @@
-SPRINT: crear un objecto Writer que se encarge de mover su propio caret, y control de las letras que este escupe, a su vez tiene su propio lastWord, y allScrems to dump. Que pueda escuchar al tipeo, a solo a los inputs de su json, o al pal que esta conectado en networking.	
-
-
-- Al hacer backspace el caret deberia hacer unn teleport a la ultima letra	
+- Que se puedan guardar json, y levantar estos en la misma session. (al poner loadJson, scrappear el folder y crear la botonera)
 - Themes de colores
 - Cambiar font y tamaño
 - el area activa de la ui deberia cambair segun el largo de los streams names
 - habria que pegarse una optimizada. (perlin sea?)
-
+- Darle cuerpo al pal en networking
 
 BUGS:
 - No andan los shortcut keys (ctrl+S ponele)
@@ -21,8 +18,5 @@ TRIGGERS:
 IDEAS:
 - Mapear sonidos de una maquina de escribir a cada tecla. Panearlas en stereo
 - Poner sonidos aleatorios musicales en escala para cada tecla?
-- Al dejar de tipear, aparece una frase que te haga mierda, y motive a seguir escribiendo. How DA FAC
-- intentar hacer llover frases ya escritas cuando se deja de escribir
 - El sonido de typeado podria ser a traves de una escala procedural? (poder cambair la escala y el root key?)
-- La línea de txt colapsa pasado x tiempo de no escribir-idea-
 - Inanis como poesia con la dimensión de tiempo? cisting *0*

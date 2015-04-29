@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.3";
-final Boolean DEBUG = false;
+final Boolean DEBUG = true;
 
 final int USER = 0;
 final int ROBOT = 1;

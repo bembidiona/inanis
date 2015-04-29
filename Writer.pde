@@ -137,9 +137,19 @@ if (keysInactive){
    
    void removeChar(){ 
       stream = stream.substring(0, stream.length()-1); 
-      if(lastWord.length() > 0)lastWord = lastWord.substring(0, lastWord.length()-1);
+      if(lastWord.length() > 0){
+        lastWord = lastWord.substring(0, lastWord.length()-1);
+      }
       
-      letters.remove(letters.size()-1);      
+      if(letters.size() >= 1){
+        Letter l = letters.get(letters.size()-1);      
+        teleport(l.x, l.y);
+        letters.remove(letters.size()-1);
+      }
+      
+      
+      
+     
       for (Letter l : letters) {
         l.stepBack();
       }
@@ -219,7 +229,7 @@ void keyPress(int _key) {
      jump();
   }
   else if (_key == BACKSPACE) {
-    if (stream.length() > 0) {
+    if (stream.length() > 0) {       
       removeChar();      
     }
   } else if (_key != SHIFT) {
