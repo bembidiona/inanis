@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.3";
-final Boolean DEBUG = true;
+final Boolean DEBUG = false;
 
 final int USER = 0;
 final int ROBOT = 1;
@@ -359,7 +359,7 @@ void draw() {
   }
 
   textAlign(LEFT, CENTER);
-  text("FPS: "+str(frameRate), 30, 30);
+  text("FPS:"+str(ceil(frameRate)), 25, 30);
   
 }
  

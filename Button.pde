@@ -35,7 +35,7 @@ class Button{
      w = name.length() * 11;
      h = 25;
      
-     if (menu == "main") x = width - name.length() - margen*4;
+     if (menu == "main") x = width - name.length() - margen*4 + 5;
      else x = width + name.length() + 200;
      y = h + safe + separation*buttonNum - _blank*10;
      
