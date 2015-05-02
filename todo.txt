@@ -1,12 +1,14 @@
-- Que se puedan guardar json, y levantar estos en la misma session. (al poner loadJson, scrappear el folder y crear la botonera)
-- Themes de colores
-- Cambiar font y tamaño
-- el area activa de la ui deberia cambair segun el largo de los streams names
+- mejorar el nombre de archivo del json
+- Lo json estan aprseandose funky
+- El save de cada json guardado en la session deberia ser el comienzo de una hoja en blanco / stream
+
+
+- Los carets robot deberian volver a su origen, pero teniendo en cuenta a donde fueron movidos
+- WORKING? el area activa de la ui deberia cambair segun el largo de los streams names
 - habria que pegarse una optimizada. (perlin sea?)
 - Darle cuerpo al pal en networking
 
 BUGS:
-- el exponent del carent se borra con el tiempo, wtf
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 
 TRIGGERS:

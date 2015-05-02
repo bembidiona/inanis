@@ -1,5 +1,5 @@
 final private String appName = "Inanis";
-final private String version = "v0.3";
+final private String version = "v0.4";
 final Boolean DEBUG = true;
 
 final int USER = 0;
@@ -74,6 +74,7 @@ int timeKeysInactive = 2000;
 Boolean keysInactive = true;
 
 Boolean cursorHand = false;
+Boolean releasedLoadJson = true;
 
 //don't forget to also add the new TRIGGERS in the setup section!!!
 String[] triggerLOVE = {"amor", "love", "amar", "shrimp", "afecto"};
@@ -469,12 +470,33 @@ void mousePressed(){
     }
   }  
 }
+void showSubMenu(String _menu){    
+  mainShow = false;    
+  for (Button b : buttons) {
+    if(b.menu.equals("main")) b.out();
+    //else if (menu.equals(_menu)) b.in();
+    else b.in();
+  }
+} 
 void mouseReleased(){
   clickedOverACaret = false;
   
   if (mouseX > width/2+width/3){
     for (Button b : buttons) {
       b.checkClick();
+    }
+    if(releasedLoadJson){
+      releasedLoadJson = false;
+      
+      for (int i=buttons.size()-1; i > 0; i--){    
+        Button b = buttons.get(i);
+        if(b.menu.equals("streams")) buttons.remove(i);
+      }
+      
+      createUIStreams();
+      
+      showSubMenu("streams");
+      
     }
   }
   else if(mouseIsDragging == true){

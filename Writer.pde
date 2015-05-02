@@ -43,6 +43,10 @@ class Writer{
    
    int hitbox = 30;
    Boolean isBeingDraged = false; 
+   
+   int exaleS;
+   int exaleA;
+   Boolean exaling = false;
     
    Writer(int _type){
       type = _type;
@@ -117,6 +121,14 @@ if (keysInactive){
       
        // Loaded automation
       if(readingLoadedInputs) checkLoadedInputs();
+      
+      if(exaling){
+        noFill();
+        stroke(colorTxt, exaleA);
+        rect(x-exaleS/2, y-exaleS/2, exaleS,exaleS);
+        
+        if(exaleA < 1) exaling = false;
+      }
    }
 
 
@@ -181,6 +193,8 @@ if (keysInactive){
         loadedInputNum++;
       }
       else{
+        startBlink();
+        
         if(streamLoopOn){
           loadedInputNum = 0;        
           loadedTimeOffset = millis();
@@ -198,6 +212,16 @@ if (keysInactive){
         }
       }
     }  
+}
+void startBlink(){
+  exaling = true;
+  
+  float t = 1;
+  exaleS = 10;
+  exaleA = 255;
+  Ani.to(this, t, "exaleS", 100, Ani.EXPO_OUT);
+  Ani.to(this, t, "exaleA", 0, Ani.EXPO_OUT);
+  
 }
 void keyPress(int _key) {
   

@@ -19,7 +19,7 @@ class Button{
    boolean hiden = true;
    private String txt;
    String menu;
-
+   boolean toRemove = false;
    
       
    
@@ -76,7 +76,7 @@ class Button{
    void checkClick(){
      if(isOver()){
         if(name == "saveJson") saveJson();
-        else if(name == "loadJson") showSubMenu("streams");
+        else if(name == "loadJson") releasedLoadJson = true;
         else if(name == ".txt") saveTxt();
         else if(name == ".img") savePix();
         else if (name == "img"){
@@ -135,13 +135,5 @@ class Button{
   void itsEnded(){    
   }
 
-  void showSubMenu(String _menu){    
-    mainShow = false;
-  
-    for (Button b : buttons) {
-      if(b.menu.equals("main")) b.out();
-      //else if (menu.equals(_menu)) b.in();
-      else b.in();
-    }
-  }   
+    
 }   
