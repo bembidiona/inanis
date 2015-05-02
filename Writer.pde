@@ -224,7 +224,6 @@ void keyPress(int _key) {
      else wasPressed_Tilde = true;
   }  
   else if (_key == ENTER){     
-     addChar(". ", false);
      stream = stream + pilcrow;
      jump();
   }
@@ -235,8 +234,9 @@ void keyPress(int _key) {
   } else if (_key != SHIFT) {
     
     if(isPressed_Ctrl){
-      if(_key == 83) saveTxt(); //s
-      else if(_key == 69) savePix(); //e      
+      println(_key);
+      if(_key == 19) saveTxt(); //s
+      else if(_key == 5) savePix(); //e      
     }    
     else{
       if(_key == 32){ // SPACE

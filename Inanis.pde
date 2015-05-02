@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.3";
-final Boolean DEBUG = false;
+final Boolean DEBUG = true;
 
 final int USER = 0;
 final int ROBOT = 1;
@@ -75,8 +75,8 @@ Boolean keysInactive = true;
 
 Boolean cursorHand = false;
 
-//don't forget to add new TRIGGERS in the setup section!!!
-String[] triggerLOVE = {"amor", "love", "amar", "shrimp"};
+//don't forget to also add the new TRIGGERS in the setup section!!!
+String[] triggerLOVE = {"amor", "love", "amar", "shrimp", "afecto"};
 String[] triggerDEAD = {"muerte", "mori", "dead", "fetal"};
 String[] triggerGLITCH = {"glitch", "bakun", "art", "arte"};
 String[] triggerCLIENT = {"connect", "conectar"};
@@ -84,7 +84,7 @@ String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
 String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
 String[] triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico", "manija"};
 String[] triggerPICADO = {"odio", "mar", "ocean", "hate", "water", "tormenta"};
-String[] triggerRAIN = {"lluvia", "llover", "rain", "llorar", "cry", "tormenta"};
+String[] triggerRAIN = {"lluvia", "llover", "llueve", "lloviendo","rain", "llorar", "cry", "tormenta"};
 private int charsTriggerMax;
 private int charsTriggerMin;
 
