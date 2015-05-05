@@ -5,6 +5,7 @@ class Writer{
   
   boolean isPressed_Ctrl = false;
   boolean isPressed_Alt = false;
+  boolean isPressed_Shift = false;
   boolean wasPressed_Tilde = false;
   
    
@@ -225,10 +226,13 @@ void startBlink(){
 }
 void keyPress(int _key) {
   
-  if (_key == UP){
+  if (_key == SHIFT){
+    isPressed_Shift = true;
+  }
+  else if (_key == UP){
     wavesUp();
   }
-  else if (_key == DOWN){
+  else if (_key == DOWN && !isPressed_Shift){
     wavesDown();
   }
   else if (_key == CONTROL){
@@ -294,12 +298,14 @@ void keyPress(int _key) {
   }
 }
 void keyRelease(int _key) {
-  writeInput("key", _key, true, 0, 0);
-  
-  if (_key == CONTROL){
+    
+  if (_key == SHIFT){
+    isPressed_Shift = false;
+  }
+  else if (_key == CONTROL){
     isPressed_Ctrl = false;
   }
-  if (_key == ALT){
+  else if (_key == ALT){
     isPressed_Alt = false;
     
     // TODO
@@ -356,16 +362,27 @@ void checkTriggers(){
     }
     for (int i = 0; i < triggerRAIN.length; i++){    
       if(lastWord.equals(triggerRAIN[i])) {triggerRAIN(); paintWord();}
-    }           
+    }
   }
-  else{ //lastWord is bigger than charsTriggerMax    
+  else{ //lastWord is bigger than charsTriggerMax 
     for (int i = 0; i < triggerCLIENT.length; i++){       
       String lt = lastWord.substring(0, triggerCLIENT[i].length()); 
       String ltIp = lastWord.substring(triggerCLIENT[i].length() + 1);
       
       if(lt.equals(triggerCLIENT[i])) {startClient(ltIp); paintWord();}    
-    }
+    }     
   }
+  
+  for (int i = 0; i < triggerSAVE.length; i++){     
+    if(triggerSAVE[i].length() < lastWord.length()){  
+      String lt = lastWord.substring(0, triggerSAVE[i].length()); 
+      String ltSaveName = lastWord.substring(triggerSAVE[i].length());
+      
+      println(lt + " - "+ triggerSAVE[i] +" - " + ltSaveName);
+      
+      if(lt.equals(triggerSAVE[i])) {saveJson(ltSaveName); paintWord();}  
+    }  
+  } 
 }
 void paintWord(){
   int lNum = letters.size();  
@@ -397,7 +414,7 @@ void drawIt(int _alpha){
    void teleport(int _x, int _y){
     if(isBeingDraged) return; 
      
-    writeInput("mouse", 0, false, _x, _y);
+    if(type == USER && recording) writeInput("mouse", 0, false, _x, _y);
 
     checkTriggers();        
     lastWord = ""; 
@@ -428,6 +445,13 @@ void drawIt(int _alpha){
      else{
        return false; 
      }
+   }
+   
+   void stopDrag(){
+     isBeingDraged = false;
+     startX = x;
+     startY = y; 
+     
    }
 
 

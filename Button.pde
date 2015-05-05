@@ -21,6 +21,8 @@ class Button{
    String menu;
    boolean toRemove = false;
    
+   String mutatingName = "recordingOFF";
+   
       
    
    Button(String _menu, String _name, int _buttonNum, int _blank){    
@@ -33,7 +35,7 @@ class Button{
      int separation = 20;
      int safe = 5;
      w = name.length() * 11;
-     h = 25;
+     h = 20;
      
      if (menu == "main") x = width - name.length() - margen*4 + 5;
      else x = width + name.length() + 200;
@@ -57,6 +59,7 @@ class Button{
     textAlign(RIGHT);
      
     if (name == ".img") txt = "."+pixFormat;
+    else if (name == "record") txt = mutatingName;
     else txt = name;     
     if (isOver()){
       txt = "_" + txt;
@@ -75,7 +78,11 @@ class Button{
    
    void checkClick(){
      if(isOver()){
-        if(name == "saveJson") saveJson();
+        if (name == "record"){
+           if (recording) { mutatingName = "recordingOFF"; recordOFF();}
+           else { mutatingName = "recordingON" ; recordON();}  
+        }
+        else if(name == "saveJson") saveJson("");
         else if(name == "loadJson") releasedLoadJson = true;
         else if(name == ".txt") saveTxt();
         else if(name == ".img") savePix();
@@ -100,7 +107,7 @@ class Button{
         else if (name == "start server") startServer();
         else if (name == "start client") messager.show("type *connect:192.168.0.10* replacing with the server IP and hit SPACE");
         else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit() / ↑or↓:moveSea()", 3);
-        else if (name == "?") messager.show(appName+" "+version+" by jeRemias Babini", 2);
+        else if (name == "   ?") messager.show(appName+" "+version+" by jeRemias Babini", 2);
         else if (name == "exit") exit(); 
 
         if(menu == "streams") loadJson(name);

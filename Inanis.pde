@@ -17,8 +17,8 @@ import java.awt.event.KeyEvent;
 JSONObject json;
 JSONArray inputs = new JSONArray();
 int inputNum = 0;
-
-
+Boolean recording = false;
+int recordStartTime = 0;
 
 Robot robot;
 Boolean streamLoopOn = true;
@@ -51,7 +51,7 @@ String pixFormat = "png";
 Boolean filterInvert = false;
 
 boolean mainShow = true;
-String[] buttonsNames = {"saveJson", "loadJson", "-", ".txt", ".img","-", "img", "folder", "-","font","theme","day/night","seaUp","seaDown","-","start server","start client","-","keys","?","-","exit"};
+String[] buttonsNames = {"record", "saveJson", "loadJson", "-", ".txt", ".img","-", "font","theme","day/night","-","start server","start client","-","keys","   ?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Writer> writers = new ArrayList<Writer>();
 int writersNum = 0;
@@ -81,6 +81,7 @@ String[] triggerLOVE = {"amor", "love", "amar", "shrimp", "afecto"};
 String[] triggerDEAD = {"muerte", "mori", "dead", "fetal"};
 String[] triggerGLITCH = {"glitch", "bakun", "art", "arte"};
 String[] triggerCLIENT = {"connect", "conectar"};
+String[] triggerSAVE = {"save:", "guardar:", "salvar:"};
 String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
 String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
 String[] triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico", "manija"};
@@ -190,6 +191,9 @@ void setup() {
   }
   for (int i = 0; i < triggerCLIENT.length; i++){    
     setMaxMinTriggers(triggerCLIENT[i].length());
+  }
+  for (int i = 0; i < triggerSAVE.length; i++){    
+    setMaxMinTriggers(triggerSAVE[i].length());
   }
   for (int i = 0; i < triggerSCALE.length; i++){    
     setMaxMinTriggers(triggerSCALE[i].length());
@@ -351,6 +355,12 @@ void draw() {
   if (filterInvert) filter(INVERT);
   //filter(THRESHOLD);
   
+  if(recording){
+    noStroke();
+    fill(255,0,0);
+    ellipse(20, 20, 10, 10); 
+  }
+  
   //debug
   if (DEBUG) {
     
@@ -378,21 +388,21 @@ void keyPressed() {
   
     
   if(key == CODED){
-    writeInput("key", int(keyCode), false, 0, 0);
+    if(recording) writeInput("key", int(keyCode), false, 0, 0);
     user.keyPress(int(keyCode));
   }
   else{
-    writeInput("key", int(key), false, 0, 0);
+    if(recording) writeInput("key", int(key), false, 0, 0);
     user.keyPress(int(key));    
   }
 }
 void keyReleased() {
   if(key == CODED){
-    writeInput("key", int(keyCode), true, 0, 0);
+    if(recording) writeInput("key", int(keyCode), true, 0, 0);
     user.keyRelease(int(keyCode));
   }
   else{
-    writeInput("key", int(key), true, 0, 0);
+    if(recording) writeInput("key", int(key), true, 0, 0);
     user.keyRelease(key);
   }
 }
@@ -502,7 +512,7 @@ void mouseReleased(){
   else if(mouseIsDragging == true){
     mouseIsDragging = false;
     
-    writerDraged.isBeingDraged = false;    
+    writerDraged.stopDrag();        
   }
   else if (user.canTeleport){
     user.addChar(". ", false);
@@ -647,7 +657,7 @@ void printDebug(String txt){
 void writeInput(String _type, int _key, Boolean wasReleased, int _x, int _y){  
   JSONObject input = new JSONObject();
   
-  input.setInt("time", millis());
+  input.setInt("time", millis() - recordStartTime);
   input.setString("type", _type);
   input.setInt("key", _key); 
   input.setBoolean("release", wasReleased);
@@ -697,11 +707,15 @@ class LoadedInput {
 
 
 // Save stuff
-void saveJson(){      
-   saveJSONArray(inputs, savePath + "/streams/"+
-                                      user.lastWord +
-                                      "_"+day()+"-"+month()+"-"+year() +
-                                      ".json"); 
+void saveJson(String _saveName){
+
+   String saveName = _saveName;
+     
+   if(_saveName.equals("")){
+     saveName = user.lastWord + "_" + day()+"-"+month()+"-"+year();
+   }  
+   
+   saveJSONArray(inputs, savePath + "/streams/"+ saveName + ".json"); 
    messager.show("json saved", 1);
 }
 void loadJson(String _filename){
@@ -802,5 +816,15 @@ void changeFont(){
   
 }
 
+void recordON(){
+ recordStartTime = millis();
+ recording = true; 
+ 
+  messager.show("inputs are being recorded - [ *save:fileName* *recordON* *recordOFF* ]");
+}
+
+void recordOFF(){ 
+ recording = false; 
+}
 
 
