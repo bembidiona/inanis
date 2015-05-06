@@ -82,10 +82,10 @@ class Button{
            if (recording) { mutatingName = "recordingOFF"; recordOFF();}
            else { mutatingName = "recordingON" ; recordON();}  
         }
-        else if(name == "saveJson") saveJson("");
-        else if(name == "loadJson") releasedLoadJson = true;
-        else if(name == ".txt") saveTxt();
-        else if(name == ".img") savePix();
+        else if(name == ".sav") saveJson("");
+        else if(name == "LOAD") releasedLoadJson = true;
+        else if(name == ".txt") saveTxt("");
+        else if(name == ".img") savePix("");
         else if (name == "img"){
            if (pixFormat == "bmp") pixFormat = "png";
            else if (pixFormat == "png") pixFormat = "bmp";  

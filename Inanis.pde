@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.4";
-final Boolean DEBUG = true;
+final Boolean DEBUG = false;
 
 final int USER = 0;
 final int ROBOT = 1;
@@ -53,7 +53,7 @@ String pixFormat = "png";
 Boolean filterInvert = false;
 
 boolean mainShow = true;
-String[] buttonsNames = {"record", "saveJson", "loadJson", "-", ".txt", ".img","-", "font","theme","day/night","-","start server","start client","-","keys","   ?","-","exit"};
+String[] buttonsNames = {"LOAD", "-", ".sav", ".txt", ".img","-", "font","theme","day/night","-","start server","start client","-","keys","   ?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Writer> writers = new ArrayList<Writer>();
 int writersNum = 0;
@@ -83,7 +83,9 @@ String[] triggerLOVE = {"amor", "love", "amar", "shrimp", "afecto"};
 String[] triggerDEAD = {"muerte", "mori", "dead", "fetal"};
 String[] triggerGLITCH = {"glitch", "bakun", "art", "arte"};
 String[] triggerCLIENT = {"connect", "conectar"};
-String[] triggerSAVE = {"save:", "guardar:", "salvar:"};
+String[] triggerSAVE = {".sav"};
+String[] triggerTXT = {".txt"};
+String[] triggerPIX = {".png", ".bmp", ".jpg", ".jpeg", ".tiff"};
 String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
 String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
 String[] triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico", "manija"};
@@ -112,6 +114,8 @@ float scaleAll = 1;
 int blood = 0;
 
 float letterGlitch = 0;
+
+Recorder recorder;
 
 
 //net
@@ -155,7 +159,7 @@ void setup() {
   Ani.init(this);
    
   
-  
+  recorder = new Recorder();  
    
   
   textAlign(RIGHT, CENTER);
@@ -357,24 +361,23 @@ void draw() {
   if (filterInvert) filter(INVERT);
   //filter(THRESHOLD);
   
-  if(recording){
-    noStroke();
-    fill(255,0,0);
-    ellipse(20, 20, 10, 10); 
-  }
+  recorder.display();
+
+
+  
   
   //debug
   if (DEBUG) {
     
+    fill(colorTxt);
     stroke(255,0,0);    
-    
     text(debugLog, width/2,height/2-150);
 
     line(width - uiZone, 0, width - uiZone, height);
   }
 
   textAlign(LEFT, CENTER);
-  text("FPS:"+str(ceil(frameRate)), 25, 30);
+  text("FPS:"+str(ceil(frameRate)), 55, 30);
   
 }
  
@@ -528,6 +531,7 @@ void mouseReleased(){
       
     }
   }
+  else if(mouseX < 100) recorder.checkClick();
   else if(mouseIsDragging == true){
     mouseIsDragging = false;
     writerDraged.stopDrag();           
@@ -571,14 +575,23 @@ void mouseMoved(){
 
 
 
-void saveTxt(){
-   String[] list = split(writers.get(0).stream, pilcrow);
-   saveStrings(savePath + "/vomito_"+day()+"-"+month()+"-"+year()+".txt", list);
+void saveTxt(String _saveName){
+
+  String saveName = _saveName;     
+  if(_saveName.equals("")) saveName = "vomito_"+day()+"-"+month()+"-"+year();
+
+  String[] list = split(writers.get(0).stream, pilcrow);
+  saveStrings(savePath + "/"+ saveName +".txt", list);
  
    messager.show("txt saved", 1);
 }
-void savePix(){
-  save(savePath +second()+"-"+hour()+"-"+day()+"."+pixFormat); 
+void savePix(String _saveName){
+  String saveName = _saveName;     
+  if(_saveName.equals("")){
+    saveName = "vomito_"+day()+"-"+month()+"-"+year();
+    save(savePath + saveName +"."+pixFormat);
+  }
+  else save(savePath + saveName);
   
   messager.show("pix saved", 1);
 }
@@ -737,8 +750,8 @@ void saveJson(String _saveName){
      saveName = user.lastWord + "_" + day()+"-"+month()+"-"+year();
    }  
    
-   saveJSONArray(inputs, savePath + "/streams/"+ saveName + ".json"); 
-   messager.show("json saved", 1);
+   saveJSONArray(inputs, savePath + "/streams/"+ saveName + ".sav"); 
+   messager.show("saved", 1);
 }
 void loadJson(String _filename){
   
@@ -839,14 +852,17 @@ void changeFont(){
 }
 
 void recordON(){
+ //inputs.clear(); TODO: pay inet and google a way to clean this fucker
+
  recordStartTime = millis();
  recording = true; 
  
-  messager.show("inputs are being recorded - [ *save:fileName* *recordON* *recordOFF* ]");
+  messager.show("inputs are being recorded");
 }
 
 void recordOFF(){ 
- recording = false; 
+  recording = false;
+  messager.show("recording stop", 2); 
 }
 
 

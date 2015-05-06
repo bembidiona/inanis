@@ -265,8 +265,8 @@ void keyPress(int _key) {
     
     if(isPressed_Ctrl){
       
-      if(_key == 19) saveTxt(); //s
-      else if(_key == 5) savePix(); //e      
+      if(_key == 19) saveTxt(""); //s
+      else if(_key == 5) savePix(""); //e      
     }    
     else{
       if(_key == 32){ // SPACE
@@ -333,6 +333,7 @@ void keyRelease(int _key) {
 
 void checkTriggers(){
   
+  //if(type != USER) return;
   
   
   int lastWordSize = lastWord.length();
@@ -377,11 +378,23 @@ void checkTriggers(){
   
   for (int i = 0; i < triggerSAVE.length; i++){     
     if(triggerSAVE[i].length() < lastWord.length()){  
-      String lt = lastWord.substring(0, triggerSAVE[i].length()); 
-      String ltSaveName = lastWord.substring(triggerSAVE[i].length());
-      
-            
-      if(lt.equals(triggerSAVE[i])) {saveJson(ltSaveName); paintWord();}  
+      String saveName = lastWord.substring(0, lastWord.length() - triggerSAVE[i].length()); 
+      String lt = lastWord.substring(lastWord.length() - triggerSAVE[i].length());                  
+      if(lt.equals(triggerSAVE[i])) {saveJson(saveName); paintWord();}  
+    }  
+  }
+  for (int i = 0; i < triggerTXT.length; i++){     
+    if(triggerTXT[i].length() < lastWord.length()){  
+      String saveName = lastWord.substring(0, lastWord.length() - triggerTXT[i].length()); 
+      String lt = lastWord.substring(lastWord.length() - triggerTXT[i].length());                  
+      if(lt.equals(triggerTXT[i])) {saveTxt(saveName); paintWord();}  
+    }  
+  }
+  for (int i = 0; i < triggerPIX.length; i++){     
+    if(triggerPIX[i].length() < lastWord.length()){  
+      String saveName = lastWord.substring(0, lastWord.length() - triggerPIX[i].length()); 
+      String lt = lastWord.substring(lastWord.length() - triggerPIX[i].length());                  
+      if(lt.equals(triggerPIX[i])) {paintWord(); savePix(lastWord);}  
     }  
   } 
 }

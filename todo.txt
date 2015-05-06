@@ -1,6 +1,7 @@
 - El save de cada json guardado en la session deberia ser el comienzo de una hoja en blanco / stream
 - habria que pegarse una optimizada. (perlin sea?)
 - Darle cuerpo al pal en networking
+- Un keyboardshortvut para GRABAR ON/OFF
 
 BUGS:
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
