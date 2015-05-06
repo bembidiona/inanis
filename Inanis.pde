@@ -30,6 +30,8 @@ int uiZoneNormal = 100;
 String debugLog = "LOG: ";
 
 
+
+
 String altKeys = "";
 color colorBg;
 color colorGradient;
@@ -364,9 +366,11 @@ void draw() {
   //debug
   if (DEBUG) {
     
-    tint(colorTxt);
+    stroke(255,0,0);    
     
     text(debugLog, width/2,height/2-150);
+
+    line(width - uiZone, 0, width - uiZone, height);
   }
 
   textAlign(LEFT, CENTER);
@@ -506,7 +510,7 @@ void showSubMenu(String _menu){
 void mouseReleased(){
   clickedOverACaret = false;
 
-  if (mouseX > width/2+width/3){
+  if (mouseX > width - uiZone){
     for (Button b : buttons) {
       b.checkClick();
     }
@@ -540,11 +544,15 @@ void mouseMoved(){
   if(!firstBlood){
     if(mouseX > width - uiZone){     
         if(mainShow){
+
+         int longestName = 0;
           for (Button b : buttons) {
             if(b.menu.equals("main")){
               b.in();
+              if(b.name.length() > longestName) longestName = b.name.length();
             }
           }
+          uiZone = longestName * 15; 
         } 
         
     }    
