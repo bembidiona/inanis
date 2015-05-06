@@ -471,12 +471,27 @@ void mousePressed(){
 
   for (Writer w : writers) {
     if(w.isOver()){
-      clickedOverACaret = true; //HACK
-      
-      writerDraged = w;
-      writerDraged.isBeingDraged = true;      
-      writerDraged.startX = mouseX;
-      writerDraged.startY = mouseY; 
+      if (mouseButton == LEFT) {
+        clickedOverACaret = true; //HACK      
+        writerDraged = w;
+        writerDraged.isBeingDraged = true;      
+        writerDraged.startX = mouseX;
+        writerDraged.startY = mouseY; 
+      }
+      else {
+        
+        
+        w.delete();
+      }
+
+
+    }
+  }
+
+  for (int i = writers.size() - 1; i >= 0; i--) {
+    Writer w = writers.get(i);
+    if (w.toRemove) {
+      writers.remove(i);
     }
   }  
 }
@@ -490,7 +505,7 @@ void showSubMenu(String _menu){
 } 
 void mouseReleased(){
   clickedOverACaret = false;
-  
+
   if (mouseX > width/2+width/3){
     for (Button b : buttons) {
       b.checkClick();
@@ -511,10 +526,9 @@ void mouseReleased(){
   }
   else if(mouseIsDragging == true){
     mouseIsDragging = false;
-    
-    writerDraged.stopDrag();        
+    writerDraged.stopDrag();           
   }
-  else if (user.canTeleport){
+  else if (mouseButton == LEFT && user.canTeleport){
     user.addChar(". ", false);
     user.stream = user.stream + pilcrow;               
     user.teleport(mouseX,mouseY);

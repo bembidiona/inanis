@@ -48,6 +48,8 @@ class Writer{
    int exaleS;
    int exaleA;
    Boolean exaling = false;
+
+   Boolean toRemove = false;
     
    Writer(int _type){
       type = _type;
@@ -262,7 +264,7 @@ void keyPress(int _key) {
   } else if (_key != SHIFT) {
     
     if(isPressed_Ctrl){
-      println(_key);
+      
       if(_key == 19) saveTxt(); //s
       else if(_key == 5) savePix(); //e      
     }    
@@ -378,8 +380,7 @@ void checkTriggers(){
       String lt = lastWord.substring(0, triggerSAVE[i].length()); 
       String ltSaveName = lastWord.substring(triggerSAVE[i].length());
       
-      println(lt + " - "+ triggerSAVE[i] +" - " + ltSaveName);
-      
+            
       if(lt.equals(triggerSAVE[i])) {saveJson(ltSaveName); paintWord();}  
     }  
   } 
@@ -452,6 +453,12 @@ void drawIt(int _alpha){
      startX = x;
      startY = y; 
      
+   }
+   
+   void delete(){
+     if(type != USER){
+       toRemove = true; 
+     }
    }
 
 

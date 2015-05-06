@@ -1,4 +1,3 @@
-- borrar carets robot con click derecho?
 - El save de cada json guardado en la session deberia ser el comienzo de una hoja en blanco / stream
 - WORKING? el area activa de la ui deberia cambair segun el largo de los streams names
 - habria que pegarse una optimizada. (perlin sea?)
