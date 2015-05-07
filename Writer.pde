@@ -369,6 +369,12 @@ void checkTriggers(){
     for (int i = 0; i < triggerDEBUG.length; i++){    
       if(lastWord.equals(triggerDEBUG[i])) {DEBUG = !DEBUG; paintWord();}
     }
+    for (int i = 0; i < triggerCOLOR.length; i++){    
+      if(lastWord.equals(triggerCOLOR[i])) {changeTheme(); paintWord();}
+    }
+    for (int i = 0; i < triggerFONT.length; i++){    
+      if(lastWord.equals(triggerFONT[i])) {changeFont(); paintWord();}
+    }
   }
   else{ //lastWord is bigger than charsTriggerMax 
     for (int i = 0; i < triggerCLIENT.length; i++){       

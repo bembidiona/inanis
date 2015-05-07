@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.4";
-Boolean DEBUG = false;
+Boolean DEBUG = true;
 
 final int USER = 0;
 final int ROBOT = 1;
@@ -85,7 +85,9 @@ String[] triggerGLITCH = {"glitch", "bakun", "art", "arte"};
 String[] triggerCLIENT = {"connect", "conectar"};
 String[] triggerSAVE = {".sav"};
 String[] triggerTXT = {".txt"};
-String[] triggerDEBUG = {"*debug"};
+String[] triggerDEBUG = {"debug"};
+String[] triggerCOLOR = {"color", "colour"};
+String[] triggerFONT = {"font", "letra"};
 String[] triggerPIX = {".png", ".bmp", ".jpg", ".jpeg", ".tiff"};
 String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
 String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};

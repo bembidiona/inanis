@@ -7,8 +7,6 @@ BUGS:
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 
 TRIGGERS:
-- trigger COLOR para themes
-- trigger FONT para fonts
 - hacer algo con los triggers "dia" y "noche"
 - cuando dejas apretado mucho tiempo la tecla "a"
 
