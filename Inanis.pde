@@ -1,6 +1,6 @@
 final private String appName = "Inanis";
 final private String version = "v0.4";
-final Boolean DEBUG = false;
+Boolean DEBUG = false;
 
 final int USER = 0;
 final int ROBOT = 1;
@@ -14,7 +14,7 @@ import java.awt.Robot;
 import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 
-JSONObject json;
+
 JSONArray inputs = new JSONArray();
 int inputNum = 0;
 Boolean recording = false;
@@ -85,6 +85,7 @@ String[] triggerGLITCH = {"glitch", "bakun", "art", "arte"};
 String[] triggerCLIENT = {"connect", "conectar"};
 String[] triggerSAVE = {".sav"};
 String[] triggerTXT = {".txt"};
+String[] triggerDEBUG = {"*debug"};
 String[] triggerPIX = {".png", ".bmp", ".jpg", ".jpeg", ".tiff"};
 String[] triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
 String[] triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
@@ -153,7 +154,6 @@ void setup() {
   changeTheme();
   changeFont();
   size(displayWidth, displayHeight);   
-  json = new JSONObject();
   timerMouseInactive = millis();
   
   Ani.init(this);
@@ -215,6 +215,9 @@ void setup() {
   }
   for (int i = 0; i < triggerRAIN.length; i++){    
     setMaxMinTriggers(triggerRAIN[i].length());
+  }
+  for (int i = 0; i < triggerDEBUG.length; i++){    
+    setMaxMinTriggers(triggerDEBUG[i].length());
   }
 
   wavesY = height - height/10;
@@ -374,10 +377,12 @@ void draw() {
     text(debugLog, width/2,height/2-150);
 
     line(width - uiZone, 0, width - uiZone, height);
+    
+    textAlign(LEFT, CENTER);
+    text("FPS:"+str(ceil(frameRate)), 55, 30);    
   }
 
-  textAlign(LEFT, CENTER);
-  text("FPS:"+str(ceil(frameRate)), 55, 30);
+  
   
 }
  
@@ -750,7 +755,8 @@ void saveJson(String _saveName){
      saveName = user.lastWord + "_" + day()+"-"+month()+"-"+year();
    }  
    
-   saveJSONArray(inputs, savePath + "/streams/"+ saveName + ".sav"); 
+   saveJSONArray(inputs, savePath + "/streams/"+ saveName + ".sav");   
+   
    messager.show("saved", 1);
 }
 void loadJson(String _filename){
@@ -766,15 +772,18 @@ void loadJson(String _filename){
 
   for (int i = 0; i < inputValues.size(); i++) { 
      
-     JSONObject in = inputValues.getJSONObject(i); 
-    
-     w.loadedInputs.add(new LoadedInput(
-                               in.getString("type"),
-                               in.getInt("time"),  
-                               in.getInt("key"),
-                               in.getBoolean("release"),
-                               in.getInt("x"),
-                               in.getInt("y") ));
+     
+      JSONObject in = inputValues.getJSONObject(i); 
+      
+      w.loadedInputs.add(new LoadedInput(
+                                in.getString("type"),
+                                in.getInt("time"),  
+                                in.getInt("key"),
+                                in.getBoolean("release"),
+                                in.getInt("x"),
+                                in.getInt("y") ));
+      
+     
   }
 
   w.loadedTimeOffset = millis();
@@ -792,7 +801,7 @@ void createUIStreams(){
    buttons.add(new Button("streams", fileList[i],i,uiBlank));
    if(fileList[i].length() > longestName) longestName = fileList[i].length();
  }
- uiZone = longestName * 12; 
+ uiZone = longestName * 15; 
 }
 
 void changeTheme(){
@@ -852,7 +861,9 @@ void changeFont(){
 }
 
 void recordON(){
- //inputs.clear(); TODO: pay inet and google a way to clean this fucker
+ 
+ inputs = new JSONArray();
+ inputNum = 0;
 
  recordStartTime = millis();
  recording = true; 
@@ -861,6 +872,9 @@ void recordON(){
 }
 
 void recordOFF(){ 
+  user.lastWord = "";
+  user.addChar(" ", true);
+  
   recording = false;
   messager.show("recording stop", 2); 
 }
