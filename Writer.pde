@@ -264,18 +264,21 @@ void keyPress(int _key) {
   } else if (_key != SHIFT) {
     
     if(isPressed_Ctrl){
+      if(type != USER) return;
       
       if(_key == 19) saveTxt(""); //s
-      else if(_key == 5) savePix(""); //e      
+      else if(_key == 5) savePix(""); //e    
+      else if(_key == 32){ //SPACE
+        if(recording) recordOFF();
+        else recordON();
+      }
     }    
     else{
       if(_key == 32){ // SPACE
-        stars.add(new Star());
-        
+        stars.add(new Star());        
         checkTriggers();        
-        lastWord = "";
-        
-        addChar(" ", true);
+        lastWord = "";        
+        addChar(" ", true);        
       }
       else if (wasPressed_Tilde){
         wasPressed_Tilde = false;

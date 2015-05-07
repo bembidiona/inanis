@@ -864,11 +864,11 @@ void changeFont(){
 
 void recordON(){
  
- inputs = new JSONArray();
- inputNum = 0;
+  inputs = new JSONArray();
+  inputNum = 0;
 
- recordStartTime = millis();
- recording = true; 
+  recordStartTime = millis();
+  recording = true; 
  
   messager.show("inputs are being recorded");
 }

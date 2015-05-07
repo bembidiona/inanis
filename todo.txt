@@ -1,8 +1,8 @@
 - habria que pegarse una optimizada. (perlin sea?)
 - Darle cuerpo al pal en networking
-- Un keyboardshortcut para GRABAR ON/OFF
 
 BUGS:
+- ROBOTS el primer input que tipean esta mal, deberias esperar un toque, y lo largan apenas se crean
 - ROBOTS al recibir backspace se teletrasportan a la ultima letras pero del stream del USER
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 
