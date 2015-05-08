@@ -1,6 +1,7 @@
 - Sharps and Flats para las notas de la scala!!!!!!!!!!!
 
 BUGS:
+- Si guardas sin haber recordiado nada, explota todo al cuerno
 - bug: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 - bug: Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo. FUCK IT
 

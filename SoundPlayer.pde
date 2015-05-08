@@ -6,6 +6,7 @@ class SoundPlayer {
   int sKeyNum = 0;
   AudioOutput out;
   
+  int noteOffset = 0;
   int octava = 3;
   final int octavaMIN = 1;
   final int octavaMAX = 4;
@@ -14,7 +15,7 @@ class SoundPlayer {
   ArrayList<Scale> scales = new ArrayList<Scale>();
   
   int currentScaleNum = 0;
-  String[] currentScale;
+  float[] currentScale;
   
   int lastNoteTime;
   
@@ -38,11 +39,11 @@ class SoundPlayer {
     }
     
     //scales
-    String[] notes1 = {"E0", "G0", "A0", "B0", "D0"};
+    float[] notes1 = {0, 3, 5, 7, 10};
     scales.add(new Scale(notes1));
-    String[] notes2 = {"C0", "D0", "E0", "F0", "G0", "A0", "B0"};
+    float[] notes2 = {0, 2, 4, 5, 7, 9, 10, 12};
     scales.add(new Scale(notes2));
-    String[] notes3 = {"C0", "B0"};
+    float[] notes3 = {1, 12};
     scales.add(new Scale(notes3));
     
     currentScale = scales.get(currentScaleNum).scale;
@@ -57,10 +58,8 @@ class SoundPlayer {
     
        
       sNum = _key % currentScale.length;
-      String note = currentScale[sNum].substring(0,1);
-      String oct = str(     int(currentScale[sNum].substring(1,2)) + octava  );
-      
-      out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch(  note + oct ) .asHz()  ));
+            
+      out.playNote( 0, duration, new SineInstrument( Frequency.ofMidiNote(currentScale[sNum] + octava*12 + noteOffset + 12) .asHz()  ));
       
       
       if(millis() < lastNoteTime + 150){
@@ -80,7 +79,9 @@ class SoundPlayer {
     currentScaleNum++;
     if(currentScaleNum > scales.size()-1) currentScaleNum = 0;
     
-    currentScale = scales.get(currentScaleNum).scale;    
+    currentScale = scales.get(currentScaleNum).scale;  
+  
+    noteOffset = int(random(12));  
   }
   
   
@@ -100,8 +101,8 @@ class SoundPlayer {
 
 // CLASSSSSSSS
 class Scale{  
-  String[] scale;  
-  Scale(String[] _scale){
+  float[] scale;  
+  Scale(float[] _scale){
     scale = _scale;
   } 
 }
