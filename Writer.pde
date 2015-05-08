@@ -170,6 +170,8 @@ if (keysInactive){
       }
       
       x -= step/2;
+      
+      
    }
    
    
@@ -342,7 +344,6 @@ void checkTriggers(){
   
   //if(type != USER) return;
   
-  
   int lastWordSize = lastWord.length();
   
   if(lastWordSize < charsTriggerMin) return;
@@ -445,11 +446,14 @@ void drawIt(int _alpha){
    void teleport(int _x, int _y, Boolean _writeInput){
     if(isBeingDraged) return; 
      
-    if(type == USER && recording && _writeInput) writeInput("mouse", 0, false, _x, _y);
-
-    checkTriggers();        
-    lastWord = ""; 
-     
+    
+    if(_writeInput){
+       checkTriggers();        
+       lastWord = ""; 
+        
+       if(type == USER && recording) writeInput("mouse", 0, false, _x, _y);
+    }
+        
     canTeleport = false;
     
     animationX = new Ani(this, 0.5, "x", _x, Ani.EXPO_IN_OUT,"onStart:blank, onEnd:startIdle");

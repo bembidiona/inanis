@@ -49,27 +49,31 @@ class SoundPlayer {
   }
   
   void playKey(int _key){    
-    int sNum = _key % sKeyNum;
-    if (sfxON) sKeys[sNum].trigger(); 
+    
+    if (sfxON)
+    {
+      int sNum = _key % sKeyNum;
+      sKeys[sNum].trigger(); 
     
        
-    sNum = _key % currentScale.length;
-    String note = currentScale[sNum].substring(0,1);
-    String oct = str(     int(currentScale[sNum].substring(1,2)) + octava  );
-    
-    out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch(  note + oct ) .asHz()  ));
-    
-    
-    if(millis() < lastNoteTime + 150){
-      octava++;
-      if(octava > octavaMAX) octava = octavaMAX;
-    } 
-    else if(millis() > lastNoteTime + 800){
-      octava--;
-      if(octava < octavaMIN) octava = octavaMIN;
-    } 
-       
-    lastNoteTime = millis();
+      sNum = _key % currentScale.length;
+      String note = currentScale[sNum].substring(0,1);
+      String oct = str(     int(currentScale[sNum].substring(1,2)) + octava  );
+      
+      out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch(  note + oct ) .asHz()  ));
+      
+      
+      if(millis() < lastNoteTime + 150){
+        octava++;
+        if(octava > octavaMAX) octava = octavaMAX;
+      } 
+      else if(millis() > lastNoteTime + 800){
+        octava--;
+        if(octava < octavaMIN) octava = octavaMIN;
+      } 
+         
+      lastNoteTime = millis();
+    }
   }
   
   void changeScale(){
