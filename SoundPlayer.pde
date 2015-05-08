@@ -6,6 +6,18 @@ class SoundPlayer {
   int sKeyNum = 0;
   AudioOutput out;
   
+  int octava = 3;
+  final int octavaMIN = 1;
+  final int octavaMAX = 4;
+  float duration = 0.7; 
+  
+  ArrayList<Scale> scales = new ArrayList<Scale>();
+  String[] scale_1 = {"E", "G", "A", "B", "D", "E", "F", "G"};
+  int currentScaleNum = 0;
+  String[] currentScale;
+  
+  int lastNoteTime;
+  
   SoundPlayer() {
     
     out = minim.getLineOut();
@@ -25,24 +37,45 @@ class SoundPlayer {
       sKeys[l] = minim.loadSample( "/sfx/key_"+ str(l+1) + ".wav", 512);
     }
     
+    //scales
+    String[] notes1 = {"E", "G", "A", "B", "D"};
+    scales.add(new Scale(notes1));
+    String[] notes2 = {"C", "D", "E", "F", "G", "A", "B"};
+    scales.add(new Scale(notes2));
+    String[] notes3 = {"C", "B"};
+    scales.add(new Scale(notes3));
+    
+    currentScale = scales.get(currentScaleNum).scale;
   }
   
   void playKey(int _key){    
     int sNum = _key % sKeyNum;
     if (sfxON) sKeys[sNum].trigger(); 
     
-    float duration = 1;
-    //out.playNote( 0, duration, new SineInstrument( _key + 100 +_key*5) );
-    if(sNum == 0)       out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "E3" ).asHz() ) );
-    else if (sNum == 1) out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "G3" ).asHz() ) );
-    else if (sNum == 2) out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "A3" ).asHz() ) );
-    else if (sNum == 3) out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "B3" ).asHz() ) );
-    else if (sNum == 4) out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "D3" ).asHz() ) );
-    else if (sNum == 5) out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "E3" ).asHz() ) );
-    else if (sNum == 6) out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "F3" ).asHz() ) );
-    else if (sNum == 7) out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( "G3" ).asHz() ) );
        
+    sNum = _key % currentScale.length;
+    out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( currentScale[sNum] + str(octava) ).asHz() ) );
+    
+    
+    if(millis() < lastNoteTime + 150){
+      octava++;
+      if(octava > octavaMAX) octava = octavaMAX;
+    } 
+    else if(millis() > lastNoteTime + 800){
+      octava--;
+      if(octava < octavaMIN) octava = octavaMIN;
+    } 
+       
+    lastNoteTime = millis();
   }
+  
+  void changeScale(){
+    currentScaleNum++;
+    if(currentScaleNum > scales.size()-1) currentScaleNum = 0;
+    
+    currentScale = scales.get(currentScaleNum).scale;    
+  }
+  
   
   void display(){
    stroke(colorTxt, 100);
@@ -58,7 +91,15 @@ class SoundPlayer {
   
 }
 
-// INSTRUMENTS
+// CLASSSSSSSS
+class Scale{  
+  String[] scale;  
+  Scale(String[] _scale){
+    scale = _scale;
+  } 
+}
+
+
 class SineInstrument implements Instrument
 {
   Oscil wave;

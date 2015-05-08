@@ -438,7 +438,8 @@ void drawIt(int _alpha){
    
    
    void jump(){
-      teleport(x, floor(height/2 - 100 + random(200)) , true);           
+      teleport(x, floor(200 + random(height-400)) , true);  
+      soundPlayer.changeScale();      
    }
 
    void teleport(int _x, int _y, Boolean _writeInput){
