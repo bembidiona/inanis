@@ -12,7 +12,7 @@ class SoundPlayer {
   float duration = 0.7; 
   
   ArrayList<Scale> scales = new ArrayList<Scale>();
-  String[] scale_1 = {"E", "G", "A", "B", "D", "E", "F", "G"};
+  
   int currentScaleNum = 0;
   String[] currentScale;
   
@@ -38,11 +38,11 @@ class SoundPlayer {
     }
     
     //scales
-    String[] notes1 = {"E", "G", "A", "B", "D"};
+    String[] notes1 = {"E0", "G0", "A0", "B0", "D0"};
     scales.add(new Scale(notes1));
-    String[] notes2 = {"C", "D", "E", "F", "G", "A", "B"};
+    String[] notes2 = {"C0", "D0", "E0", "F0", "G0", "A0", "B0"};
     scales.add(new Scale(notes2));
-    String[] notes3 = {"C", "B"};
+    String[] notes3 = {"C0", "B0"};
     scales.add(new Scale(notes3));
     
     currentScale = scales.get(currentScaleNum).scale;
@@ -54,7 +54,10 @@ class SoundPlayer {
     
        
     sNum = _key % currentScale.length;
-    out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch( currentScale[sNum] + str(octava) ).asHz() ) );
+    String note = currentScale[sNum].substring(0,1);
+    String oct = str(     int(currentScale[sNum].substring(1,2)) + octava  );
+    
+    out.playNote( 0, duration, new SineInstrument( Frequency.ofPitch(  note + oct ) .asHz()  ));
     
     
     if(millis() < lastNoteTime + 150){

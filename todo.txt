@@ -1,18 +1,18 @@
+- Sharps and Flats para las notas de la scala!!!!!!!!!!!
+
 BUGS:
-- cis
+- bug: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
+- bug: Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo. FUCK IT
 
 TRIGGERS:
 - hacer algo con los triggers "dia" y "noche"
 - cuando dejas apretado mucho tiempo la tecla "a"
 
 IDEAS:
-- Hacer varias escalas y que las vaya cambiando cada tanto.
-- Al timear cada vez mas rapido que vaya aumentando la octava. (idealmente que se mueva por steps en los tonos)
 - Panearlas sKeys en stereo
 - Inanis como poesia con la dimensión de tiempo? cisting *0*
 
 FUCK IT ZONE
 - Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
 - probar que graba siempre?
-- bug: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
-- bug: Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo. FUCK IT
+
