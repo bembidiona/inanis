@@ -549,7 +549,7 @@ void mouseReleased(){
   else if (mouseButton == LEFT && user.canTeleport){
     user.addChar(". ", false);
     user.stream = user.stream + pilcrow;               
-    user.teleport(mouseX,mouseY);
+    user.teleport(mouseX,mouseY,true);
   }    
 }
 void mouseMoved(){

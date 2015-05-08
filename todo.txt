@@ -1,10 +1,10 @@
 - habria que pegarse una optimizada. (perlin sea?)
 - Darle cuerpo al pal en networking
+- probar que graba siempre?
 
 BUGS:
-- ROBOTS al recibir backspace se estan teletransportando y haciendo CUALQUIERA
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
-- Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo.
+- Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo. FUCK IT
 
 TRIGGERS:
 - hacer algo con los triggers "dia" y "noche"

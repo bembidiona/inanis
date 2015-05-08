@@ -60,7 +60,7 @@ class Writer{
       }
       else{
         x = width/2;
-        y = 150 + floor(random(height-150));        
+        y = 150 + floor(random(height-300));        
       }       
       writersNum++;
       
@@ -156,9 +156,12 @@ if (keysInactive){
         lastWord = lastWord.substring(0, lastWord.length()-1);
       }
       
-      if(type == USER && letters.size() >= 1){
-        Letter l = letters.get(letters.size()-1);      
-        teleport(l.x, l.y);
+      if(letters.size() >= 1){ 
+        
+        if (type == USER){
+          Letter l = letters.get(letters.size()-1);
+          teleport(l.x, l.y, false);
+        }
         letters.remove(letters.size()-1);
       }
      
@@ -181,7 +184,7 @@ if (keysInactive){
         LoadedInput in = loadedInputs.get(loadedInputNum);    //start at 0
         
         if(in.type.equals("mouse")){
-          teleport(in.x, in.y);
+          teleport(in.x, in.y,false);
         }
         else if (in.type.equals("key")){
           if(in.r) keyRelease(in.k);
@@ -203,7 +206,7 @@ if (keysInactive){
         if(streamLoopOn){                 
           loadedTimeOffset = millis();  
           loadedInputTime = loadedInputs.get(0).t;
-          teleport(startX,startY);        
+          teleport(startX,startY,true);        
         }
         else{
           messager.show("end of stream", 3); 
@@ -435,13 +438,13 @@ void drawIt(int _alpha){
    
    
    void jump(){
-      teleport(x, floor(height/2 - 100 + random(200)) );           
+      teleport(x, floor(height/2 - 100 + random(200)) , true);           
    }
 
-   void teleport(int _x, int _y){
+   void teleport(int _x, int _y, Boolean _writeInput){
     if(isBeingDraged) return; 
      
-    if(type == USER && recording) writeInput("mouse", 0, false, _x, _y);
+    if(type == USER && recording && _writeInput) writeInput("mouse", 0, false, _x, _y);
 
     checkTriggers();        
     lastWord = ""; 

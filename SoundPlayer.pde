@@ -1,5 +1,4 @@
 class SoundPlayer {
-
   
   AudioSample[] sKeys;  
   Boolean sfxON = true;    
@@ -25,11 +24,8 @@ class SoundPlayer {
     
   }
   
-  void playKey(int _key){
-    
+  void playKey(int _key){    
     int sNum = _key % sKeyNum;
-    
-    println(sNum);
     if (sfxON) sKeys[sNum].trigger();           
   }
 }
