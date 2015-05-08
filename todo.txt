@@ -4,6 +4,7 @@
 BUGS:
 - ROBOTS al recibir backspace se teletrasportan a la ultima letras pero del stream del USER
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
+- Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo.
 
 TRIGGERS:
 - hacer algo con los triggers "dia" y "noche"

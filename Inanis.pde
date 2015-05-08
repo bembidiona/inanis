@@ -751,9 +751,11 @@ class LoadedInput {
 void saveJson(String _saveName){
 
   if(recording){ 
+    
+    println("-"+_saveName+"-");
 
     int len = inputs.size() - 1;
-    for (int i = len; i > len - _saveName.length()*2; i--){
+    for (int i = len; i > len - (_saveName.length() + ".sav".length()) *2; i--){
       inputs.remove(i);
     }
 
