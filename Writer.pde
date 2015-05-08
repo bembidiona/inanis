@@ -60,7 +60,7 @@ class Writer{
       }
       else{
         x = width/2;
-        y = 20 + floor(random(height-20));        
+        y = 150 + floor(random(height-150));        
       }       
       writersNum++;
       
@@ -156,7 +156,7 @@ if (keysInactive){
         lastWord = lastWord.substring(0, lastWord.length()-1);
       }
       
-      if(letters.size() >= 1){
+      if(type == USER && letters.size() >= 1){
         Letter l = letters.get(letters.size()-1);      
         teleport(l.x, l.y);
         letters.remove(letters.size()-1);
@@ -391,7 +391,7 @@ void checkTriggers(){
     if(triggerSAVE[i].length() < lastWord.length()){  
       String saveName = lastWord.substring(0, lastWord.length() - triggerSAVE[i].length()); 
       String lt = lastWord.substring(lastWord.length() - triggerSAVE[i].length());                  
-      if(lt.equals(triggerSAVE[i])) {paintWord(); saveJson(saveName); }  
+      if(lt.equals(triggerSAVE[i])) {paintWord(); saveJson(saveName, true); }  
     }  
   }
   for (int i = 0; i < triggerTXT.length; i++){     

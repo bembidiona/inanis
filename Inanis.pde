@@ -748,17 +748,14 @@ class LoadedInput {
 
 
 // Save stuff
-void saveJson(String _saveName){
+void saveJson(String _saveName, Boolean _wasTriggered){
 
-  if(recording){ 
-    
+  if(_wasTriggered && recording){     
     println("-"+_saveName+"-");
-
     int len = inputs.size() - 1;
     for (int i = len; i > len - (_saveName.length() + ".sav".length()) *2; i--){
       inputs.remove(i);
     }
-
     recordOFF();
   }
 
