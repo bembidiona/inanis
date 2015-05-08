@@ -248,6 +248,8 @@ void draw() {
 
   noStroke();  
   fill(colorTxt);
+  
+  soundPlayer.display();
    
   for (Writer w : writers) {
     w.display();
@@ -753,9 +755,7 @@ class LoadedInput {
 
 // Save stuff
 void saveJson(String _saveName, Boolean _wasTriggered){
-
-  if(_wasTriggered && recording){     
-    println("-"+_saveName+"-");
+  if(_wasTriggered && recording){         
     int len = inputs.size() - 1;
     for (int i = len; i > len - (_saveName.length() + ".sav".length()) *2; i--){
       inputs.remove(i);
