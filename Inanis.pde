@@ -1,10 +1,9 @@
-final private String appName = "Inanis";
-final private String version = "v0.4";
-Boolean DEBUG = true;
-
-final int USER = 0;
-final int ROBOT = 1;
-
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
 import de.looksgood.ani.*;
 import de.looksgood.ani.easing.*;
 import processing.net.*;
@@ -14,6 +13,12 @@ import java.awt.Robot;
 import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 
+final private String appName = "Inanis";
+final private String version = "v0.4";
+Boolean DEBUG = true;
+
+final int USER = 0;
+final int ROBOT = 1;
 
 JSONArray inputs = new JSONArray();
 int inputNum = 0;
@@ -29,9 +34,6 @@ int uiZoneNormal = 100;
 
 
 String debugLog = "LOG: ";
-
-
-
 
 String altKeys = "";
 color colorBg;
@@ -54,7 +56,7 @@ String pixFormat = "png";
 Boolean filterInvert = false;
 
 boolean mainShow = true;
-String[] buttonsNames = {"LOAD", "-", ".sav", ".txt", ".img","-", "font","theme","day/night","-","start server","start client","-","keys","   ?","-","exit"};
+String[] buttonsNames = {"LOAD", "-", ".sav", ".txt", ".img","-", "font","theme","day/night","-","sound/silence","-","start server","start client","-","keys","   ?","-","exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Writer> writers = new ArrayList<Writer>();
 int writersNum = 0;
@@ -120,7 +122,8 @@ int blood = 0;
 float letterGlitch = 0;
 
 Recorder recorder;
-
+SoundPlayer soundPlayer;
+Minim minim;
 
 //net
 Boolean conectedServer = false;
@@ -161,7 +164,8 @@ void setup() {
   
   Ani.init(this);
    
-  
+  minim = new Minim(this);
+  soundPlayer = new SoundPlayer();
   recorder = new Recorder();  
    
   

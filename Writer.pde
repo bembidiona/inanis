@@ -227,6 +227,8 @@ void startBlink(){
 }
 void keyPress(int _key) {
   
+  soundPlayer.playKey(_key);
+  
   if (_key == SHIFT){
     isPressed_Shift = true;
   }

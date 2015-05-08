@@ -93,15 +93,8 @@ class Button{
         else if (name == "folder") selectFolder("On exit Save to this folder", "checkPath");
         else if (name == "font") changeFont();
         else if (name == "theme") changeTheme();
-        else if (name == "day/night") {
-          if(filterInvert) {
-            filterInvert = false;
-          }
-          else{
-            filterInvert = true;
-          }
-          
-        }
+        else if (name == "day/night") filterInvert = !filterInvert;
+        else if(name == "sound/silence") soundPlayer.sfxON = !soundPlayer.sfxON; 
         else if (name == "seaUp") wavesUp(); 
         else if (name == "seaDown") wavesDown();
         else if (name == "start server") startServer();

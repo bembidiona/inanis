@@ -2,7 +2,7 @@
 - Darle cuerpo al pal en networking
 
 BUGS:
-- ROBOTS al recibir backspace se teletrasportan a la ultima letras pero del stream del USER
+- ROBOTS al recibir backspace se estan teletransportando y haciendo CUALQUIERA
 - ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 - Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo.
 
@@ -11,7 +11,7 @@ TRIGGERS:
 - cuando dejas apretado mucho tiempo la tecla "a"
 
 IDEAS:
-- Mapear sonidos de una maquina de escribir a cada tecla. Panearlas en stereo
+- Panearlas sKeys en stereo
 - Poner sonidos aleatorios musicales en escala para cada tecla?
 - El sonido de typeado podria ser a traves de una escala procedural? (poder cambair la escala y el root key?)
 - Inanis como poesia con la dimensión de tiempo? cisting *0*
