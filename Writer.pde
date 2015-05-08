@@ -161,9 +161,6 @@ if (keysInactive){
         teleport(l.x, l.y);
         letters.remove(letters.size()-1);
       }
-      
-      
-      
      
       for (Letter l : letters) {
         l.stepBack();
@@ -197,19 +194,21 @@ if (keysInactive){
       }
       else{
         startBlink();
-        
-        if(streamLoopOn){
-          loadedInputNum = 0;        
-          loadedTimeOffset = millis();
-  
+
+        isPressed_Shift = false;
+        isPressed_Ctrl = false;
+        isPressed_Alt = false;
+        loadedInputNum = 0;
+
+        if(streamLoopOn){                 
+          loadedTimeOffset = millis();  
           loadedInputTime = loadedInputs.get(0).t; 
           teleport(startX,startY);        
         }
         else{
-          messager.show("end of stream", 3);
-        
-          loadedInputs.clear();
-          loadedInputNum = 0;
+          messager.show("end of stream", 3); 
+                 
+          loadedInputs.clear();          
           loadedInputTime = 0;
           readingLoadedInputs = false;
         }
@@ -301,6 +300,8 @@ void keyPress(int _key) {
       }
     }
   }
+
+  if(type == USER && recording) writeInput("key", _key, false, 0, 0);
 }
 void keyRelease(int _key) {
     
@@ -312,11 +313,7 @@ void keyRelease(int _key) {
   }
   else if (_key == ALT){
     isPressed_Alt = false;
-    
-    // TODO
-    // for some reason the conversion to chars is using the second table: http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html
-    // so, hardcodie los acentos y la ñ por ahora
-    
+        
     int i = int(altKeys);
     String hackedChar = Character.toString((char)i);
     
@@ -331,6 +328,8 @@ void keyRelease(int _key) {
      
     altKeys = "";
   }
+
+  if(type == USER && recording) writeInput("key", _key, true, 0, 0);
 }
 
 

@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 JSONArray inputs = new JSONArray();
 int inputNum = 0;
 Boolean recording = false;
+Boolean recordingStarted = false;
 int recordStartTime = 0;
 
 Robot robot;
@@ -286,6 +287,9 @@ void draw() {
     timerKeysInactive = millis();
     keysInactive = true;    
   }
+  if(recordingStarted && millis() > recordStartTime + 500){
+    recording = true;
+  }
   
   //net
   if (conectedServer || conectedClient){
@@ -398,25 +402,20 @@ void keyPressed() {
     }
     user.stream = "";    
     firstBlood = false;
-  }
-  
+  } 
     
   if(key == CODED){
-    if(recording) writeInput("key", int(keyCode), false, 0, 0);
     user.keyPress(int(keyCode));
   }
   else{
-    if(recording) writeInput("key", int(key), false, 0, 0);
     user.keyPress(int(key));    
   }
 }
 void keyReleased() {
-  if(key == CODED){
-    if(recording) writeInput("key", int(keyCode), true, 0, 0);
+  if(key == CODED){    
     user.keyRelease(int(keyCode));
   }
-  else{
-    if(recording) writeInput("key", int(key), true, 0, 0);
+  else{    
     user.keyRelease(key);
   }
 }
@@ -751,6 +750,17 @@ class LoadedInput {
 // Save stuff
 void saveJson(String _saveName){
 
+  if(recording){ 
+
+    int len = inputs.size() - 1;
+    for (int i = len; i > len - _saveName.length()*2; i--){
+      inputs.remove(i);
+    }
+
+    recordOFF();
+  }
+
+
    String saveName = _saveName;
      
    if(_saveName.equals("")){
@@ -760,6 +770,9 @@ void saveJson(String _saveName){
    saveJSONArray(inputs, savePath + "/streams/"+ saveName + ".sav");   
    
    messager.show("saved", 1);
+
+   //instaload!
+   loadJson(saveName+".sav");
 }
 void loadJson(String _filename){
   
@@ -868,7 +881,7 @@ void recordON(){
   inputNum = 0;
 
   recordStartTime = millis();
-  recording = true; 
+  recordingStarted = true;   
  
   messager.show("inputs are being recorded");
 }
@@ -877,6 +890,7 @@ void recordOFF(){
   user.lastWord = "";
   user.addChar(" ", true);
   
+  recordingStarted = false;
   recording = false;
   messager.show("recording stop", 2); 
 }
