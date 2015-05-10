@@ -1,0 +1,66 @@
+[
+  {
+    "time": 927,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 108,
+    "x": 0
+  },
+  {
+    "time": 1057,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 108,
+    "x": 0
+  },
+  {
+    "time": 1282,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 111,
+    "x": 0
+  },
+  {
+    "time": 1389,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 111,
+    "x": 0
+  },
+  {
+    "time": 1734,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 108,
+    "x": 0
+  },
+  {
+    "time": 1809,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 108,
+    "x": 0
+  },
+  {
+    "time": 3202,
+    "type": "key",
+    "release": false,
+    "y": 0,
+    "key": 32,
+    "x": 0
+  },
+  {
+    "time": 3294,
+    "type": "key",
+    "release": true,
+    "y": 0,
+    "key": 32,
+    "x": 0
+  }
+]
