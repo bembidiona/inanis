@@ -1,21 +1,19 @@
-- https://www.youtube.com/watch?v=eS0CO-yPmO4&list=RDHC4zyLV7Q4Afs&index=1
+- Probar escribir la escala musical
+- La carga de streams y data tiene que ser relativa, no absoluta!
+- soporte para cambiar tamaño de las letras.
+- jugar con el zoom, rotacion y la camara mas
 
-- Sharps and Flats para las notas de la scala!!!!!!!!!!!
+- Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
+
 
 BUGS:
 - Si guardas sin haber recordiado nada, explota todo al cuerno
 - bug: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
 - bug: Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo. FUCK IT
 
-TRIGGERS:
+IDEAS:
+- Panearlas sKeys en stereo
 - hacer algo con los triggers "dia" y "noche"
 - cuando dejas apretado mucho tiempo la tecla "a"
 
-IDEAS:
-- Panearlas sKeys en stereo
-- Inanis como poesia con la dimensión de tiempo? cisting *0*
-
-FUCK IT ZONE
-- Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
-- probar que graba siempre?
 

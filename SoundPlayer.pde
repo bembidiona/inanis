@@ -23,7 +23,7 @@ class SoundPlayer {
     
     out = minim.getLineOut();
     
-    File dataFolder = new File( sketchPath + "/data/sfx/");
+    File dataFolder = new File("E:/Proyects/inanis/data/sfx");
     File[] listFolder = dataFolder.listFiles();  
     
     for (File f : listFolder) {
@@ -92,7 +92,8 @@ class SoundPlayer {
    int waveAmp = 20;
     
     for(int i = 0; i < out.bufferSize() - 1; i++){
-      line(i*waveStep, user.y + out.left.get(i)*waveAmp, i*waveStep, user.y + out.left.get(i+1)*waveAmp );      
+      //line(i*waveStep, user.y + out.left.get(i)*waveAmp, (i+1)*waveStep, user.y + out.left.get(i+1)*waveAmp );      
+      point(i*waveStep, int(user.y + out.left.get(i)*waveAmp));
     }    
     noStroke();
   }
@@ -140,4 +141,3 @@ class SineInstrument implements Instrument
     wave.unpatch( soundPlayer.out );
   }
 }
-
