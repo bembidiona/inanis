@@ -98,7 +98,7 @@ if (keysInactive){
         else { 
            blinkTimer = 0;
            
-           if(!firstBlood) x -= stepBack;
+           //if(!firstBlood) x -= stepBack;
         }   
 
                 
@@ -142,7 +142,7 @@ if (keysInactive){
       for (Star s : stars) {
         s.stepForward();
       }       
-      letters.add(new Letter(_char, x, y));
+      letters.add(new Letter(_char, x-5, y + 5));
       
       stream = stream + _char;
       if(!space) lastWord = lastWord + _char;

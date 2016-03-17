@@ -5,9 +5,9 @@ class Letter{
       
    String letter = " ";   
    
-   float windX = 0.001; 
+   float windX = 0.01; 
    private int windTimer = 0;
-   int windTimerMax = 3;
+   int windTimerMax = 1;
    
    Boolean isOut = false;
 
@@ -29,6 +29,8 @@ class Letter{
         if(x < margen) alpha = floor((((x*100)/margen) * 255 ) / 100);
         else alpha = 255;
         
+        
+        
         if (isTrigger) fill(colorTrigger,alpha);
         else fill(colorTxt,alpha);      
 
@@ -36,8 +38,8 @@ class Letter{
         
         for (int i = 0; i < 2; i++){  
           if (isTrigger) fill(colorTrigger,alpha/2.5);
-          else fill(colorTxt, alpha/2.5);
-          text(letter, x+random(2), y + glitch() +random(2));
+          else fill(colorTxt, alpha/5);
+          //text(letter, x+random(2), y + glitch() +random(2));
         }
         if(blood > 0 && !letter.equals(" ")){
           for (int i = 0; i < 2; i++){  
@@ -53,12 +55,14 @@ class Letter{
       
       
 
-      if (windTimer > windTimerMax){
+      /*if (windTimer > windTimerMax){
         x -= windX;
         
         windTimer = 0; 
       }
-      else windTimer++;
+      else windTimer++;*/
+      
+      x -= 0.00001;
       
       if(x < - width/2) isOut = true;      
      

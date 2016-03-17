@@ -93,7 +93,7 @@ class SoundPlayer {
     
     for(int i = 0; i < out.bufferSize() - 1; i++){
       //line(i*waveStep, user.y + out.left.get(i)*waveAmp, (i+1)*waveStep, user.y + out.left.get(i+1)*waveAmp );      
-      point(i*waveStep, int(user.y + 7 + out.left.get(i)*waveAmp));
+      point(i*waveStep, int(user.y + 13 + out.left.get(i)*waveAmp));
     }    
     noStroke();
   }

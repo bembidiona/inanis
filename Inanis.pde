@@ -139,12 +139,10 @@ private int wavesY;
 final private int wavesStep = 5; 
 int picado = 5;
 
-Boolean DEBUG = true;
+Boolean DEBUG = false;
 void settings() {
-  //fullScreen(FX2D);
-  size(displayWidth, displayHeight);
-  
-  
+  fullScreen();
+  //size(displayWidth, displayHeight); 
 }
 
 
@@ -173,6 +171,7 @@ void setup() {
   recorder = new Recorder();  
 
 
+  print(sketchPath());
   textAlign(RIGHT, CENTER);  
   fill(50);
   cursor(CROSS);
@@ -576,7 +575,9 @@ void saveTxt(String _saveName) {
   if (_saveName.equals("")) saveName = "vomito_"+day()+"-"+month()+"-"+year();
 
   String[] list = split(writers.get(0).stream, pilcrow);
-  saveStrings(savePath + "/"+ saveName +".txt", list);
+  saveStrings(sketchPath() + "/export/" + saveName +".txt", list);
+  
+  print(saveName);
 
   messager.show("txt saved", 1);
 }
@@ -584,8 +585,8 @@ void savePix(String _saveName) {
   String saveName = _saveName;     
   if (_saveName.equals("")) {
     saveName = "vomito_"+day()+"-"+month()+"-"+year();
-    save(savePath + saveName +"."+pixFormat);
-  } else save(savePath + saveName);
+    save(sketchPath() + "/export/" + saveName +"."+pixFormat);
+  } else save(sketchPath() + "/export/" +saveName);
 
   messager.show("pix saved", 1);
 }
@@ -753,7 +754,7 @@ void saveJson(String _saveName, Boolean _wasTriggered) {
     saveName = user.lastWord + "_" + day()+"-"+month()+"-"+year();
   }  
 
-  saveJSONArray(inputs, savePath + "/streams/"+ saveName + ".sav");   
+  saveJSONArray(inputs, sketchPath() + "/streams/" + saveName + ".sav");   
 
   messager.show("saved", 1);
 
@@ -764,7 +765,7 @@ void loadJson(String _filename) {
 
   messager.show(_filename + " loaded", 1);
 
-  JSONArray inputValues = loadJSONArray("E:/Proyects/inanis/streams/"+ _filename);
+  JSONArray inputValues = loadJSONArray(sketchPath() + "/streams/"+ _filename);
 
   Writer w = new Writer(ROBOT);
   writers.add(w);
@@ -793,7 +794,7 @@ void loadJson(String _filename) {
 
 void createUIStreams() {
   int uiBlank = 0;
-  File dataFolder = new File("E:/Proyects/inanis/streams");
+  File dataFolder = new File(sketchPath() + "/streams");
   String[] fileList = dataFolder.list();
   int longestName = 0; 
   for (int i = 0; i < fileList.length; i++) {
@@ -848,7 +849,7 @@ void changeFont() {
     fontOptions = loadFont("Terminus-14.vlw");
   } else {
     fontSelected = 1;
-    fontOptions = createFont("fonts/Consolas.ttf", 20); //loadFont("courier-15.vlw");
+    fontOptions = createFont(sketchPath() + "/data/fonts/Consolas.ttf", 16); //loadFont("courier-15.vlw");
   }
 }
 
