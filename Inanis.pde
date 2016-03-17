@@ -171,7 +171,7 @@ void setup() {
   recorder = new Recorder();  
 
 
-  print(sketchPath());
+  
   textAlign(RIGHT, CENTER);  
   fill(50);
   cursor(CROSS);
@@ -754,7 +754,7 @@ void saveJson(String _saveName, Boolean _wasTriggered) {
     saveName = user.lastWord + "_" + day()+"-"+month()+"-"+year();
   }  
 
-  saveJSONArray(inputs, sketchPath() + "/streams/" + saveName + ".sav");   
+  saveJSONArray(inputs, sketchPath() + "/data/streams/" + saveName + ".sav");   
 
   messager.show("saved", 1);
 
@@ -765,7 +765,7 @@ void loadJson(String _filename) {
 
   messager.show(_filename + " loaded", 1);
 
-  JSONArray inputValues = loadJSONArray(sketchPath() + "/streams/"+ _filename);
+  JSONArray inputValues = loadJSONArray(sketchPath() + "/data/streams/"+ _filename);
 
   Writer w = new Writer(ROBOT);
   writers.add(w);
@@ -794,7 +794,7 @@ void loadJson(String _filename) {
 
 void createUIStreams() {
   int uiBlank = 0;
-  File dataFolder = new File(sketchPath() + "/streams");
+  File dataFolder = new File(sketchPath() + "/data/streams");
   String[] fileList = dataFolder.list();
   int longestName = 0; 
   for (int i = 0; i < fileList.length; i++) {
@@ -837,19 +837,13 @@ void changeTheme() {
 void changeFont() {
   if (fontSelected == 1) {
     fontSelected++;
-    fontOptions = loadFont("anonymous-15.vlw");
+    fontOptions = createFont(sketchPath() + "/data/fonts/jauria.otf", 16);
   } else if (fontSelected == 2) {
     fontSelected++;
-    fontOptions = loadFont("MonospaceTypewriter-13.vlw");
-  } else if (fontSelected == 3) {
-    fontSelected++;
-    fontOptions = loadFont("Jauria-15.vlw");
-  } else if (fontSelected == 4) {
-    fontSelected++;
-    fontOptions = loadFont("Terminus-14.vlw");
+    fontOptions = createFont(sketchPath() + "/data/fonts/monospacetypewriter.ttf", 16);
   } else {
     fontSelected = 1;
-    fontOptions = createFont(sketchPath() + "/data/fonts/Consolas.ttf", 16); //loadFont("courier-15.vlw");
+    fontOptions = createFont(sketchPath() + "/data/fonts/consolas.ttf", 16); //loadFont("courier-15.vlw");
   }
 }
 
