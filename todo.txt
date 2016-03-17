@@ -1,12 +1,10 @@
 - Probar escribir la escala musical
-- La carga de streams y data tiene que ser relativa, no absoluta!
-- soporte para cambiar tamaño de las letras.
+- Soporte para cambiar tamaño de las letras.
 - Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
-
 
 BUGS:
 - Si guardas sin haber recordiado nada, explota todo al cuerno
-- bug: ALT + XXX creo que está usando ANSI en vez de ASCII (http://www.irongeek.com/alt-numpad-ascii-key-combos-and-chart.html)
+- bug: ALT + XXX tira puros ?
 - bug: Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo. FUCK IT
 
 IDEAS:
