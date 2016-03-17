@@ -22,31 +22,33 @@ class Letter{
       y = _y;
    }
    
-   void display(){
-      noStroke();  
+   void display(){    
+      noStroke();
+      if(x > -10){
+        int margen = 500;
+        if(x < margen) alpha = floor((((x*100)/margen) * 255 ) / 100);
+        else alpha = 255;
+        
+        if (isTrigger) fill(colorTrigger,alpha);
+        else fill(colorTxt,alpha);      
 
-
-      int margen = 500;
-      if(x < margen) alpha = floor((((x*100)/margen) * 255 ) / 100);
-      else alpha = 255;
-      
-      if (isTrigger) fill(colorTrigger,alpha);
-      else fill(colorTxt,alpha);      
-
-      text(letter, x, y + glitch() );
-      
-      for (int i = 0; i < 2; i++){  
-        if (isTrigger) fill(colorTrigger,alpha/2.5);
-        else fill(colorTxt, alpha/2.5);
-        text(letter, x+random(3), y + glitch() +random(3));
-      }
-      if(blood > 0 && !letter.equals(" ")){
+        text(letter, x, y + glitch() );
+        
         for (int i = 0; i < 2; i++){  
-          if (isTrigger) fill(colorTrigger,alpha);
-          else fill(colorTxt);
-          rect(x-8/2 + random(8) ,y, 1, random(blood));
-        }  
+          if (isTrigger) fill(colorTrigger,alpha/2.5);
+          else fill(colorTxt, alpha/2.5);
+          text(letter, x+random(2), y + glitch() +random(2));
+        }
+        if(blood > 0 && !letter.equals(" ")){
+          for (int i = 0; i < 2; i++){  
+            if (isTrigger) fill(colorTrigger,alpha);
+            else fill(colorTxt);
+            rect(x-8/2 + random(8) ,y, 1, random(blood));
+          }  
+        }
       }
+
+      
       
       
       
@@ -58,7 +60,8 @@ class Letter{
       }
       else windTimer++;
       
-      if(x < - width/2) isOut = true;
+      if(x < - width/2) isOut = true;      
+     
    }
    
    void stepForward(){

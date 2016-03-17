@@ -1,8 +1,6 @@
 - Probar escribir la escala musical
 - La carga de streams y data tiene que ser relativa, no absoluta!
 - soporte para cambiar tamaño de las letras.
-- jugar con el zoom, rotacion y la camara mas
-
 - Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
 
 

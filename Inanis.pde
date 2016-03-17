@@ -159,6 +159,8 @@ void setup() {
   catch(AWTException e) {
     println(e);
   }
+  
+  
 
   changeTheme();
   changeFont();    
@@ -171,8 +173,7 @@ void setup() {
   recorder = new Recorder();  
 
 
-  textAlign(RIGHT, CENTER);
-  textSize(30);
+  textAlign(RIGHT, CENTER);  
   fill(50);
   cursor(CROSS);
 
@@ -231,6 +232,8 @@ void setup() {
   wavesY = height - height/10;
 }
 
+
+
 void draw() { 
   textFont(fontOptions);
 
@@ -241,7 +244,7 @@ void draw() {
 
   if (scaleAll != 1) {
     translate( width/2, height/2);  
-    scale(scaleAll);      
+    scale(scaleAll);    
     translate( -(width/2), -(height/2));
   }
 
@@ -761,7 +764,7 @@ void loadJson(String _filename) {
 
   messager.show(_filename + " loaded", 1);
 
-  JSONArray inputValues = loadJSONArray(savePath + "/streams/"+ _filename);
+  JSONArray inputValues = loadJSONArray("E:/Proyects/inanis/streams/"+ _filename);
 
   Writer w = new Writer(ROBOT);
   writers.add(w);
@@ -845,7 +848,7 @@ void changeFont() {
     fontOptions = loadFont("Terminus-14.vlw");
   } else {
     fontSelected = 1;
-    fontOptions = loadFont("courier-48.vlw");
+    fontOptions = createFont("fonts/Consolas.ttf", 20); //loadFont("courier-15.vlw");
   }
 }
 
