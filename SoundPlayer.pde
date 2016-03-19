@@ -8,8 +8,8 @@ class SoundPlayer {
   
   int noteOffset = 0;
   int octava = 3;
-  final int octavaMIN = 1;
-  final int octavaMAX = 4;
+  final int octavaMIN = 2;
+  final int octavaMAX = 5;
   float duration = 0.7; 
   
    
@@ -109,7 +109,7 @@ class SineInstrument implements Instrument
   void noteOn( float duration )
   {
     // start the amplitude envelope
-    ampEnv.activate( duration, 0.5f, 0 );
+    ampEnv.activate( duration, 0.1f, 0 );
     // attach the oscil to the output so it makes sound
     wave.patch( soundPlayer.out );
   }
