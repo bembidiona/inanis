@@ -87,6 +87,7 @@ String[] triggerLOVE = {"amor", "love", "amar", "shrimp", "afecto"};
 String[] triggerDEAD = {"muerte", "mori", "dead", "fetal"};
 String[] triggerGLITCH = {"glitch", "bakun", "art", "arte"};
 String[] triggerCLIENT = {"connect", "conectar"};
+String[] triggerMUSICSCALE = {"scale", "escala"};
 String[] triggerSAVE = {".sav"};
 String[] triggerTXT = {".txt"};
 String[] triggerDEBUG = {"debug"};
@@ -140,7 +141,7 @@ private int wavesY;
 final private int wavesStep = 5; 
 int picado = 5;
 
-Boolean DEBUG = false;
+Boolean DEBUG = true;
 void settings() {
   //fullScreen();
   size(displayWidth, displayHeight); 
@@ -207,6 +208,9 @@ void setup() {
   }
   for (int i = 0; i < triggerCLIENT.length; i++) {    
     setMaxMinTriggers(triggerCLIENT[i].length());
+  }
+  for (int i = 0; i < triggerMUSICSCALE.length; i++) {    
+    setMaxMinTriggers(triggerMUSICSCALE[i].length());
   }
   for (int i = 0; i < triggerSAVE.length; i++) {    
     setMaxMinTriggers(triggerSAVE[i].length());
@@ -667,8 +671,7 @@ void startServer() {
     messager.show("FAIL", 1);
   }
 }
-void triggerCLIENT() {
-}
+
 void startClient(String _ip) {
   try {
     client = new Client(this, _ip, port);

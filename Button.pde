@@ -35,7 +35,7 @@ class Button{
      int separation = 20;
      int safe = 5;
      w = name.length() * 11;
-     h = 30;
+     h = 20;
      
      if (menu == "main") x = width - name.length() - margen*4 + 5;
      else x = width + name.length() + 200;

@@ -225,7 +225,7 @@ class Writer {
       isPressed_Shift = true;
     } else if (_key == 45) { // -
       fontSize -= 2;
-      step = fontSize/2; 
+      step = fontSize/2;
     } else if (_key == 43) { // +
       fontSize += 2;
       step = fontSize/2;
@@ -396,6 +396,7 @@ class Writer {
         }
       }
     } else { //lastWord is bigger than charsTriggerMax 
+
       for (int i = 0; i < triggerCLIENT.length; i++) {       
         String lt = lastWord.substring(0, triggerCLIENT[i].length()); 
         String ltIp = lastWord.substring(triggerCLIENT[i].length() + 1);
@@ -405,7 +406,23 @@ class Writer {
           paintWord();
         }
       }
+
+      for (int i = 0; i < triggerMUSICSCALE.length; i++) {      
+        String lt = lastWord.substring(0, triggerMUSICSCALE[i].length());        
+
+        if (lt.equals(triggerMUSICSCALE[i])) {
+          String scaleCode = lastWord.substring(triggerMUSICSCALE[i].length() + 1);
+          println(scaleCode);
+          
+          soundPlayer.changeScale(scaleCode);
+          
+          paintWord();
+        }
+      }
     }
+
+
+
 
     for (int i = 0; i < triggerSAVE.length; i++) {     
       if (triggerSAVE[i].length() < lastWord.length()) {  
@@ -417,6 +434,7 @@ class Writer {
         }
       }
     }
+
     for (int i = 0; i < triggerTXT.length; i++) {     
       if (triggerTXT[i].length() < lastWord.length()) {  
         String saveName = lastWord.substring(0, lastWord.length() - triggerTXT[i].length()); 
@@ -463,7 +481,7 @@ class Writer {
 
   void jump() {
     teleport(width/2, floor(200 + random(height-400)), true);  
-    soundPlayer.changeScale();
+    //soundPlayer.changeScale();
   }
 
   void teleport(int _x, int _y, Boolean _writeInput) {

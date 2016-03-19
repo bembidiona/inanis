@@ -1,5 +1,4 @@
-- Probar escribir la escala musical
-- Soporte para cambiar tamaño de las letras.
+- Estaria peola que no sature el sonido al carajo
 - Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
 
 BUGS:

@@ -12,9 +12,8 @@ class SoundPlayer {
   final int octavaMAX = 4;
   float duration = 0.7; 
   
-  ArrayList<Scale> scales = new ArrayList<Scale>();
+   
   
-  int currentScaleNum = 0;
   float[] currentScale;
   
   int lastNoteTime;
@@ -40,13 +39,7 @@ class SoundPlayer {
     
     //scales
     float[] notes1 = {0, 3, 5, 7, 10};
-    scales.add(new Scale(notes1));
-    float[] notes2 = {0, 2, 4, 5, 7, 9, 10, 12};
-    scales.add(new Scale(notes2));
-    float[] notes3 = {1, 12};
-    scales.add(new Scale(notes3));
-    
-    currentScale = scales.get(currentScaleNum).scale;
+    currentScale = notes1;
   }
   
   void playKey(int _key){    
@@ -75,13 +68,8 @@ class SoundPlayer {
     }
   }
   
-  void changeScale(){
-    currentScaleNum++;
-    if(currentScaleNum > scales.size()-1) currentScaleNum = 0;
-    
-    currentScale = scales.get(currentScaleNum).scale;  
-  
-    noteOffset = int(random(12));  
+  void changeScale(String _scale){     
+    currentScale = float(split(_scale, '/'));
   }
   
   
@@ -91,8 +79,7 @@ class SoundPlayer {
    int waveStep = 5;
    int waveAmp = 20;
     
-    for(int i = 0; i < out.bufferSize() - 1; i++){
-      //line(i*waveStep, user.y + out.left.get(i)*waveAmp, (i+1)*waveStep, user.y + out.left.get(i+1)*waveAmp );      
+    for(int i = 0; i < out.bufferSize() - 1; i++){          
       point(i*waveStep, int(user.y + 13 + out.left.get(i)*waveAmp));
     }    
     noStroke();
@@ -101,13 +88,6 @@ class SoundPlayer {
 }
 
 // CLASSSSSSSS
-class Scale{  
-  float[] scale;  
-  Scale(float[] _scale){
-    scale = _scale;
-  } 
-}
-
 
 class SineInstrument implements Instrument
 {
