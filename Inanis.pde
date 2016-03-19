@@ -45,6 +45,7 @@ color colorExtra;
 int themeSelected = 0;
 int fontSelected = 0;
 ArrayList<PFont> fonts = new ArrayList<PFont>();
+int fontSize = 16;
 
 int step = 8;
 
@@ -236,6 +237,7 @@ void setup() {
 
 void draw() { 
   textFont(fontOptions);
+  textSize(fontSize);
 
   fill(colorBg, bgAlpha);
   rect(0, 0, width, height); 
@@ -341,7 +343,8 @@ void draw() {
   }  
   noStroke();   
   //----------
-
+  
+  textSize(16);
   for (Button b : buttons) {
     b.display();
   }
@@ -840,7 +843,7 @@ void loadFonts() {
   File dataFolder = new File(sketchPath() + "/data/fonts");
   String[] fileList = dataFolder.list();  
   for (int i = 0; i < fileList.length; i++) {
-    fonts.add(createFont(sketchPath() + "/data/fonts/" + fileList[i], 16));    
+    fonts.add(createFont(sketchPath() + "/data/fonts/" + fileList[i], fontSize));    
   }  
   fontOptions = fonts.get(0);
 }

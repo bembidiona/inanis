@@ -221,9 +221,14 @@ class Writer {
   void keyPress(int _key) {
 
     soundPlayer.playKey(_key);
-
     if (_key == SHIFT) {
       isPressed_Shift = true;
+    } else if (_key == 45) { // -
+      fontSize -= 2;
+      step = fontSize/2; 
+    } else if (_key == 43) { // +
+      fontSize += 2;
+      step = fontSize/2;
     } else if (_key == UP) {
       wavesUp();
     } else if (_key == DOWN && !isPressed_Shift) {
