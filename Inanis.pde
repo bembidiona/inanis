@@ -44,7 +44,7 @@ color colorTrigger;
 color colorExtra;
 int themeSelected = 0;
 int fontSelected = 0;
-
+ArrayList<PFont> fonts = new ArrayList<PFont>();
 
 int step = 8;
 
@@ -141,8 +141,8 @@ int picado = 5;
 
 Boolean DEBUG = false;
 void settings() {
-  fullScreen();
-  //size(displayWidth, displayHeight); 
+  //fullScreen();
+  size(displayWidth, displayHeight); 
 }
 
 
@@ -161,7 +161,8 @@ void setup() {
   
 
   changeTheme();
-  changeFont();    
+  loadFonts();
+      
   timerMouseInactive = millis();
 
   Ani.init(this);
@@ -834,17 +835,19 @@ void changeTheme() {
     colorExtra = color(255, 255, 250);
   }
 }
+
+void loadFonts() {  
+  File dataFolder = new File(sketchPath() + "/data/fonts");
+  String[] fileList = dataFolder.list();  
+  for (int i = 0; i < fileList.length; i++) {
+    fonts.add(createFont(sketchPath() + "/data/fonts/" + fileList[i], 16));    
+  }  
+  fontOptions = fonts.get(0);
+}
 void changeFont() {
-  if (fontSelected == 1) {
-    fontSelected++;
-    fontOptions = createFont(sketchPath() + "/data/fonts/jauria.otf", 16);
-  } else if (fontSelected == 2) {
-    fontSelected++;
-    fontOptions = createFont(sketchPath() + "/data/fonts/monospacetypewriter.ttf", 16);
-  } else {
-    fontSelected = 1;
-    fontOptions = createFont(sketchPath() + "/data/fonts/consolas.ttf", 16); //loadFont("courier-15.vlw");
-  }
+  fontSelected++;
+  if(fontSelected > fonts.size()-1) fontSelected = 0;
+  fontOptions = fonts.get(fontSelected);
 }
 
 void recordON() {
