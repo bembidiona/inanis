@@ -1,3 +1,4 @@
+- hardcodear los themes //dejar solo day/night
 - Estaria peola que no sature el sonido al carajo
 - Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
 
