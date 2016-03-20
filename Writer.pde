@@ -50,6 +50,10 @@ class Writer {
   Boolean exaling = false;
 
   Boolean toRemove = false;
+    
+  int windTimer = 0;
+  int windTimerMax = 1;   
+  Boolean windPassThisTurn = false;
 
   Writer(int _type) {
     type = _type;
@@ -95,7 +99,7 @@ class Writer {
       } else { 
         blinkTimer = 0;
 
-        //if(!firstBlood) x -= stepBack;
+        if(!firstBlood) x -= stepBack;
       }
     } else { 
       drawIt(255);
@@ -108,12 +112,22 @@ class Writer {
 
       cursorHand = true;
     } 
+    
+    if (windTimer > windTimerMax){        
+      windTimer = 0; 
+      windPassThisTurn = true;
+    }
+    else windTimer++;
 
     for (int i=letters.size()-1; i >= 0; i--) {
       Letter l = letters.get(i);
       if (l.isOut) letters.remove(i);
-      else l.display();
+      else{
+        l.display();
+        if(windPassThisTurn) l.windPass();
+      }
     }  
+    if(windPassThisTurn) windPassThisTurn = false;
 
 
     // Loaded automation
@@ -136,7 +150,7 @@ class Writer {
     for (Star s : stars) {
       s.stepForward();
     }       
-    letters.add(new Letter(_char, x-5, y + 5));
+    letters.add(new Letter(_char, x-fontSize/3, y + fontSize/8 + 4));
 
     stream = stream + _char;
     if (!space) lastWord = lastWord + _char;

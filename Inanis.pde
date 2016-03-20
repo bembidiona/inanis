@@ -57,7 +57,8 @@ String pixFormat = "png";
 Boolean filterInvert = false;
 
 boolean mainShow = true;
-String[] buttonsNames = {"LOAD", "-", ".sav", ".txt", ".img", "-", "font", "theme", "day/night", "-", "sound/silence", "-", "start server", "start client", "-", "keys", "   ?", "-", "exit"};
+//String[] buttonsNames = {"LOAD", "-", ".sav", ".txt", ".img", "-", "font", "theme", "day/night", "-", "sound/silence", "-", "start server", "start client", "-", "keys", "   ?", "-", "exit"};
+String[] buttonsNames = {"LOAD", "-", ".sav", ".txt", ".img", "-",  "font", "theme", "sound/silence", "-", "   ?", "-", "exit"};
 ArrayList<Button> buttons = new ArrayList<Button>();
 ArrayList<Writer> writers = new ArrayList<Writer>();
 int writersNum = 0;
@@ -141,10 +142,10 @@ private int wavesY;
 final private int wavesStep = 5; 
 int picado = 5;
 
-Boolean DEBUG = true;
+Boolean DEBUG = false;
 void settings() {
-  //fullScreen();
-  size(displayWidth, displayHeight); 
+  fullScreen();
+  //size(displayWidth, displayHeight); 
 }
 
 
@@ -815,13 +816,23 @@ void changeTheme() {
   if (themeSelected == 1) {
     themeSelected++;
 
+    colorTxt = color(25, 25, 25);
+    colorTrigger = color(118, 55, 118);
+    colorBg = color(235, 233, 232);
+    colorGradient = color(226, 224, 226);
+    colorGradientAlpha = color(colorGradient, 0);
+    colorExtra = color(68, 139, 135);
+  }
+  else if (themeSelected == 2) {
+    themeSelected++;
+
     colorTxt = color(187, 214, 181);
     colorTrigger = color(238, 247, 225, 255);
     colorBg = color(19, 82, 90);
     colorGradient = color(30, 66, 86, 255);
     colorGradientAlpha = color(colorGradient, 0);
     colorExtra = color(68, 139, 135);
-  } else if (themeSelected == 2) {
+  } else if (themeSelected == 3) {
     themeSelected++;
 
     colorTxt = color(255, 255, 250);

@@ -37,9 +37,9 @@ class Button{
      w = name.length() * 11;
      h = 20;
      
-     if (menu == "main") x = width - name.length() - margen*4 + 5;
+     if (menu == "main") x = width - name.length() - margen*4;
      else x = width + name.length() + 200;
-     y = h + safe + separation*buttonNum - _blank*10;
+     y = h + safe + separation*buttonNum - _blank*10 + margen + 6;
      
      cX = x - w + 5;
      cY = y-h+5;
@@ -99,7 +99,7 @@ class Button{
         else if (name == "seaDown") wavesDown();
         else if (name == "start server") startServer();
         else if (name == "start client") messager.show("type *connect:192.168.0.10* replacing with the server IP and hit SPACE");
-        else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit() / ↑or↓:moveSea()", 3);
+        else if (name == "keys") messager.show("Ctrl+S:saveTxt() / Ctrl+E:savePix() / Esc:quit() / ^ or v :moveSea()", 3);
         else if (name == "   ?") messager.show(appName+" "+version+" by jeRemias Babini", 2);
         else if (name == "exit") exit(); 
 

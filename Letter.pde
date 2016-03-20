@@ -6,9 +6,7 @@ class Letter{
    String letter = " ";   
    
    float windX = 0.01; 
-   private int windTimer = 0;
-   int windTimerMax = 1;
-   
+     
    Boolean isOut = false;
 
    private int alpha = 255;
@@ -49,23 +47,15 @@ class Letter{
           }  
         }
       }
-
-      
-      
-      
-      
-
-      /*if (windTimer > windTimerMax){
-        x -= windX;
-        
-        windTimer = 0; 
-      }
-      else windTimer++;*/
       
       x -= 0.00001;
       
       if(x < - width/2) isOut = true;      
      
+   }
+   
+   void windPass(){
+     x -= windX;     
    }
    
    void stepForward(){

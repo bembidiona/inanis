@@ -1,5 +1,5 @@
-- hardcodear los themes //dejar solo day/night
-- Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
+- hacer un stream que sea el about
+- hacer un read me
 
 BUGS:
 - Si guardas sin haber recordiado nada, explota todo al cuerno
@@ -7,6 +7,7 @@ BUGS:
 - bug: Tipear un savename con Shift o Alt+xxx agrega inputs que no son leidos alcalcular el length del savename. Por lo que no se remueven correctamente si tipeas el trigger .sav mientras el recording está activo. FUCK IT
 
 IDEAS:
+- Darle cuerpo al pal en networking. o Nukearlo? Pinta NUKE
 - Panearlas sKeys en stereo
 - hacer algo con los triggers "dia" y "noche"
 - cuando dejas apretado mucho tiempo la tecla "a"
