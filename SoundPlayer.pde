@@ -22,7 +22,7 @@ class SoundPlayer {
     
     out = minim.getLineOut();
     
-    File dataFolder = new File("E:/Proyects/inanis/data/sfx");
+    File dataFolder = new File(sketchPath() + "/data/sfx");
     File[] listFolder = dataFolder.listFiles();  
     
     for (File f : listFolder) {
@@ -34,7 +34,7 @@ class SoundPlayer {
     sKeys = new AudioSample[sKeyNum];
   
     for (int l=0; l < sKeyNum; l++) {
-      sKeys[l] = minim.loadSample( "/sfx/key_"+ str(l+1) + ".wav", 512);
+      sKeys[l] = minim.loadSample( sketchPath() + "/data/sfx/key_"+ str(l+1) + ".wav", 512);
     }
     
     //scales
