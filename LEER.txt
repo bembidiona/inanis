@@ -1,0 +1,112 @@
+------
+INANIS
+------
+Procesador de texto para diseñado para sesiones de monólogos interiores y poesía dinámica
+Las características principales son visuales y sonidos que se generan por el estilo de tipeo y las palabras escritas, y la posibilidad de grabar las secciones para luego poder reproducirlas de nuevo o en conjunto.
+La opción de escritura colaborativa via internet esta desactivada en esta version.
+
+
+------------
+INSTALACIÓN
+------------
+1 - Descargar la version correcta para tu sistema operativo: https://bitbucket.org/jerebab/inanis/downloads o desde http://jeremiasbabini.com/inanis.php
+2 - Extraer los archivos comprimidos
+3 - Ejecutar Inanis.exe
+
+
+-----
+USO
+-----
+* Triggers
+Son un conjunto de palabras especiales que crean diferentes efectos visuales y que ejecutan funciones del programa.
+Para usarlas, simplemente se tipean, pero es importante que queden separadas por espacios.
+Una lista de varias de estas palabras especiales esta mas abajo en este mismo texto, pero otras esperan por ser descubiertas.
+Ejemplo con el trigger "lluvia"
+"... parece que esta noche va a llover ..." CORRECTO
+"... parece que esta noche va allover ..." INCORRECTO
+
+* Guardar y cargar sesiones
+Clickear el cuadrado rojo de la esquina superior izquierda para comenzar a grabar el teclado y el mouse.
+Para guardar la grabación, simplemente hay que escribir el nombre de archivo deseado seguido de ".sav"
+Ejemplos:
+"nombre_de_la_sesion.sav"
+"LoQueSoñeHoy.sav"
+Para cargar sesiones viejas, mover el mouse a la derecha de la pantalla, y clickear en LOAD. Luego clickear el archivo deseado.
+
+* Controlando las sesiones cargadas
+Clickear y arrastrar para mover los carets. 
+Para eliminar una sesion cargada, hacer click derecho al caret que la controla.
+
+* Preferencias visuales
+Para cambiar el tamaño de la letra usar las teclas [+] y [-]
+Para cambiar el tipo de letra usar el trigger "fuente"
+Para cambiar los colores usar el trigger "color"
+Para cuando se escribe en una habitación oscura, resulta mu util posicionar el mar con las teclas [↑] and [↓]. Da un resplandor suave que permite ver las teclas del teclado. 
+
+* Escalas musicales
+Se puede cambiar la escala musical usada por los sonidos emitidos por el tipeo.
+Usar el trigger "escala:" seguido por la serie de intervalos.
+Ejemplos:
+"escala:0-2-4-6-8-10-12" para una escala de a tonos
+"escala:0-2-4-5-7-9-11-12" para una escala de major
+"escala:0-12" para simplemente usar la tónica y su primer octava
+
+* Exportando el texto en crudo e imágenes
+Se puede grabar un .txt de todo lo escrito desde que se inicio el programa escribiendo el nombre con el que se desea guardarlo seguido de ".txt"
+Ejemplos:
+"texto_exportado.txt"
+"pensamientos.txt"
+se puede guardar una captura de la pantalla en diversos formatos, escribiendo el nombre con la que se la desear guardar seguido de la extension ".png", ".jpg", o ".bmp"
+Ejemplo:
+"captura.png"
+"poemavisual.jpg"
+"foto.bmp"
+
+
+--------------------
+TRIGGERS PRINCIPALES
+--------------------
+triggerLOVE = {"amor", "love", "amar", "shrimp", "afecto"};
+triggerDEAD = {"muerte", "mori", "dead", "fetal"};
+triggerGLITCH = {"glitch", "bakun", "art", "arte"};
+triggerCLIENT = {"connect", "conectar"};
+triggerMUSICSCALE = {"scale", "escala"};
+triggerSAVE = {".sav"};
+triggerTXT = {".txt"};
+triggerDEBUG = {"debug"};
+triggerCOLOR = {"color", "colour"};
+triggerFONT = {"font", "letra"};
+triggerPIX = {".png", ".bmp", ".jpg", ".jpeg", ".tiff"};
+triggerSCALE = {"encerrado", "grande", "big", "close", "cerca"};
+triggerBLOOD = {"sangre", "blood", "pelo", "hair"};
+triggerPANIC = {"panic", "ansiedad", "attack", "panico", "pánico", "manija"};
+triggerPICADO = {"odio", "mar", "ocean", "hate", "water", "tormenta"};
+triggerRAIN = {"lluvia", "llover", "llueve", "lloviendo", "rain", "llorar", "cry", "tormenta"};
+
+
+------------------
+ATAJOS DE TECLADO
+------------------
+[-] Disminuye el tamaño de la letra
+[+] Aumenta el tamaño de la letra
+[↑] Sube el mar
+[↓] Baja el mar
+[Ctrl]+[Space] Iniciar la grabación
+[Ctrl]+[S] Exportar un .txt
+[Ctrl]+[E] Exportar una captura de pantalla
+[Esc] Cerrar el programa
+
+
+-------
+CREDITOS
+-------
+Desarrollado por Jeremias Babini
+http://jeremiasbabini.com/ 
+
+
+-------
+LICENCIA
+-------
+CC-Attribution-NonCommercial-ShareAlike
+License: http://creativecommons.org/licenses/by-nc-sa/4.0/
+Inanis Source: https://bitbucket.org/jerebab/inanis/
