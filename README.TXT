@@ -11,9 +11,10 @@ Online multiwriter has been truncated for now.
 ------------
 INSTALLATION
 ------------
-1 - Download the correct version for your OS from https://bitbucket.org/jerebab/inanis/downloads or http://jeremiasbabini.com/inanis.php
+1 - Download the correct version for your OS from http://jeremiasbabini.com/inanis.php
 2 - Extract zip file
 3 - Run Inanis.exe
+If something goes wrong, install Java and try again: https://java.com/en/download/
 
 
 -----

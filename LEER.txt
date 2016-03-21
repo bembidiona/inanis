@@ -9,9 +9,10 @@ La opción de escritura colaborativa via internet esta desactivada en esta versi
 ------------
 INSTALACIÓN
 ------------
-1 - Descargar la version correcta para tu sistema operativo: https://bitbucket.org/jerebab/inanis/downloads o desde http://jeremiasbabini.com/inanis.php
+1 - Descargar la version correcta para tu sistema operativo desde http://jeremiasbabini.com/inanis.php
 2 - Extraer los archivos comprimidos
 3 - Ejecutar Inanis.exe
+Si no anda, instalar Java primero: https://java.com/en/download/
 
 
 -----
