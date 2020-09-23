@@ -99,15 +99,7 @@ ATAJOS DE TECLADO
 
 
 -------
-CREDITOS
--------
-Desarrollado por Jeremias Babini
-http://jeremiasbabini.com/ 
-
-
--------
 LICENCIA
 -------
 CC-Attribution-NonCommercial-ShareAlike
 License: http://creativecommons.org/licenses/by-nc-sa/4.0/
-Inanis Source: https://bitbucket.org/jerebab/inanis/
