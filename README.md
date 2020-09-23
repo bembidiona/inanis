@@ -6,7 +6,7 @@ and words, and the possibility of recording your sessions or phrases and play th
 Online multiwriter has been truncated for now.
 
 <p align="center">
-  <img width="600" height="375" src="https://raw.githubusercontent.com/bembidiona/inanis/master/_readme/inanis_4.jpg">
+  <img width="600" height="375" src="https://raw.githubusercontent.com/bembidiona/inanis/master/_readme/inanis_3.jpg">
 </p>
 
 
