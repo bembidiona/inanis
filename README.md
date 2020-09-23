@@ -16,15 +16,15 @@ There are some especial words that created different visual effect and trigger f
 Just type them in the stream, but is important that they get separated by spaces.\
 A bunch of keywords are listed below. Others await to be discovered.\
 Example with trigger "rain"\
-`"... i think it's going to rain tonight ..."` WORKS
+`"... i think it's going to rain tonight ..."` WORKS\
 `"... i think it's going to rainntonight ..."` DON´T WORK
 
 #### Save and load sessions
 Click the upper-left red rectangle to start recording your inputs.\
 To save the recording, just write your desired file name followed by ".sav"\
 Examples:\
-`"exampleName.sav"`
-`"todaySession.sav"`
+`"exampleName.sav"`\
+`"todaySession.sav"`\
 Then you can load this and other older save files from the right menu.
 
 #### Controlling loaded streams
@@ -48,12 +48,12 @@ Examples:\
 #### Exporting raw text and images
 You can save a .txt file of all the text wrote since Inanis started, writing your desired file name followed by ".txt"\
 Examples:\
-`"textDump.txt"`
-`"dream_4-12.txt"`
+`"textDump.txt"`\
+`"dream_4-12.txt"`\
 You can save a capture of the screen writing your desired file name followed by ".png", ".jpg", or ".bmp"\
 Examples:\
-`"screenshot.png"`
-`"inanisIsLookingCute.jpg"`
+`"screenshot.png"`\
+`"inanisIsLookingCute.jpg"`\
 `"suchraw.bmp"`
 
 
